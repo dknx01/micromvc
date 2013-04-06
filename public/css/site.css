@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+#navi {
+    background-color: orange;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+#navi a{
+    color: black;
+    font-weight: bold;
+}
+.needed:before {
+    content: "*";
+    color:red;
+    font-weight: bold;
+}
+#error {
+    background-color: red;
+    font-weight: bold;
+    text-align: left;
+}
