@@ -1,4 +1,3 @@
-<?php require_once realpath(__DIR__) . '/Abstract.php';?>
 <div id="container">
 
     <div id="center-container">

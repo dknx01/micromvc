@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+    <database>
+        <active>false</active>
+        <host>TEST.com</host>
+        <user>test123</user>
+        <password>test</password>
+        <name>foo</name>
+        <params>
+            <charset>UTF-8</charset>
+            <foo>bar</foo>
+        </params>
+    </database>
+</application>

@@ -1,8 +1,6 @@
 <?php
-require_once realpath(__DIR__) . '/Abstract.php';
-
 $systemtemConnectionDml = new Db_SystemConnectionDml();
-$row = $data->parent[0];
+$row = $this->_viewdata->parent[0];
 $parentName = $row->name;
 $parentId = $row->id;
 

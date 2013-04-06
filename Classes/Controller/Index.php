@@ -8,12 +8,14 @@ class Controller_Index extends Controller_Abstract
     protected $_dmlSystem = null;
     public function run()
     {
-        $this->_dmlSystem = new Db_SystemDml();
-        if (Registry::getInstance()->get('asTree') == true) {
-            Registry::getInstance()->set('treeVis', $this->fromDbAsTree()->asJson());
-        } else {
-            Registry::getInstance()->set('netVis', $this->fromDbAsNet()->asJson());
-        }
+        $this->addToView('test', array(1,4,9));
+//        Helper_Debug::dump($this->getView());
+//        $this->_dmlSystem = new Db_SystemDml();
+//        if (Registry::getInstance()->get('asTree') == true) {
+//            Registry::getInstance()->set('treeVis', $this->fromDbAsTree()->asJson());
+//        } else {
+//            Registry::getInstance()->set('netVis', $this->fromDbAsNet()->asJson());
+//        }
     }
 
 /**
