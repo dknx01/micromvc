@@ -5,6 +5,6 @@ class Form_Connection extends Form_Abstract
     {
         $this->addFormDefinition('severity')
              ->addFormDefinition('description')
-             ->addFormDefinition('malfunctionImpact')
+             ->addFormDefinition('malfunctionImpact');
     }
 }
