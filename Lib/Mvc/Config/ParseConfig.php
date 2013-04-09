@@ -1,15 +1,21 @@
 <?php
-class Lib_ParseConfig
+/**
+ * the config parser
+ * @author dknx01
+ * @package Config
+ */
+class Config_ParseConfig
 {
+    /**
+     *
+     * @var string
+     */
     protected $_name = 'Config/Application.xml';
     /**
      *
-     * @var Lib_Definition_Config
+     * @var Config_Definition_Config
      */
     protected $_configData = null;
-
-
-
 
     public function __construct($configFile = null)
     {
@@ -18,10 +24,14 @@ class Lib_ParseConfig
         }
         $this->_checkFile()->_parse();
     }
-    
+    /**
+     * basic checkfor the config file
+     * @return \Config_ParseConfig
+     * @throws Exception
+     */
     protected function _checkFile()
     {
-        if (!file_exists(realpath(__DIR__) . '/../' . $this->_name))
+        if (!file_exists(APPDIR . '/' . $this->_name))
         {
             throw new Exception('Config file not found: ' . $this->_name);
         }
@@ -30,15 +40,21 @@ class Lib_ParseConfig
         }
         return $this;
     }
-    
+    /**
+     * pares the config to our object
+     * @return \Config_ParseConfig
+     */
     protected function _parse()
     {
-        $className = 'Lib_Definition_Config';
-        $filename = realpath(__DIR__) . '/../' . $this->_name;
+        $className = 'Config_Definition_Config';
+        $filename = APPDIR . '/' . $this->_name;
         $this->_configData = simplexml_load_file($filename, $className);
         return $this;
     }
-    
+    /**
+     * 
+     * @return Config_Definition_Config
+     */
     public function getConfigData()
     {
         return $this->_configData;

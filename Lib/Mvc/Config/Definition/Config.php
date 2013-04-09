@@ -1,6 +1,6 @@
 <?php
 
-class Lib_Definition_Config extends SimpleXMLElement
+class Config_Definition_Config extends SimpleXMLElement
 {
     public function hasDatabase()
     {

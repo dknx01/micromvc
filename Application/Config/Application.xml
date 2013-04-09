@@ -5,7 +5,7 @@
         <host>localhost</host>
         <user>test</user>
         <password>test123</password>
-        <name>foo</name>
+        <name>test</name>
         <params>
             <charset>UTF-8</charset>
         </params>

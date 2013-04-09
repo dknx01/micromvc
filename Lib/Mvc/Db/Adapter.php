@@ -1,5 +1,5 @@
 <?php
-class Lib_Db_Adapter
+class Db_Adapter
 {
     public function __construct()
     {
@@ -8,11 +8,15 @@ class Lib_Db_Adapter
     
     protected function _init()
     {
-        $config = new Lib_ParseConfig();
+        $configParser = new Config_ParseConfig();
         $dbh = null;
-        $config = $config->getConfigData();
+        /**
+         * @var Config_Definition_Config
+         */
+        $config = $configParser->getConfigData();
         
         if ($config->getDatabaseStatus() == true) {
+            $params = $config->getDatabaseParams();
             if ($config->getDatabaseType() == 'sqlite') {
                 $dsn = 'sqlite:' . $config->getDatabasePath();
                 try {
@@ -24,13 +28,20 @@ class Lib_Db_Adapter
                 $dsn = $config->getDatabaseType()
                      . ':host=' . $config->getDatabaseHost() . ';'
                      . 'dbname=' . $config->getDatabaseName();
+                $phpversion = substr(phpversion(), 0, strpos(phpversion(), '-'));
+                $phpversion = (int)str_replace('.', '', $phpversion);
                 try {
                     $dbh = new PDO($dsn,
                             $config->getDatabaseUser(),
                             $config->getDatabasePassword());
+                    foreach ($params as $key => $value) {
+                        $stmt = 'SET ' . $dbh->quote($key) . ' ' 
+                                . $dbh->quote($value);
+                        $dbh->exec($stmt);
+                    }
                 }  
                 catch(PDOException $e) {  
-                    echo $e->getMessage();
+                    throw new Exception ($e->getMessage());
                 }  
             }
         }
