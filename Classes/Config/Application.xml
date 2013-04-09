@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
-    <database>
+    <database type="mysql">
         <active>true</active>
         <host>localhost</host>
-        <user>test123</user>
-        <password>test</password>
+        <user>test</user>
+        <password>test123</password>
         <name>foo</name>
         <params>
             <charset>UTF-8</charset>
