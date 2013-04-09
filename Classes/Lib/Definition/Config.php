@@ -55,4 +55,25 @@ class Lib_Definition_Config extends SimpleXMLElement
     {
         return $this->database->params;
     }
+    /**
+     * 
+     * @return string
+     */
+    public function getDatabaseType()
+    {
+        $attributes = $this->database->attributes();
+        $attributes = (array)$attributes;
+        $attributes = $attributes['@attributes'];
+        return $attributes['type'];
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getDatabasePath()
+    {
+        return (string)$this->database->path;
+    }
+    
 }
