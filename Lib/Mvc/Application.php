@@ -1,4 +1,9 @@
 <?php
+/**
+ * the main class for all the mvc application
+ * @author dknx01
+ * @package Mvc
+ */
 class Application
 {
     /**
@@ -29,33 +34,34 @@ class Application
     
     /**
      *
-     * @var Lib_Definition_Config
+     * @var Config_Definition_Config
      */
     protected $_config = null;
-
+    /**
+     * prepare the application
+     */
     public function __construct()
     {
         $this->_request = new Helper_Request();
-        $config = new Lib_ParseConfig();
+        $config = new Config_ParseConfig();
         $this->_config = $config->getConfigData();
         $this->setController($this->getRequest()->getBaseName())
              ->setView()
              ->setViewHeader()
              ->_prepareDatabase();
         Registry::getInstance()->set('request', $this->getRequest());
-        
-       
-
     }
+    /**
+     * run the application
+     */
     public function run()
     {
         try {
-
-            $controller = $this->getController();
+            $controllerName = $this->getController();
             /**
-             * @var Controller_Abstract
+             * @var Application_Controller_Abstract
              */
-            $controller = new $controller;
+            $controller = new $controllerName;
             $this->_viewData = $controller->getView();
             ob_start();
             include_once $this->getView();
@@ -70,12 +76,13 @@ class Application
                 ob_end_clean();
                 Registry::getInstance()->set('viewHeader', $viewOutputHeader);
             }
-            require_once realpath(__DIR__) . '/Layout/Layout.php';
+            require_once APPDIR . '/Layout/Layout.php';
             if (!is_null(Registry::getInstance()->get('db'))) {
-                mysql_close(Registry::getInstance()->get('db'));
+                Registry::getInstance()->set('db', null);
             }
         } catch (Exception $e) {
-            throw new Exception($e->getMessage() . PHP_EOL . $e->getTraceAsString());
+            throw new Exception($e->getMessage() . PHP_EOL 
+                    . $e->getTraceAsString() . PHP_EOL);
         }
 
     }
@@ -110,7 +117,7 @@ class Application
      */
     public function setView()
     {
-        $view =realpath(__DIR__) . '/View/' . $this->getRequest()->getBaseName()
+        $view = APPDIR . '/View/' . $this->getRequest()->getBaseName()
                 . '.php';
         $this->_view = $view;
         return $this;
@@ -147,7 +154,7 @@ class Application
      */
     public function setViewHeader()
     {
-        $viewHeader = realpath(__DIR__) . '/View/' . 
+        $viewHeader = APPDIR . 'View/' . 
                 $this->getRequest()->getBaseName() . '.header.php';
         $this->_viewHeader = $viewHeader;
         return $this;
@@ -177,23 +184,11 @@ class Application
      */
     protected function _prepareDatabase()
     {
-        $host = $this->_config->getDatabaseHost();
-        $user = $this->_config->getDatabaseUser();
-        $status = $this->_config->getDatabaseStatus();
-        $password = $this->_config->getDatabasePassword();
-        $db = $this->_config->getDatabaseName();
-        $params = $this->_config->getDatabaseParams();
-        if ($status == true) {
-            $dbConnection = mysql_connect($host, $user, $password);
-            if (!$dbConnection) {
-                throw new Exception('DB Connection Error: ' .  mysql_error());
-            } else {
-                if (!empty($params->charset)) {
-                    mysql_set_charset((string)$params->charse, $dbConnection);
-                }
-                mysql_select_db($db, $dbConnection);
-                Registry::getInstance()->set('db', $dbConnection);
-            }
+        try {
+            $db = new Db_Adapter();
+            Registry::getInstance()->set('db', $db);
+        } catch (PDOException $exc) {
+            echo $exc->getTraceAsString();
         }
         return $this;
     }
