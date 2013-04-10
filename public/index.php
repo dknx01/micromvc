@@ -1,6 +1,5 @@
 <?php
-
-error_reporting(E_ALL);
+error_reporting(E_WARNING);
 ini_set('display_errors', '1');
 require_once '../Lib/Mvc/Autoloader.php';
 define('APPDIR', realpath(__DIR__ . '/../Application/'));

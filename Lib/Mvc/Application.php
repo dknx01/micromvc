@@ -62,7 +62,11 @@ class Application
              * @var Application_Controller_Abstract
              */
             $controller = new $controllerName;
-            $this->_viewData = $controller->getView();
+            $this->setViewData($controller->getView());
+            $viewNameController = $controller->getViewName();
+            if (!empty($viewNameController)) {
+                $this->setView($viewNameController);
+            }
             ob_start();
             include_once $this->getView();
             $viewOutput = ob_get_contents();
@@ -76,7 +80,11 @@ class Application
                 ob_end_clean();
                 Registry::getInstance()->set('viewHeader', $viewOutputHeader);
             }
-            require_once APPDIR . '/Layout/Layout.php';
+            if ($controller->getIsAjax() == false) {
+                require_once APPDIR . '/Layout/Layout.php';
+            } else {
+                require_once APPDIR . '/Layout/Ajax.php';
+            }
             if (!is_null(Registry::getInstance()->get('db'))) {
                 Registry::getInstance()->set('db', null);
             }
@@ -113,12 +121,16 @@ class Application
     }
 
     /**
+     * @param string $name
      * @return Application
      */
-    public function setView()
+    public function setView($name = null)
     {
-        $view = APPDIR . '/View/' . $this->getRequest()->getBaseName()
-                . '.php';
+        if (!empty($name)) {
+            $view = APPDIR . '/View/' . $name . '.php';
+        } else {
+            $view = APPDIR . '/View/' . $this->getRequest()->getBaseName() . '.php';
+        }
         $this->_view = $view;
         return $this;
     }
@@ -188,7 +200,7 @@ class Application
             $db = new Db_Adapter();
             Registry::getInstance()->set('db', $db);
         } catch (PDOException $exc) {
-            echo $exc->getTraceAsString();
+            throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }
         return $this;
     }

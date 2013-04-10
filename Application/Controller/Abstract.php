@@ -16,14 +16,23 @@ class Controller_Abstract
      * @var Helper_Request
      */
     protected $_request = null;
-    
+    /**
+     *
+     * @var string
+     */
+    protected $_viewName = '';
+    /**
+     *
+     * @var boolean
+     */
+    protected $_isAjax = false;
     public function __construct()
     {
         $this->_viewData = new stdClass();
         $this->_request = Registry::getInstance()->get('request');
         $this->run();
     }
-    
+
     /**
      * function to run the controllers and maybe do some preparing
      */
@@ -72,5 +81,36 @@ class Controller_Abstract
     {
         return $this->_request;
     }
-
+    /**
+     * @return boolean
+     */
+    public function getIsAjax()
+    {
+        return $this->_isAjax;
+    }
+    /**
+     * @param boolean $_isAjax
+     * @return Controller_Abstract
+     */
+    public function setIsAjax($_isAjax)
+    {
+        $this->_isAjax = $_isAjax;
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getViewName()
+    {
+        return $this->_viewName;
+    }
+    /**
+     * @param string $_viewName
+     * @return Controller_Abstract
+     */
+    public function setViewName($_viewName)
+    {
+        $this->_viewName = $_viewName;
+        return $this;
+    }
 }

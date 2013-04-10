@@ -18,13 +18,17 @@ class Helper_Request
     {
         $params = array();
         if (strpos($_SERVER['QUERY_STRING'], '/') != false) {
-            $params = explode('?', substr($_SERVER['QUERY_STRING'], strpos($_SERVER['QUERY_STRING'], '/') + 1));
+            $params = explode('|', substr($_SERVER['QUERY_STRING'], strpos($_SERVER['QUERY_STRING'], '/') + 1));
         } elseif (strpos($_SERVER['QUERY_STRING'], '?') > 1) {
-            $params = explode('?', $_SERVER['QUERY_STRING']);
+            $params = explode('|', $_SERVER['QUERY_STRING']);
         }
-        foreach ($params as $param) {
-            $paramParts = explode('=', $param);
-            $this->_params[$paramParts[0]] = $paramParts[1];
+        if (count($params) > 0) {
+            foreach ($params as $param) {
+                $paramParts = explode('=', $param);
+                if (count($paramParts) > 1) {
+                    $this->_params[$paramParts[0]] = $paramParts[1];
+                }
+            }
         }
         foreach ($_POST as $key => $value) {
             $this->_params[$key] = $value;
