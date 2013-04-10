@@ -11,5 +11,7 @@ class Controller_Index extends Controller_Abstract
      */
     public function main()
     {
+        $testDml = new Db_TestDml();
+        $this->addToView('testData',$testDml->fetchAll());
     }
 }

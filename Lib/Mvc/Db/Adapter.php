@@ -1,50 +1,46 @@
 <?php
-class Db_Adapter
+class Db_Adapter extends PDO
 {
+    protected $_dsn = '';
+    protected $_user = '';
+    protected $_password = '';
+    protected $_params = array();
     public function __construct()
     {
         $this->_init();
+        parent::__construct($this->_dsn, $this->_user, $this->_password);
+        $this->_proccedParams();
     }
-    
+
+    protected function _proccedParams()
+    {
+        foreach ($this->_params as $key => $value) {
+            $stmt =  $stmt = 'SET ' . $this->quote($key) . ' '
+                                . $this->quote($value);
+            $this->exec($stmt);
+        }
+    }
+
     protected function _init()
     {
         $configParser = new Config_ParseConfig();
-        $dbh = null;
         /**
          * @var Config_Definition_Config
          */
         $config = $configParser->getConfigData();
-        
+
         if ($config->getDatabaseStatus() == true) {
-            $params = $config->getDatabaseParams();
+            $this->_params = $config->getDatabaseParams();
             if ($config->getDatabaseType() == 'sqlite') {
-                $dsn = 'sqlite:' . $config->getDatabasePath();
-                try {
-                    $dbh = new PDO($dsn);
-                } catch (PDOException $exc) {
-                    echo $exc->getMessage();
-                }
+                $this->_dsn = 'sqlite:' . $config->getDatabasePath();
             } else {
-                $dsn = $config->getDatabaseType()
-                     . ':host=' . $config->getDatabaseHost() . ';'
-                     . 'dbname=' . $config->getDatabaseName();
-                $phpversion = substr(phpversion(), 0, strpos(phpversion(), '-'));
-                $phpversion = (int)str_replace('.', '', $phpversion);
-                try {
-                    $dbh = new PDO($dsn,
-                            $config->getDatabaseUser(),
-                            $config->getDatabasePassword());
-                    foreach ($params as $key => $value) {
-                        $stmt = 'SET ' . $dbh->quote($key) . ' ' 
-                                . $dbh->quote($value);
-                        $dbh->exec($stmt);
-                    }
-                }  
-                catch(PDOException $e) {  
-                    throw new Exception ($e->getMessage());
-                }  
+                $this->_dsn = $config->getDatabaseType()
+                    . ':host=' . $config->getDatabaseHost() . ';'
+                    . 'dbname=' . $config->getDatabaseName();
+                $this->_user = $config->getDatabaseUser();
+                $this->_password = $config->getDatabasePassword();
+                $this->_params = $config->getDatabaseParams();
             }
         }
-        return $dbh;
     }
 }
