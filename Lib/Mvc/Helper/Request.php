@@ -17,10 +17,12 @@ class Helper_Request
     protected function _getParams()
     {
         $params = array();
+        $queryString = substr($_SERVER['QUERY_STRING'], strpos($_SERVER['QUERY_STRING'], '/') + 1);
+        $queryString = str_replace(array('?', '&'), '|', $queryString);
         if (strpos($_SERVER['QUERY_STRING'], '/') != false) {
-            $params = explode('|', substr($_SERVER['QUERY_STRING'], strpos($_SERVER['QUERY_STRING'], '/') + 1));
-        } elseif (strpos($_SERVER['QUERY_STRING'], '?') > 1) {
-            $params = explode('|', $_SERVER['QUERY_STRING']);
+            $params = explode('|', $queryString);
+        } elseif (strpos($queryString, '|') > 1) {
+            $params = explode('|', $queryString);
         }
         if (count($params) > 0) {
             foreach ($params as $param) {
@@ -67,6 +69,16 @@ class Helper_Request
     public function getParamByName($name)
     {
         return (array_key_exists($name, $this->_params) == true) ? $this->_params[$name] : null;
+    }
+    /**
+     * @param string $_name
+     * @param mixed $value
+     * @return Helper_Request
+     */
+    public function setParam($name, $value)
+    {
+        $this->_params[$name] = $value;
+        return $this;
     }
 
 }

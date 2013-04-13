@@ -1,10 +1,10 @@
 <?php
 /**
- * the DML class
+ * the table class
  * @author dknx01
  * @package Db
  */
-class Db_Dml
+class Db_Table
 {
     /**
      *
@@ -30,8 +30,8 @@ class Db_Dml
     public function __construct()
     {
         $this->_connection = Registry::getInstance()->get('db');
-        $modelName = str_replace('Dml', 'Model', get_class($this));
-        $mapperName = str_replace('Dml', 'Mapper', get_class($this));
+        $modelName = str_replace('Table', 'Model', get_class($this));
+        $mapperName = str_replace('Table', 'Mapper', get_class($this));
         if (!class_exists($modelName)) {
             throw new Exception('Model ' . $modelName . ' not found');
             exit;
@@ -87,6 +87,60 @@ class Db_Dml
                 $model->$setter($row[$column]);
             }
             return $model;
+        }
+    }
+    /**
+     * maps a table model to a table row
+     * @param array $row
+     * @return Db_Model
+     * @throws Exception
+     */
+    public function reverseMapper($model)
+    {
+        if (count($this->_mapper->getMapper()) == 0) {
+            throw new Exception('Cannot use mapper because it\'s not declared');
+        } elseif(!$model instanceof Db_Model) {
+            throw new Exception('Model does not base on Db_Model');
+        }
+        else {
+            $row = array();
+            foreach (array_flip($this->_mapper->getMapper()) as $property => $column) {
+                $getter = 'get' . ucfirst($property);
+                $row[$column] = $model->$getter();
+            }
+            return $row;
+        }
+    }
+    /**
+     * fetch all recors from this table
+     * @return array
+     * @throws Exception
+     */
+    public function fetchAll()
+    {
+        $sql = 'SELECT * FROM `' . $this->getName() . '`';
+        $result = array();
+        try {
+            foreach ($this->_connection->exec($sql) as $row) {
+                $result[] = $this->mapper($row);
+            }
+        } catch (PDOException $exc) {
+            throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
+        }
+        return $result;
+    }
+    public function insert($model)
+    {
+        $row = $this->reverseMapper($model);
+        $sql = 'INSERT INTO `' . $this->getName() . '` SET ';
+        foreach ($row as $column => $value) {
+            $sql .= '`' . $column . '` = ' . $this->_connection->quote($value) . ',';
+        }
+        $sql = substr($sql, -1);
+        try {
+            $this->_connection->query($sql);
+        } catch (PDOException $exc) {
+            throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }
     }
 }
