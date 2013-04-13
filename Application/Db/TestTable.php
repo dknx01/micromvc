@@ -1,6 +1,6 @@
 <?php
 
-class Db_TestDml extends Db_Dml
+class Db_TestTable extends Db_Table
 {
     protected $_name = 'test';
 
