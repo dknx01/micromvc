@@ -38,8 +38,16 @@ class Controller_Abstract
      */
     public function run()
     {
+        $this->up();
         $this->main();
     }
+    /**
+     * setup the current controller
+     */
+    public function up()
+    {
+    }
+
     /**
      * the main function
      */
