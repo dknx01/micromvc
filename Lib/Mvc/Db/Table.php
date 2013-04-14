@@ -113,21 +113,22 @@ class Db_Table
     }
     /**
      * fetch all recors from this table
+     * @param boolean $asIterator should the result implements Db_ResultIterator
      * @return array
      * @throws Exception
      */
-    public function fetchAll()
+    public function fetchAll($asIterator = false)
     {
         $sql = 'SELECT * FROM `' . $this->getName() . '`';
         $result = array();
         try {
-            foreach ($this->_connection->exec($sql) as $row) {
+            foreach ($this->_connection->query($sql) as $row) {
                 $result[] = $this->mapper($row);
             }
         } catch (PDOException $exc) {
             throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }
-        return $result;
+        return $asIterator == true ? new Db_ResultIterator($result) : $result;
     }
     public function insert($model)
     {
