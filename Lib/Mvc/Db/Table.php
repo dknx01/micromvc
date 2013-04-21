@@ -20,7 +20,7 @@ class Db_Table
      * the table model used for this dml class
      * @var Db_Model
      */
-    protected $_modell = null;
+    protected $_model = null;
     /**
      * the table mapper used for this dml class
      * @var Db_Mapper
@@ -40,10 +40,10 @@ class Db_Table
             throw new Exception('Mapper ' . $mapperName . ' not found');
             exit;
         }
-        $this->_modell = new $modelName;
+        $this->_model = new $modelName;
         $this->_mapper = new $mapperName;
         
-        if (!$this->_modell instanceof Db_Model) {
+        if (!$this->_model instanceof Db_Model) {
             throw new Exception($modelName . ' is not an instance of Db_Modell');
             exit;
         }
@@ -81,7 +81,7 @@ class Db_Table
         if (count($this->_mapper->getMapper()) == 0) {
             throw new Exception('Cannot use mapper because it\'s not declared');
         } else {
-            $model = clone $this->_modell;
+            $model = clone $this->_model;
             foreach ($this->_mapper->getMapper() as $column => $property) {
                 $setter = 'set' . ucfirst($property);
                 $model->$setter($row[$column]);
@@ -114,7 +114,7 @@ class Db_Table
     /**
      * fetch all recors from this table
      * @param boolean $asIterator should the result implements Db_ResultIterator
-     * @return array
+     * @return array with Db_Model instances for each row
      * @throws Exception
      */
     public function fetchAll($asIterator = false)
@@ -130,18 +130,31 @@ class Db_Table
         }
         return $asIterator == true ? new Db_ResultIterator($result) : $result;
     }
+    
+    /**
+     * Inserts a database model into a table without the primary column
+     * @param Db_Model $model
+     * @return null|int null if nothing was insert or lastInsertId
+     * @throws Exception
+     */
     public function insert($model)
     {
         $row = $this->reverseMapper($model);
+        $insertId = null;
         $sql = 'INSERT INTO `' . $this->getName() . '` SET ';
         foreach ($row as $column => $value) {
-            $sql .= '`' . $column . '` = ' . $this->_connection->quote($value) . ',';
+            if ($column != $this->_mapper->getPrimary()) {
+                $sql .= '`' . $column . '` = ' . $this->_connection->quote($value) . ',';
+            }
         }
         $sql = substr($sql, -1);
         try {
             $this->_connection->query($sql);
+            $insertId = (int)$this->_connection->lastInsertId();
         } catch (PDOException $exc) {
             throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }
+        
+        return $insertId;
     }
 }
