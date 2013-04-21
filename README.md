@@ -2,6 +2,7 @@ MicroMVC
 =========
 This is just a small (micro) mvc framework written in PHP 5.
 You can use it for small websites with small complexity. Beside the mvc concept there are not many additional function included.
+
 Feel free to extend it.
 
 System requirements
@@ -9,6 +10,7 @@ System requirements
 + Apache 2
 + PHP >=5.3
 + Some database (optional): MySQL or SQLite or other with PDO
+
 Installation
 --------------
 Via git:
@@ -35,8 +37,12 @@ BSD
 ToDo
 ----
 [] Documentation
+
 [] Actions
+
 [] extend standard database function
 
+
 Any sugestions or comments just let me know.
+
 dknx01
