@@ -10,32 +10,32 @@ class Config_ParseConfig
      *
      * @var string
      */
-    protected $_name = 'Config/Application.xml';
+    protected $name = 'Config/Application.xml';
     /**
      *
      * @var Config_Definition_Config
      */
-    protected $_configData = null;
+    protected $configData = null;
 
     public function __construct($configFile = null)
     {
         if (!is_null($configFile)) {
-            $this->_name = $configFile;
+            $this->name = $configFile;
         }
-        $this->_checkFile()->_parse();
+        $this->checkFile()->parse();
     }
     /**
      * basic checkfor the config file
      * @return \Config_ParseConfig
      * @throws Exception
      */
-    protected function _checkFile()
+    protected function checkFile()
     {
-        if (!file_exists(APPDIR . '/' . $this->_name))
+        if (!file_exists(APPDIR . '/' . $this->name))
         {
-            throw new Exception('Config file not found: ' . $this->_name);
+            throw new Exception('Config file not found: ' . $this->name);
         }
-        if (substr($this->_name, -4) != '.xml') {
+        if (substr($this->name, -4) != '.xml') {
             throw new Exception('Config file must be xml.');
         }
         return $this;
@@ -44,11 +44,11 @@ class Config_ParseConfig
      * pares the config to our object
      * @return \Config_ParseConfig
      */
-    protected function _parse()
+    protected function parse()
     {
         $className = 'Config_Definition_Config';
-        $filename = APPDIR . '/' . $this->_name;
-        $this->_configData = simplexml_load_file($filename, $className);
+        $filename = APPDIR . '/' . $this->name;
+        $this->configData = simplexml_load_file($filename, $className);
         return $this;
     }
     /**
@@ -57,6 +57,6 @@ class Config_ParseConfig
      */
     public function getConfigData()
     {
-        return $this->_configData;
+        return $this->configData;
     }
 }

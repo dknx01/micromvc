@@ -10,4 +10,16 @@
             <charset>UTF-8</charset>
         </params>
     </database>
+    <dataStore active="false">
+        <a>123</a>
+        <b>890</b>
+    </dataStore>
+    <bar active="false">
+        <c bla="blub">
+            <foo>000</foo>
+            <bar>nö</bar>
+        </c>
+        <d>890</d>
+    </bar>
+    <test>123</test>
 </application>

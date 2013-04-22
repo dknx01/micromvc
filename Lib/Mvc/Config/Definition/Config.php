@@ -75,5 +75,47 @@ class Config_Definition_Config extends SimpleXMLElement
     {
         return (string)$this->database->path;
     }
-    
+    /**
+     * 
+     * @param string $name
+     * @return mixed the value
+     */
+    public function getParam($name)
+    {
+        $node = empty($this->$name) ? null : $this->$name;
+        if (!is_null($node)) {
+            $value = $this->checkChildren($node);
+        } else {
+            $value = $node;
+        }
+        return $value;
+    }
+    /**
+     * 
+     * @param SimpleXMLElement $node
+     * @return array|string
+     */
+    protected function checkChildren($node)
+    {
+        if (count($node->children()) > 0) {
+            $value = array();
+            if (count($node->attributes()) > 0) {
+                $attributes = (array) $node->attributes();
+                $attributes = $attributes['@attributes'];
+                foreach ($attributes as $k => $v) {
+                    $value['@attributes'][$k] = (string)$v;
+                }
+            }
+            foreach ($node->children() as $k => $v) {
+                if (count($v->children()) > 0) {
+                    $value[$k] = $this->checkChildren($v);
+                } else {
+                    $value[$k] = (string)$v;
+                }
+            }
+        } else {
+            $value = (string)$node;
+        }
+        return $value;
+    }
 }

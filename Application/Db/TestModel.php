@@ -2,27 +2,27 @@
 
 class Db_TestModel extends Db_Model
 {
-    protected $_id;
-    protected $_testName;
+    protected $id;
+    protected $testName;
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     public function setId($id)
     {
-        $this->_id = $id;
+        $this->id = $id;
         return $this;
     }
 
     public function getTestName()
     {
-        return $this->_testName;
+        return $this->testName;
     }
 
     public function setTestName($testName)
     {
-        $this->_testName = $testName;
+        $this->testName = $testName;
         return $this;
     }
 
