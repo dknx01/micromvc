@@ -6,7 +6,7 @@ class Helper_Debug
     /**
      * @var string
      */
-    protected static $_sapi = null;
+    protected static $sapi = null;
 
     /**
      * Get the current value of the debug output environment.
@@ -16,10 +16,10 @@ class Helper_Debug
      */
     public static function getSapi()
     {
-        if (self::$_sapi === null) {
-            self::$_sapi = PHP_SAPI;
+        if (self::$sapi === null) {
+            self::$sapi = PHP_SAPI;
         }
-        return self::$_sapi;
+        return self::$sapi;
     }
 
     /**
@@ -31,7 +31,7 @@ class Helper_Debug
      */
     public static function setSapi($sapi)
     {
-        self::$_sapi = $sapi;
+        self::$sapi = $sapi;
     }
 
     /**

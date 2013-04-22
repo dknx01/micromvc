@@ -1,27 +1,27 @@
 <?php
 class Db_Adapter extends PDO
 {
-    protected $_dsn = '';
-    protected $_user = '';
-    protected $_password = '';
-    protected $_params = array();
+    protected $dsn = '';
+    protected $user = '';
+    protected $password = '';
+    protected $params = array();
     public function __construct()
     {
-        $this->_init();
-        parent::__construct($this->_dsn, $this->_user, $this->_password);
-        $this->_proccedParams();
+        $this->init();
+        parent::__construct($this->dsn, $this->user, $this->password);
+        $this->proccedParams();
     }
 
-    protected function _proccedParams()
+    protected function proccedParams()
     {
-        foreach ($this->_params as $key => $value) {
+        foreach ($this->params as $key => $value) {
             $stmt =  $stmt = 'SET ' . $this->quote($key) . ' '
                                 . $this->quote($value);
             $this->exec($stmt);
         }
     }
 
-    protected function _init()
+    protected function init()
     {
         $configParser = new Config_ParseConfig();
         /**
@@ -30,16 +30,16 @@ class Db_Adapter extends PDO
         $config = $configParser->getConfigData();
 
         if ($config->getDatabaseStatus() == true) {
-            $this->_params = $config->getDatabaseParams();
+            $this->params = $config->getDatabaseParams();
             if ($config->getDatabaseType() == 'sqlite') {
-                $this->_dsn = 'sqlite:' . $config->getDatabasePath();
+                $this->dsn = 'sqlite:' . $config->getDatabasePath();
             } else {
-                $this->_dsn = $config->getDatabaseType()
+                $this->dsn = $config->getDatabaseType()
                     . ':host=' . $config->getDatabaseHost() . ';'
                     . 'dbname=' . $config->getDatabaseName();
-                $this->_user = $config->getDatabaseUser();
-                $this->_password = $config->getDatabasePassword();
-                $this->_params = $config->getDatabaseParams();
+                $this->user = $config->getDatabaseUser();
+                $this->password = $config->getDatabasePassword();
+                $this->params = $config->getDatabaseParams();
             }
         }
     }

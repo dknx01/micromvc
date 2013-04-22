@@ -10,19 +10,19 @@ class Db_Mapper
      * the model db result mapper
      * @var array
      */
-    protected $_mapper = array();
+    protected $mapper = array();
     /**
      * the primary key column
      * @var string
      */
-    protected $_primary = '';
+    protected $primary = '';
     /**
      * 
      * @return string
      */
     public function getPrimary()
     {
-        return $this->_primary;
+        return $this->primary;
     }
     /**
      * 
@@ -31,7 +31,7 @@ class Db_Mapper
      */
     public function setPrimary($primary)
     {
-        $this->_primary = (string)$primary;
+        $this->primary = (string)$primary;
         return $this;
     }
     /**
@@ -40,7 +40,7 @@ class Db_Mapper
      */
     public function getMapper()
     {
-        return $this->_mapper;
+        return $this->mapper;
     }
     /**
      * 
@@ -49,7 +49,7 @@ class Db_Mapper
      */
     public function setMapper(array $mapper)
     {
-        $this->_mapper = $mapper;
+        $this->mapper = $mapper;
         return $this;
     }
 }

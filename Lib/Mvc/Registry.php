@@ -1,7 +1,7 @@
 <?php
 class Registry
 {
-    protected $_store = null;
+    protected $store = null;
     static private $_instance = null;
 
     /**
@@ -19,7 +19,7 @@ class Registry
 
     public function __construct()
     {
-        $this->_store = new stdClass();
+        $this->store = new stdClass();
     }
 
     /**
@@ -29,8 +29,8 @@ class Registry
      */
     public function get($name)
     {
-        if (property_exists($this->_store, $name)) {
-            return $this->_store->$name;
+        if (property_exists($this->store, $name)) {
+            return $this->store->$name;
         } else {
             return null;
         }
@@ -47,7 +47,7 @@ class Registry
         if (property_exists($this, $name)) {
            error_log( 'Entry ' .  $name . ' will be overwritten');
         }
-        $this->_store->$name = $value;
+        $this->store->$name = $value;
         return $this;
     }
 

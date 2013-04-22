@@ -10,45 +10,39 @@ class Application
      *
      * @var Helper_Request
      */
-    protected $_request = null;
+    protected $request = null;
     /**
      *
      * @var string
      */
-    protected $_view = '';
+    protected $view = '';
     /**
      *
      * @var string
      */
-    protected $_viewHeader = '';
+    protected $viewHeader = '';
     /**
      *
      * @var string
      */
-    protected $_controller = '';
-    /**
-     *
-     * @var mixed
-     */
-    protected $_viewData = null;
+    protected $controller = '';
+    
     
     /**
      *
      * @var Config_Definition_Config
      */
-    protected $_config = null;
+    protected $config = null;
     /**
      * prepare the application
      */
     public function __construct()
     {
-        $this->_request = new Helper_Request();
+        $this->request = new Helper_Request();
         $config = new Config_ParseConfig();
-        $this->_config = $config->getConfigData();
+        $this->config = $config->getConfigData();
         $this->setController($this->getRequest()->getBaseName())
-             ->setView()
-             ->setViewHeader()
-             ->_prepareDatabase();
+             ->prepareDatabase();
         Registry::getInstance()->set('request', $this->getRequest());
     }
     /**
@@ -59,32 +53,20 @@ class Application
         try {
             $controllerName = $this->getController();
             /**
-             * @var Application_Controller_Abstract
+             * @var Controller_Abstract
              */
             $controller = new $controllerName;
             $this->setViewData($controller->getView());
             $viewNameController = $controller->getViewName();
+            $viewOutput = new View_Output();
+            $viewOutput->setViewData($controller->getViewData())
+                       ->setRequest($this->getRequest())
+                       ->setConfig($this->config)
+                       ->isAjax($controller->isAjax());
             if (!empty($viewNameController)) {
-                $this->setView($viewNameController);
+                $viewOutput->setView($viewNameController);
             }
-            ob_start();
-            include_once $this->getView();
-            $viewOutput = ob_get_contents();
-            ob_end_clean();
-            Registry::getInstance()->set('viewContent', $viewOutput);
-
-            if (file_exists($this->getViewHeader())) {
-                ob_start();
-                include_once $this->getViewHeader();
-                $viewOutputHeader = ob_get_contents();
-                ob_end_clean();
-                Registry::getInstance()->set('viewHeader', $viewOutputHeader);
-            }
-            if ($controller->getIsAjax() == false) {
-                require_once APPDIR . '/Layout/Layout.php';
-            } else {
-                require_once APPDIR . '/Layout/Ajax.php';
-            }
+            $viewOutput->render();
             if (!is_null(Registry::getInstance()->get('db'))) {
                 Registry::getInstance()->set('db', null);
             }
@@ -99,7 +81,7 @@ class Application
      */
     public function getRequest()
     {
-        return $this->_request;
+        return $this->request;
     }
 
     /**
@@ -108,30 +90,7 @@ class Application
      */
     public function setRequest($_request)
     {
-        $this->_request = $_request;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getView()
-    {
-        return $this->_view;
-    }
-
-    /**
-     * @param string $name
-     * @return Application
-     */
-    public function setView($name = null)
-    {
-        if (!empty($name)) {
-            $view = APPDIR . '/View/' . $name . '.php';
-        } else {
-            $view = APPDIR . '/View/' . $this->getRequest()->getBaseName() . '.php';
-        }
-        $this->_view = $view;
+        $this->request = $_request;
         return $this;
     }
 
@@ -140,7 +99,7 @@ class Application
      */
     public function getController()
     {
-        return $this->_controller;
+        return $this->controller;
     }
 
     /**
@@ -149,26 +108,7 @@ class Application
      */
     public function setController($_controller)
     {
-        $this->_controller = 'Controller_' . $_controller;
-        return $this;
-    }
-    /**
-     * 
-     * @return string
-     */
-    public function getViewHeader()
-    {
-        return $this->_viewHeader;
-    }
-    /**
-     * 
-     * @return \Application
-     */
-    public function setViewHeader()
-    {
-        $viewHeader = APPDIR . 'View/' . 
-                $this->getRequest()->getBaseName() . '.header.php';
-        $this->_viewHeader = $viewHeader;
+        $this->controller = 'Controller_' . $_controller;
         return $this;
     }
     /**
@@ -194,7 +134,7 @@ class Application
      * @return \Application
      * @throws Exception
      */
-    protected function _prepareDatabase()
+    protected function prepareDatabase()
     {
         try {
             $db = new Db_Adapter();

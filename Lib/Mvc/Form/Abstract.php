@@ -5,17 +5,17 @@ class Form_Abstract
      *
      * @var stdClass
      */
-    protected $_formDefinition = null;
+    protected $formDefinition = null;
     /**
      *
      * @var stdClass
      */
-    protected $_formData = null;
+    protected $formData = null;
 
     final public function __construct()
     {
-        $this->_formDefinition = new stdClass;
-        $this->_formData = new stdClass();
+        $this->formDefinition = new stdClass;
+        $this->formData = new stdClass();
         $this->main();
     }
 
@@ -34,7 +34,7 @@ class Form_Abstract
          */
         $request = Registry::getInstance()->get('request');
         foreach (get_object_vars($this->getFormDefinition()) as $name => $element) {
-            $this->_formData->$name = $request->getParamByName($name);
+            $this->formData->$name = $request->getParamByName($name);
         }
         return $this;
     }
@@ -43,7 +43,7 @@ class Form_Abstract
      */
     public function getFormDefinition()
     {
-        return $this->_formDefinition;
+        return $this->formDefinition;
     }
     /**
      * @param string $name
@@ -62,7 +62,7 @@ class Form_Abstract
             $formDefinition['optional'] = false;
         }
 
-        $this->_formDefinition->$name = $formDefinition;
+        $this->formDefinition->$name = $formDefinition;
         return $this;
     }
     /**
@@ -76,7 +76,7 @@ class Form_Abstract
             if ($element['optional'] == false) {
                 if (!property_exists($this->getFormData(), $name)) {
                     $error[$name]= ' is not set';
-                } elseif (empty($this->_formData->$name)) {
+                } elseif (empty($this->formData->$name)) {
                     $error[$name] = 'is needed and can not be empty';
                 } elseif (array_key_exists('function', $element)) {
                     if (method_exists($this, $element['function'])) {
@@ -98,7 +98,7 @@ class Form_Abstract
      */
     public function getFormData()
     {
-        return $this->_formData;
+        return $this->formData;
     }
 
     /**
@@ -107,7 +107,7 @@ class Form_Abstract
      */
     public function setFormData($_formData)
     {
-        $this->_formData = $_formData;
+        $this->formData = $_formData;
         return $this;
     }
     /**
@@ -122,7 +122,7 @@ class Form_Abstract
         if (empty($name)) {
             throw new Exception('Form element name must not be empty.');
         }
-        $this->_formData->$name = $value;
+        $this->formData->$name = $value;
         return $this;
     }
 }

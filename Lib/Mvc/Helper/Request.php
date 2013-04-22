@@ -1,20 +1,20 @@
 <?php
 class Helper_Request
 {
-    protected $_baseName = 'Index';
-    protected $_params = array();
+    protected $baseName = 'Index';
+    protected $params = array();
 
     public function __construct()
     {
         if (strpos($_SERVER['QUERY_STRING'], '/') != false) {
-            $this->_baseName = substr($_SERVER['QUERY_STRING'], 0, strpos($_SERVER['QUERY_STRING'], '/'));
+            $this->baseName = substr($_SERVER['QUERY_STRING'], 0, strpos($_SERVER['QUERY_STRING'], '/'));
         } elseif (!empty($_SERVER['QUERY_STRING'])) {
-            $this->_baseName = $_SERVER['QUERY_STRING'];
+            $this->baseName = $_SERVER['QUERY_STRING'];
         }
-        $this->_getParams();
+        $this->getAllParams();
     }
 
-    protected function _getParams()
+    protected function getAllParams()
     {
         $params = array();
         $queryString = substr($_SERVER['QUERY_STRING'], strpos($_SERVER['QUERY_STRING'], '/') + 1);
@@ -28,12 +28,12 @@ class Helper_Request
             foreach ($params as $param) {
                 $paramParts = explode('=', $param);
                 if (count($paramParts) > 1) {
-                    $this->_params[$paramParts[0]] = $paramParts[1];
+                    $this->params[$paramParts[0]] = $paramParts[1];
                 }
             }
         }
         foreach ($_POST as $key => $value) {
-            $this->_params[$key] = $value;
+            $this->params[$key] = $value;
         }
     }
     /**
@@ -41,7 +41,7 @@ class Helper_Request
      */
     public function getBaseName()
     {
-        return $this->_baseName;
+        return $this->baseName;
     }
 
     /**
@@ -50,7 +50,7 @@ class Helper_Request
      */
     public function setBaseName($_baseName)
     {
-        $this->_baseName = $_baseName;
+        $this->baseName = $_baseName;
         return $this;
     }
 
@@ -59,7 +59,7 @@ class Helper_Request
      */
     public function getParams()
     {
-        return $this->_params;
+        return $this->params;
     }
 
     /**
@@ -68,7 +68,7 @@ class Helper_Request
      */
     public function getParamByName($name)
     {
-        return (array_key_exists($name, $this->_params) == true) ? $this->_params[$name] : null;
+        return (array_key_exists($name, $this->params) == true) ? $this->params[$name] : null;
     }
     /**
      * @param string $_name
@@ -77,7 +77,7 @@ class Helper_Request
      */
     public function setParam($name, $value)
     {
-        $this->_params[$name] = $value;
+        $this->params[$name] = $value;
         return $this;
     }
 

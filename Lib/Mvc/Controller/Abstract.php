@@ -10,26 +10,26 @@ class Controller_Abstract
      *
      * @var stdClass
      */
-    protected $_viewData = null;
+    protected $viewData = null;
     /**
      *
      * @var Helper_Request
      */
-    protected $_request = null;
+    protected $request = null;
     /**
      *
      * @var string
      */
-    protected $_viewName = '';
+    protected $viewName = '';
     /**
      *
      * @var boolean
      */
-    protected $_isAjax = false;
+    protected $isAjax = false;
     public function __construct()
     {
-        $this->_viewData = new stdClass();
-        $this->_request = Registry::getInstance()->get('request');
+        $this->viewData = new stdClass();
+        $this->request = Registry::getInstance()->get('request');
         $this->run();
     }
 
@@ -59,7 +59,7 @@ class Controller_Abstract
      */
     public function getView()
     {
-        return $this->_viewData;
+        return $this->viewData;
     }
 
     /**
@@ -68,7 +68,7 @@ class Controller_Abstract
      */
     public function setView($_view)
     {
-        $this->_viewData = $_view;
+        $this->viewData = $_view;
         return $this;
     }
     /**
@@ -79,7 +79,7 @@ class Controller_Abstract
      */
     public function addToView($name, $value)
     {
-        $this->_viewData->$name = $value;
+        $this->viewData->$name = $value;
         return $this;
     }
     /**
@@ -87,14 +87,14 @@ class Controller_Abstract
      */
     public function getRequest()
     {
-        return $this->_request;
+        return $this->request;
     }
     /**
      * @return boolean
      */
-    public function getIsAjax()
+    public function isAjax()
     {
-        return $this->_isAjax;
+        return $this->isAjax;
     }
     /**
      * @param boolean $_isAjax
@@ -102,7 +102,7 @@ class Controller_Abstract
      */
     public function setIsAjax($_isAjax)
     {
-        $this->_isAjax = $_isAjax;
+        $this->isAjax = $_isAjax;
         return $this;
     }
     /**
@@ -110,7 +110,7 @@ class Controller_Abstract
      */
     public function getViewName()
     {
-        return $this->_viewName;
+        return $this->viewName;
     }
     /**
      * @param string $_viewName
@@ -118,7 +118,15 @@ class Controller_Abstract
      */
     public function setViewName($_viewName)
     {
-        $this->_viewName = $_viewName;
+        $this->viewName = $_viewName;
         return $this;
+    }
+    /**
+     * 
+     * @return stdClass
+     */
+    public function getViewData()
+    {
+        return $this->viewData;
     }
 }
