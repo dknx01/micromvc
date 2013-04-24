@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class php_error\ErrorHandler | visualisation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?3030261136"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li><a href="namespace-None.html">None</a>
+						</li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="namespace-php_error.html">php_error</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-php_error.ErrorHandler.html">ErrorHandler</a></li>
+				<li><a href="class-php_error.FileLinesSet.html">FileLinesSet</a></li>
+				<li><a href="class-php_error.JSMin.html">JSMin</a></li>
+			</ul>
+
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-php_error.ErrorException.html">ErrorException</a></li>
+				<li><a href="class-php_error.JSMinException.html">JSMinException</a></li>
+			</ul>
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-php_error.reportErrors.html">reportErrors</a></li>
+				<li><a href="function-php_error.withoutErrors.html">withoutErrors</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-php_error.html" title="Summary of php_error"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ErrorHandler</h1>
+
+
+	<div class="description">
+	
+<p>The actual handler. There can only ever be one.</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-php_error.html">php_error</a><br />
+		
+
+				<b>License:</b>
+				<a href="PHP">Error
+
+Copyright (c) 2012 Joseph Lenton
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the &lt;organization&gt; nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL &lt;COPYRIGHT HOLDER&gt; BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Uses:
+     JSMin-php   https://github.com/rgrove/jsmin-php/
+     jQuery      http://jquery.com/</a><br />
+		<b>Located at</b> <a href="source-class-php_error.ErrorHandler.html#215-3950" title="Go to source code">Lib/Mvc/php_error.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="identifyTypeHTML" id="_identifyTypeHTML">
+
+		<td class="attributes"><code>
+			 public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_identifyTypeHTML">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1064-1100" title="Go to source code">identifyTypeHTML</a>( <span>mixed <var>$arg</var></span>, <span>mixed <var>$recurseLevels</var> = <span class="php-num">1</span> </span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1138-1276" title="Go to source code">__construct</a>( <span>options <var>$options</var> = <span class="php-keyword1">null</span> </span> )</code>
+
+		<div class="description short">
+			
+<p>= Options =</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>= Options =</p>
+
+<p>All options are optional, and so is passing in an options item. You don't
+have to supply any, it's up to you.</p>
+
+<p>Note that if 'php_error.force_disable' is true, then this object will try to
+look like it works, but won't actually do anything.</p>
+
+<p>All options can also be passed in from 'php.ini'. You do this by setting it
+with 'php_error.' prefix. For example:<br />
+php_error.catch_ajax_errors = On php_error.error_reporting_on = E_ALL |
+E_STRICT</p>
+
+<p>Includes: = Types of errors this will catch = - catch_ajax_errors When on,
+this will inject JS Ajax wrapping code, to allow this to catch any future JSON
+errors. Defaults to true. - catch_supressed_errors The @ supresses errors. If
+set to true, then they are still reported anyway, but respected when false.
+Defaults to false. - catch_class_not_found When true, loading a class that does
+not exist will be caught. This defaults to true.<br />
+= Error reporting level = - error_reporting_on value for when errors are on,
+defaults to all errors - error_reporting_off value for when errors are off,
+defaults to php.ini's error_reporting.<br />
+= Setup Details = - application_root When it's working out hte stack trace, this
+is the root folder of the application, to use as it's base. Defaults to the
+servers root directory.<br />
+A relative path can be given, but lets be honest, an explicit path is the way to
+guarantee that you will get the path you want. My relative might not be the same
+as your relative.<br />
+- snippet_num_lines The number of lines to display in the code snippet. That
+includes the line being reported.<br />
+- server_name The name for this server, defaults to "$_SERVER['SERVER_NAME']"<br
+/>
+- ignore_folders This is allows you to highlight non-framework code in a stack
+trace. An array of folders to ignore, when working out the stack trace. This is
+folder prefixes in relation to the application_root, whatever that might be.
+They are only ignored if there is a file found outside of them. If you still
+don't get what this does, don't worry, it's here cos I use it.<br />
+- application_folders Just like ignore, but anything found in these folders
+takes precedence over anything else.<br />
+- background_text The text that appeares in the background. By default this is
+blank. Why? You can replace this with the name of your framework, for extra
+customization spice.<br />
+- html_only By default, PHP Error only runs on ajax and HTML pages. If this is
+false, then it will also run when on non-HTML pages too, such as replying with
+images of JavaScript from your PHP. Defaults to true.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$options</var></dt>
+					<dd><code>options</code><br>Optional, an array of values to customize this handler.</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-Exception.html">Exception</a></code></code><br>This is raised if given an options that does <em>not</em> exist (so you know
+that option is meaningless).<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isOn" id="_isOn">
+
+		<td class="attributes"><code>
+			 public 
+			true
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isOn">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1284-1289" title="Go to source code">isOn</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>true</code><br>if this is currently on, false if not.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isOff" id="_isOff">
+
+		<td class="attributes"><code>
+			 public 
+			If
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isOff">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1291-1296" title="Go to source code">isOff</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>If</code><br>this is off, this returns true, otherwise false.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="turnOn" id="_turnOn">
+
+		<td class="attributes"><code>
+			 public 
+			This
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_turnOn">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1298-1312" title="Go to source code">turnOn</a>( )</code>
+
+		<div class="description short">
+			
+<p>Turns error reporting on.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Turns error reporting on.</p>
+
+<p>This will use the strictest error reporting available, or the level you pass
+in when creating this using the 'error_reporting_on' option.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>This</code><br>error reporting handler, for method chaining.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="turnOff" id="_turnOff">
+
+		<td class="attributes"><code>
+			 public 
+			This
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_turnOff">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1314-1327" title="Go to source code">turnOff</a>( )</code>
+
+		<div class="description short">
+			
+<p>Turns error reporting off.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Turns error reporting off.</p>
+
+<p>This will use the 'php.ini' setting for the error_reporting level, or one you
+have passed in if you used the 'error_reporting_off' option when creating
+this.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>This</code><br>error reporting handler, for method chaining.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="withoutErrors" id="_withoutErrors">
+
+		<td class="attributes"><code>
+			 public 
+			The
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_withoutErrors">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1329-1363" title="Go to source code">withoutErrors</a>( <span>callable <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Allows you to run a callback with strict errors turned off. Standard errors
+still apply, but this will use the default error and exception handlers.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Allows you to run a callback with strict errors turned off. Standard errors
+still apply, but this will use the default error and exception handlers.</p>
+
+<p>This is useful for when loading libraries which do not adhere to strict
+errors, such as Wordpress.</p>
+
+<p>To use:<br />
+withoutErrors( function() { // unsafe code here });</p>
+
+<p>This will use the error_reporting value for when this is turned off.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$callback</var></dt>
+					<dd><code>callable</code><br>A PHP function to call.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>The</code><br>result of calling the callback.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__onShutdown" id="___onShutdown">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___onShutdown">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1365-1394" title="Go to source code">__onShutdown</a>( )</code>
+
+		<div class="description short">
+			
+<p>This is the shutdown function, which should <em>only</em> be called via
+'register_shutdown_function'.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>This is the shutdown function, which should <em>only</em> be called via
+'register_shutdown_function'.</p>
+
+<p>It's exposed because it has to be exposed.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="endBuffer" id="_endBuffer">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_endBuffer">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#1487-1547" title="Go to source code">endBuffer</a>( )</code>
+
+		<div class="description short">
+			
+<p>This will finish buffering, and output the page. It also appends the magic JS
+onto the beginning of the page, if enabled, to allow working with Ajax.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>This will finish buffering, and output the page. It also appends the magic JS
+onto the beginning of the page, if enabled, to allow working with Ajax.</p>
+
+<p>Note that if PHP Error has been disabled in the php.ini file, or through some
+other option, such as running from the command line, then this will do nothing
+(as no buffering will take place).</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reportClassNotFound" id="_reportClassNotFound">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reportClassNotFound">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#2299-2308" title="Go to source code">reportClassNotFound</a>( <span>mixed <var>$className</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Given a class name, which can include a namespace, this will report that it
+is not found.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Given a class name, which can include a namespace, this will report that it
+is not found.</p>
+
+<p>This will also report it as an exception, so you will get a full stack
+trace.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reportException" id="_reportException">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reportException">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#2310-2321" title="Go to source code">reportException</a>( <span>mixed <var>$ex</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Given an exception, this will report it.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Given an exception, this will report it.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reportError" id="_reportError">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reportError">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#2323-2425" title="Go to source code">reportError</a>( <span>mixed <var>$code</var></span>, <span>mixed <var>$message</var></span>, <span>mixed <var>$errLine</var></span>, <span>mixed <var>$errFile</var></span>, <span>mixed <var>$ex</var> = <span class="php-keyword1">null</span> </span> )</code>
+
+		<div class="description short">
+			
+<p>The entry point for handling an error.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>The entry point for handling an error.</p>
+
+<p>This is the lowest entry point for error reporting, and for that reason it
+can either take just error info, or a combination of error and exception
+information.</p>
+
+<p>Note that this will still log errors in the error log even when it's disabled
+with ini. It just does nothing more than that.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="displayHTML" id="_displayHTML">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_displayHTML">#</a>
+		<code><a href="source-class-php_error.ErrorHandler.html#3307-3949" title="Go to source code">displayHTML</a>( <span><code><a href="class-Closure.html">Closure</a></code> <var>$head</var></span>, <span>mixed <var>$body</var> = <span class="php-keyword1">null</span></span>, <span>mixed <var>$javascript</var> = <span class="php-keyword1">null</span> </span> )</code>
+
+		<div class="description short">
+			
+<p>A generic function for clearing the buffer, and displaying error output.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>A generic function for clearing the buffer, and displaying error output.</p>
+
+<p>A function needs to be given, and then this is run at the correct time. There
+are two ways this can be used:<br />
+displayHTML( $head, $body )</p>
+
+<p>Here 'head' is run straight after the doctype, whilst 'body' is run as the
+body for the content. The other way is:<br />
+displayHTML( $body )</p>
+
+<p>Here there is only content.</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="REGEX_DOCTYPE" id="REGEX_DOCTYPE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#220" title="Go to source code"><b>REGEX_DOCTYPE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/&lt;( )*!( *)DOCTYPE([^&gt;]+)&gt;/'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_DOCTYPE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="REGEX_PHP_IDENTIFIER" id="REGEX_PHP_IDENTIFIER">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#222" title="Go to source code"><b>REGEX_PHP_IDENTIFIER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'\b[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_PHP_IDENTIFIER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="REGEX_PHP_CONST_IDENTIFIER" id="REGEX_PHP_CONST_IDENTIFIER">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#223" title="Go to source code"><b>REGEX_PHP_CONST_IDENTIFIER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/\b[A-Z_\x7f-\xff][A-Z0-9_\x7f-\xff]*/'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_PHP_CONST_IDENTIFIER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="REGEX_METHOD_OR_FUNCTION_END" id="REGEX_METHOD_OR_FUNCTION_END">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#225-244" title="Go to source code"><b>REGEX_METHOD_OR_FUNCTION_END</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/(\\{closure\\})|(((\\\\)?(\b[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*\\\\)*)?\b[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(::[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)?)\\(\\)$/'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_METHOD_OR_FUNCTION_END" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Matches:<br />
+{closure}()<br />
+blah::foo()<br />
+foo()</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Matches: {closure}() blah::foo() foo()</p>
+
+<p>It is: a closure or a method or function followed by parenthesis '()'<br />
+a function is 'namespace function' a method is 'namespace class::function', or
+'namespace class-&gt;function' the whole namespace is optional namespace is made
+up of an '\' and then repeating 'namespace\' both the first slash, and the
+repeating 'namespace\', are optional</p>
+
+<p>'END' matches it at the end of a string, the other one does not.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="REGEX_METHOD_OR_FUNCTION" id="REGEX_METHOD_OR_FUNCTION">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#245" title="Go to source code"><b>REGEX_METHOD_OR_FUNCTION</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/(\\{closure\\})|(((\\\\)?(\b[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*\\\\)*)?\b[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*(::[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)?)\\(\\)/'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_METHOD_OR_FUNCTION" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="REGEX_VARIABLE" id="REGEX_VARIABLE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#247" title="Go to source code"><b>REGEX_VARIABLE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/\b[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*$/'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_VARIABLE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="REGEX_MISSING_SEMI_COLON_FOLLOWING_LINE" id="REGEX_MISSING_SEMI_COLON_FOLLOWING_LINE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#249" title="Go to source code"><b>REGEX_MISSING_SEMI_COLON_FOLLOWING_LINE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'/^ *(return|}|if|while|foreach|for|switch)/'</span></code></td>
+		<td class="description"><div>
+			<a href="#REGEX_MISSING_SEMI_COLON_FOLLOWING_LINE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="NUM_FILE_LINES" id="NUM_FILE_LINES">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#251-259" title="Go to source code"><b>NUM_FILE_LINES</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">13</span></code></td>
+		<td class="description"><div>
+			<a href="#NUM_FILE_LINES" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The number of lines to take from the file, where the error is reported. This
+is the number of lines around the line in question, including that line.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The number of lines to take from the file, where the error is reported. This
+is the number of lines around the line in question, including that line.</p>
+
+<p>So '9' will be the error line + 4 lines above + 4 lines below.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="FILE_TYPE_APPLICATION" id="FILE_TYPE_APPLICATION">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#261" title="Go to source code"><b>FILE_TYPE_APPLICATION</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">1</span></code></td>
+		<td class="description"><div>
+			<a href="#FILE_TYPE_APPLICATION" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="FILE_TYPE_IGNORE" id="FILE_TYPE_IGNORE">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#262" title="Go to source code"><b>FILE_TYPE_IGNORE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">2</span></code></td>
+		<td class="description"><div>
+			<a href="#FILE_TYPE_IGNORE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="FILE_TYPE_ROOT" id="FILE_TYPE_ROOT">
+
+		<td class="attributes"><code>integer</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#263" title="Go to source code"><b>FILE_TYPE_ROOT</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-num">3</span></code></td>
+		<td class="description"><div>
+			<a href="#FILE_TYPE_ROOT" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PHP_ERROR_MAGIC_HEADER_KEY" id="PHP_ERROR_MAGIC_HEADER_KEY">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#265" title="Go to source code"><b>PHP_ERROR_MAGIC_HEADER_KEY</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'PHP_ERROR_MAGIC_HEADER'</span></code></td>
+		<td class="description"><div>
+			<a href="#PHP_ERROR_MAGIC_HEADER_KEY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PHP_ERROR_MAGIC_HEADER_VALUE" id="PHP_ERROR_MAGIC_HEADER_VALUE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#266" title="Go to source code"><b>PHP_ERROR_MAGIC_HEADER_VALUE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'php_stack_error'</span></code></td>
+		<td class="description"><div>
+			<a href="#PHP_ERROR_MAGIC_HEADER_VALUE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MAGIC_IS_PRETTY_ERRORS_MARKER" id="MAGIC_IS_PRETTY_ERRORS_MARKER">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#267" title="Go to source code"><b>MAGIC_IS_PRETTY_ERRORS_MARKER</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'&lt;!-- __magic_php_error_is_a_stack_trace_constant__ --&gt;'</span></code></td>
+		<td class="description"><div>
+			<a href="#MAGIC_IS_PRETTY_ERRORS_MARKER" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PHP_ERROR_INI_PREFIX" id="PHP_ERROR_INI_PREFIX">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-php_error.ErrorHandler.html#269" title="Go to source code"><b>PHP_ERROR_INI_PREFIX</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">'php_error'</span></code></td>
+		<td class="description"><div>
+			<a href="#PHP_ERROR_INI_PREFIX" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		visualisation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

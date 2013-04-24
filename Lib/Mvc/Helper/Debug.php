@@ -1,9 +1,13 @@
 <?php
-
+/**
+ * a helper to debug a variable
+ * @author dknx01
+ * @package Helper
+ */
 class Helper_Debug
 {
-
     /**
+     * the sapi
      * @var string
      */
     protected static $sapi = null;
@@ -76,5 +80,4 @@ class Helper_Debug
         }
         return $output;
     }
-
 }

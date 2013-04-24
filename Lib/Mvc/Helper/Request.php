@@ -1,9 +1,24 @@
 <?php
+/**
+ * helper class to procces the request and get the basename for the controller and all params
+ * @author dknx01
+ * @package Helper
+ */
 class Helper_Request
 {
+    /**
+     * the basename
+     * @var string
+     */
     protected $baseName = 'Index';
+    /**
+     * all passed params
+     * @var array
+     */
     protected $params = array();
-
+    /**
+     * the constructor
+     */
     public function __construct()
     {
         if (strpos($_SERVER['QUERY_STRING'], '/') != false) {
@@ -13,7 +28,9 @@ class Helper_Request
         }
         $this->getAllParams();
     }
-
+    /**
+     * retrive all params get by GET or POST method
+     */
     protected function getAllParams()
     {
         $params = array();
@@ -37,7 +54,8 @@ class Helper_Request
         }
     }
     /**
-     * @return the $_baseName
+     * the basename
+     * @return string
      */
     public function getBaseName()
     {
@@ -45,6 +63,7 @@ class Helper_Request
     }
 
     /**
+     * set an new basename
      * @param string $_baseName
      * @return Helper_Request
      */
@@ -55,7 +74,8 @@ class Helper_Request
     }
 
     /**
-     * @return the $_params
+     * all passed params
+     * @return array
      */
     public function getParams()
     {
@@ -63,6 +83,7 @@ class Helper_Request
     }
 
     /**
+     * get a param by its name
      * @param string $_params
      * @return string | null
      */
@@ -71,6 +92,7 @@ class Helper_Request
         return (array_key_exists($name, $this->params) == true) ? $this->params[$name] : null;
     }
     /**
+     * set a new param
      * @param string $_name
      * @param mixed $value
      * @return Helper_Request
@@ -80,5 +102,4 @@ class Helper_Request
         $this->params[$name] = $value;
         return $this;
     }
-
 }

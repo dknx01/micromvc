@@ -1,13 +1,21 @@
 <?php
-
+/**
+ * claas to define some configuration entry and how to get a value from the configuration
+ * @author dknx01
+ * @package Config
+ */
 class Config_Definition_Config extends SimpleXMLElement
 {
+    /**
+     * check if the configuration has an database entry
+     * @return boolean
+     */
     public function hasDatabase()
     {
         return !empty($this->database) ? true : false;
     }
     /**
-     * 
+     * the database host name
      * @return string
      */
     public function getDatabaseHost()
@@ -15,7 +23,7 @@ class Config_Definition_Config extends SimpleXMLElement
         return (string)$this->database->host;
     }
     /**
-     * 
+     * the database user
      * @return string
      */
     public function getDatabaseUser()
@@ -23,7 +31,7 @@ class Config_Definition_Config extends SimpleXMLElement
         return (string)$this->database->user;
     }
     /**
-     * 
+     * the database password
      * @return string
      */
     public function getDatabasePassword()
@@ -31,7 +39,7 @@ class Config_Definition_Config extends SimpleXMLElement
         return (string)$this->database->password;
     }
     /**
-     * 
+     * the database name
      * @return string
      */
     public function getDatabaseName()
@@ -39,7 +47,7 @@ class Config_Definition_Config extends SimpleXMLElement
         return (string)$this->database->name;
     }
     /**
-     * 
+     * should this connection be used (active)
      * @return boolean
      */
     public function getDatabaseStatus()
@@ -50,13 +58,16 @@ class Config_Definition_Config extends SimpleXMLElement
             return false;
         }
     }
-    
+    /**
+     * get all database params
+     * @return array
+     */
     public function getDatabaseParams()
     {
         return $this->database->params;
     }
     /**
-     * 
+     * get the type of the database
      * @return string
      */
     public function getDatabaseType()
@@ -68,7 +79,7 @@ class Config_Definition_Config extends SimpleXMLElement
     }
     
     /**
-     * 
+     * get the path for a sqlite database
      * @return string
      */
     public function getDatabasePath()
@@ -76,7 +87,7 @@ class Config_Definition_Config extends SimpleXMLElement
         return (string)$this->database->path;
     }
     /**
-     * 
+     * get the value of a parameter
      * @param string $name
      * @return mixed the value
      */
@@ -91,7 +102,7 @@ class Config_Definition_Config extends SimpleXMLElement
         return $value;
     }
     /**
-     * 
+     * check if a node has children and parse them
      * @param SimpleXMLElement $node
      * @return array|string
      */

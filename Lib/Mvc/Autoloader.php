@@ -1,5 +1,11 @@
 <?php
 /**
+ * all needed autoloader
+ * @author dknx01
+ * @package Autoloader
+ */
+
+/**
  * application autoloader
  * @param string $classname
  */

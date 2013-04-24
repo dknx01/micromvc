@@ -7,29 +7,19 @@
 class Application
 {
     /**
-     *
+     * request handler
      * @var Helper_Request
      */
     protected $request = null;
     /**
-     *
-     * @var string
-     */
-    protected $view = '';
-    /**
-     *
-     * @var string
-     */
-    protected $viewHeader = '';
-    /**
-     *
+     * name of the controller
      * @var string
      */
     protected $controller = '';
     
     
     /**
-     *
+     * the loaded and parsed config file
      * @var Config_Definition_Config
      */
     protected $config = null;
@@ -56,11 +46,9 @@ class Application
              * @var Controller_Abstract
              */
             $controller = new $controllerName;
-            $this->setViewData($controller->getView());
             $viewNameController = $controller->getViewName();
-            $viewOutput = new View_Output();
+            $viewOutput = new View_Output($this->getRequest());
             $viewOutput->setViewData($controller->getViewData())
-                       ->setRequest($this->getRequest())
                        ->setConfig($this->config)
                        ->isAjax($controller->isAjax());
             if (!empty($viewNameController)) {
@@ -77,6 +65,7 @@ class Application
 
     }
     /**
+     * return the request object
      * @return Helper_Request
      */
     public function getRequest()
@@ -85,6 +74,7 @@ class Application
     }
 
     /**
+     * set the request objec
      * @param Helper_Request $_request
      * @return Application
      */
@@ -95,6 +85,7 @@ class Application
     }
 
     /**
+     * return the current controller name
      * @return string
      */
     public function getController()
@@ -103,6 +94,7 @@ class Application
     }
 
     /**
+     * set the controller name
      * @param string $_controller
      * @return Application
      */
@@ -112,25 +104,7 @@ class Application
         return $this;
     }
     /**
-     * 
-     * @return mixed
-     */
-    public function getViewData()
-    {
-        return $this->_viewData;
-    }
-    /**
-     * 
-     * @param mixed $viewData
-     * @return \Application
-     */
-    public function setViewData($viewData)
-    {
-        $this->_viewData = $viewData;
-        return $this;
-    }
-    /**
-     * 
+     * prepare the database connection and store them in the registry
      * @return \Application
      * @throws Exception
      */
