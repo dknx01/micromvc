@@ -7,16 +7,19 @@
 class Config_ParseConfig
 {
     /**
-     *
+     * configuration file name
      * @var string
      */
     protected $name = 'Config/Application.xml';
     /**
-     *
+     * the parsed configuration data
      * @var Config_Definition_Config
      */
     protected $configData = null;
-
+    /**
+     * the constructor with an optional configuration file
+     * @param string $configFile
+     */
     public function __construct($configFile = null)
     {
         if (!is_null($configFile)) {
@@ -52,7 +55,7 @@ class Config_ParseConfig
         return $this;
     }
     /**
-     * 
+     * get the parsed configuration datas
      * @return Config_Definition_Config
      */
     public function getConfigData()

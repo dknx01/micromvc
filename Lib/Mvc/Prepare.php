@@ -1,8 +1,14 @@
 <?php
 /**
  * some prepare work for the mvc application
+ * @author dknx01
+ * @package Prepare
  */
 
+/**
+ * check if all needed constants are set
+ * @throws Exception
+ */
 function checkConstants()
 {
     if (!defined('APPDIR')) {
@@ -15,13 +21,7 @@ function checkConstants()
     }
 }
 
-function setArgSeparator()
-{
-    ini_set('arg_separator.output', '|');
-}
-
 checkConstants();
 require_once ROOTDIR . '/Lib/Mvc/php_error.php';
 $options = array('background_text' => 'MVC', 'application_root' => ROOTDIR);
 \php_error\reportErrors($options);
-setArgSeparator();

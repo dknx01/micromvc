@@ -7,7 +7,7 @@
 class Db_Table
 {
     /**
-     *
+     * the pdo connection
      * @var PDO
      */
     protected $connection = null;
@@ -26,7 +26,10 @@ class Db_Table
      * @var Db_Mapper
      */
     protected $mapper = null;
-
+    /**
+     * the constructor
+     * @throws Exception
+     */
     public function __construct()
     {
         $this->connection = Registry::getInstance()->get('db');
@@ -53,7 +56,7 @@ class Db_Table
         }
     }
     /**
-     * 
+     * get the table name
      * @return string
      */
     public function getName()
@@ -61,9 +64,9 @@ class Db_Table
         return $this->name;
     }
     /**
-     * 
+     * set the table name
      * @param string $name
-     * @return \Db_Dml
+     * @return \Db_Table
      */
     public function setName($name)
     {

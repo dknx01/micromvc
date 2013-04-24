@@ -1,56 +1,66 @@
 <?php
-
+/**
+ * procces the output passed to the browser
+ * @author dknx01
+ * @package View
+ */
 Class View_Output
 {
     /**
-     *
+     * the layout file name
      * @var string
      */
     private $layout = 'Layout';
     /**
-     *
+     * the header file name
      * @var string
      */
     private $header = null;
     /**
-     *
+     * the view file name
      * @var string
      */
     private $view = 'Index';
     /**
-     *
+     * the footer file name
      * @var string
      */
     private $footer = null;
     /**
-     *
+     * the request object
      * @var Helper_Request
      */
     private $request = null;
     /**
-     *
+     * the data passed to the view
      * @var stdClass
      */
     private $viewData = null;
     /**
-     *
+     * is this an ajax file
      * @var boolean
      */
     private $ajax = false;
     /**
-     *
+     * the loaded and parsed configuration
      * @var Config_Definition_Config
      */
     protected $config = null;
-
-    public function __construct()
+    /**
+     * the constructor
+     * @param Helper_Request $request
+     */
+    public function __construct(Helper_Request $request)
     {
         $this->viewData = new stdClass();
+        $this->setRequest($request);
         $this->setView()
              ->setHeader()
              ->setFooter();
     }
-
+    /**
+     * the a complete output
+     */
     public function render()
     {        
         ob_start();
@@ -77,12 +87,12 @@ Class View_Output
         if ($this->isAjax() == false) {
             require_once $this->getLayout();
         } else {
-            require_once APPDIR . '/Layout/Ajax.php';
+            require_once APPDIR . '/Layout/Ajax.phtml';
             
         }
     }
     /**
-     * 
+     *  get the current layout
      * @return string
      */
     public function getLayout()
@@ -90,18 +100,18 @@ Class View_Output
         return $this->layout;
     }
     /**
-     * 
+     * set a new layout
      * @param string $layout
      * @return \View_Render
      */
     public function setLayout($layout = null)
     {
         $layout = is_null($layout) ? 'Layout' : $layout;
-        $this->layout = APPDIR . '/Layout/' . $layout . '.php';
+        $this->layout = APPDIR . '/Layout/' . $layout . '.phtml';
         return $this;
     }
     /**
-     * 
+     * get the current header
      * @return string
      */
     public function getHeader()
@@ -109,18 +119,18 @@ Class View_Output
         return $this->header;
     }
     /**
-     * 
+     * set a new header
      * @param string $header
      * @return \View_Render
      */
     public function setHeader($header = null)
     {
         $header = is_null($header) ? $this->getRequest()->getBaseName() : $header;
-        $this->header = APPDIR . 'View/' . $header . '.header.php';
+        $this->header = APPDIR . 'View/' . $header . '.header.phtml';
         return $this;
     }
     /**
-     * 
+     * get the current view
      * @return string
      */
     public function getView()
@@ -128,18 +138,18 @@ Class View_Output
         return $this->view;
     }
     /**
-     * 
+     * set a new view
      * @param string $view
      * @return \View_Render
      */
     public function setView($view = null)
     {
         $view = is_null($view) ? $this->getRequest()->getBaseName() : $view;
-        $this->view = APPDIR . '/View/' . $view . '.php';
+        $this->view = APPDIR . '/View/' . $view . '.phtml';
         return $this;
     }
     /**
-     * 
+     * get the current footer
      * @return string
      */
     public function getFooter()
@@ -147,18 +157,18 @@ Class View_Output
         return $this->footer;
     }
     /**
-     * 
+     * set a new footer
      * @param string $footer
      * @return \View_Render
      */
     public function setFooter($footer = null)
     {
         $footer = is_null($footer) ? $this->getRequest()->getBaseName() : $footer;
-        $this->footer = APPDIR . '/View/' . $footer . '.footer.php';
+        $this->footer = APPDIR . '/View/' . $footer . '.footer.phtml';
         return $this;
     }
     /**
-     * 
+     * get the request object
      * @return Helper_Request
      */
     public function getRequest()
@@ -166,7 +176,7 @@ Class View_Output
         return $this->request;
     }
     /**
-     * 
+     * set a new request object
      * @param Helper_Request $request
      * @return \View_Render
      */
@@ -176,7 +186,7 @@ Class View_Output
         return $this;
     }
     /**
-     * 
+     * get the view data object
      * @return stdClass
      */
     public function getViewData()
@@ -184,7 +194,7 @@ Class View_Output
         return $this->viewData;
     }
     /**
-     * 
+     * set new view data object
      * @param stdClass $viewData
      * @return \View_Render
      */
@@ -194,17 +204,19 @@ Class View_Output
         return $this;
     }
     /**
-     * 
-     * @param boolean $ajax
+     * get or set if it is an ajax view
+     * @param boolean|null $ajax
      * @return boolean
      */
-    public function isAjax($ajax = false)
+    public function isAjax($ajax = null)
     {
-        $this->ajax = (boolean)$ajax;
+        if (!is_null($ajax)) {
+            $this->ajax = (boolean)$ajax;
+        }
         return $this->ajax;
     }
     /**
-     * 
+     *  get the configuration object
      * @return Config_Definition_Config
      */
     public function getConfig()
@@ -212,7 +224,7 @@ Class View_Output
         return $this->config;
     }
     /**
-     * 
+     * set the configuration object
      * @param Config_Definition_Config $config
      * @return \View_Output
      */
@@ -221,6 +233,4 @@ Class View_Output
         $this->config = $config;
         return $this;
     }
-
-
 }

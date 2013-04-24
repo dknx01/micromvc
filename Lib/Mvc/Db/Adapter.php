@@ -1,17 +1,43 @@
 <?php
+/**
+ * the adapter for our database connection
+ * @author dknx01
+ * @package Db
+ */
 class Db_Adapter extends PDO
 {
+    /**
+     * the generated dsn
+     * @var string
+     */
     protected $dsn = '';
+    /**
+     * the database user
+     * @var string
+     */
     protected $user = '';
+    /**
+     * the database password
+     * @var string
+     */
     protected $password = '';
+    /**
+     * the database connection parameters
+     * @var array
+     */
     protected $params = array();
+    /**
+     * the constructor
+     */
     public function __construct()
     {
         $this->init();
         parent::__construct($this->dsn, $this->user, $this->password);
         $this->proccedParams();
     }
-
+    /**
+     * procces all parameters
+     */
     protected function proccedParams()
     {
         foreach ($this->params as $key => $value) {
@@ -20,7 +46,9 @@ class Db_Adapter extends PDO
             $this->exec($stmt);
         }
     }
-
+    /**
+     * prepare a new connection based on the configuration file
+     */
     protected function init()
     {
         $configParser = new Config_ParseConfig();

@@ -7,25 +7,28 @@
 class Controller_Abstract
 {
     /**
-     *
+     * the view data
      * @var stdClass
      */
     protected $viewData = null;
     /**
-     *
+     * the request object
      * @var Helper_Request
      */
     protected $request = null;
     /**
-     *
+     * the view name
      * @var string
      */
     protected $viewName = '';
     /**
-     *
+     * is it an ajax view
      * @var boolean
      */
     protected $isAjax = false;
+    /**
+     * the constructor
+     */
     public function __construct()
     {
         $this->viewData = new stdClass();
@@ -55,24 +58,7 @@ class Controller_Abstract
     {
     }
     /**
-     * @return stdClass
-     */
-    public function getView()
-    {
-        return $this->viewData;
-    }
-
-    /**
-     * @param stdClass $_view
-     * @return Controller_Abstract
-     */
-    public function setView($_view)
-    {
-        $this->viewData = $_view;
-        return $this;
-    }
-    /**
-     *
+     * adds an entry to the view
      * @param string $name
      * @param mixed $value
      * @return Controller_Abstract
@@ -83,6 +69,7 @@ class Controller_Abstract
         return $this;
     }
     /**
+     * get the request helper object
      * @return Helper_Request
      */
     public function getRequest()
@@ -90,6 +77,7 @@ class Controller_Abstract
         return $this->request;
     }
     /**
+     * check if this is an ajax view request
      * @return boolean
      */
     public function isAjax()
@@ -97,6 +85,7 @@ class Controller_Abstract
         return $this->isAjax;
     }
     /**
+     * set if this is an ajax view request
      * @param boolean $_isAjax
      * @return Controller_Abstract
      */
@@ -106,6 +95,7 @@ class Controller_Abstract
         return $this;
     }
     /**
+     * get the view name for the controller
      * @return string
      */
     public function getViewName()
@@ -113,6 +103,7 @@ class Controller_Abstract
         return $this->viewName;
     }
     /**
+     * set the controllers view name
      * @param string $_viewName
      * @return Controller_Abstract
      */
@@ -122,7 +113,7 @@ class Controller_Abstract
         return $this;
     }
     /**
-     * 
+     * get all data used in the view
      * @return stdClass
      */
     public function getViewData()

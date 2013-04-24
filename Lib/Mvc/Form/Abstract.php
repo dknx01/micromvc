@@ -1,30 +1,39 @@
 <?php
+/**
+ * class to set a form definition and checks it
+ * @author dknx01
+ * @package Form
+ */
 class Form_Abstract
 {
     /**
-     *
+     * the form definition
      * @var stdClass
      */
     protected $formDefinition = null;
     /**
-     *
+     * the form data get by a request
      * @var stdClass
      */
     protected $formData = null;
-
+    /**
+     * the constructor
+     */
     final public function __construct()
     {
         $this->formDefinition = new stdClass;
         $this->formData = new stdClass();
         $this->main();
     }
-
+    /**
+     * the main function overwritten in the form definition
+     */
     public function main()
     {
     }
 
     /**
-     *
+     * set all form data to its request parameters
      * @return Form_Abstract
      */
     public function proceedFormRequest()
@@ -39,6 +48,7 @@ class Form_Abstract
         return $this;
     }
     /**
+     * the form definition
      * @return stdClass
      */
     public function getFormDefinition()
@@ -46,6 +56,7 @@ class Form_Abstract
         return $this->formDefinition;
     }
     /**
+     * adds an entry to the form definition
      * @param string $name
      * @param array $formDefinition
      * @return Form_Abstract
@@ -66,7 +77,7 @@ class Form_Abstract
         return $this;
     }
     /**
-     *
+     * checks the form
      * @return array
      */
     public function checkForm()
@@ -94,6 +105,7 @@ class Form_Abstract
         return $error;
     }
     /**
+     * get the passed form data
      * @return the $_formData
      */
     public function getFormData()
@@ -102,6 +114,7 @@ class Form_Abstract
     }
 
     /**
+     * set the passed form data
      * @param stdClass $_formData
      * @return Form_Abstract
      */
@@ -111,7 +124,7 @@ class Form_Abstract
         return $this;
     }
     /**
-     *
+     * add an entry to the passed form data
      * @param string $name
      * @param mixed $value
      * @throws Exception

@@ -17,7 +17,7 @@ class Db_Mapper
      */
     protected $primary = '';
     /**
-     * 
+     * get the primary key column
      * @return string
      */
     public function getPrimary()
@@ -25,7 +25,7 @@ class Db_Mapper
         return $this->primary;
     }
     /**
-     * 
+     * set the primary key column
      * @param string $primary
      * @return \Db_Mapper
      */
@@ -35,7 +35,7 @@ class Db_Mapper
         return $this;
     }
     /**
-     * 
+     * get the mapper
      * @return array
      */
     public function getMapper()
@@ -43,7 +43,7 @@ class Db_Mapper
         return $this->mapper;
     }
     /**
-     * 
+     * set a mapper
      * @param array $mapper
      * @return \Db_Mapper
      */

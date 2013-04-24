@@ -1,11 +1,24 @@
 <?php
+/**
+ * the registry object to store datas
+ * @author dknx01
+ * @package Registry
+ */
 class Registry
 {
+    /**
+     * our store
+     * @var stdClass
+     */
     protected $store = null;
+    /**
+     * the current instance
+     * @var Registry|null
+     */
     static private $_instance = null;
 
     /**
-     *
+     * get the current registry or create a new one
      * @return Registry
      */
     static function getInstance()
@@ -13,19 +26,21 @@ class Registry
         if (is_null(self::$_instance)) {
             self::$_instance = new self();
         }
-
         return self::$_instance;
     }
-
+    /**
+     * the constructor
+     */
     public function __construct()
     {
         $this->store = new stdClass();
     }
 
     /**
-     *
+     * gets a value from our store
      * @param string $name
      * @throws Exception
+     * @return null|mixed
      */
     public function get($name)
     {
@@ -37,7 +52,7 @@ class Registry
     }
 
     /**
-     *
+     * set a new entry in the store
      * @param string $name
      * @param mixed $value
      * @return Registry
@@ -50,5 +65,4 @@ class Registry
         $this->store->$name = $value;
         return $this;
     }
-
 }
