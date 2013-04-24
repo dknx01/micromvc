@@ -46,14 +46,13 @@ Class View_Output
     public function __construct()
     {
         $this->viewData = new stdClass();
-    }
-
-    public function render()
-    {
         $this->setView()
              ->setHeader()
              ->setFooter();
-        
+    }
+
+    public function render()
+    {        
         ob_start();
         include_once $this->getView();
         $viewOutput = ob_get_contents();
