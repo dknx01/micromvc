@@ -69,7 +69,6 @@ Class View_Output
         ob_end_clean();
         Registry::getInstance()->set('viewContent', $viewOutput);
         
-        Helper_Debug::dump($viewOutput);exit;
         if (file_exists($this->getHeader())) {
             ob_start();
             include_once $this->getHeader();

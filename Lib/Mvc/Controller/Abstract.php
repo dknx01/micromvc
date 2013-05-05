@@ -4,7 +4,7 @@
  * @author dknx01
  * @package Controller
  */
-class Controller_Abstract
+abstract class Controller_Abstract
 {
     /**
      * the view data
@@ -42,7 +42,7 @@ class Controller_Abstract
     public function run()
     {
         $this->up();
-        $this->main();
+        $this->index();
     }
     /**
      * setup the current controller
@@ -54,9 +54,7 @@ class Controller_Abstract
     /**
      * the main function
      */
-    public function main()
-    {
-    }
+    abstract function index();
     /**
      * adds an entry to the view
      * @param string $name

@@ -4,138 +4,190 @@
  * @author dknx01
  * @package Form
  */
-class Form_Abstract
+abstract class Form_Abstract
 {
     /**
-     * the form definition
-     * @var stdClass
+     * the form elements
+     * @var array
      */
-    protected $formDefinition = null;
-    /**
-     * the form data get by a request
-     * @var stdClass
-     */
-    protected $formData = null;
+    protected $formElements = array();
+//    /**
+//     * the form data get by a request
+//     * @var stdClass
+//     */
+//    protected $formData = null;
+    protected $action = '';
+    protected $method = 'post';
+    protected $attributes = null;
+    protected $checkErrors = null;
     /**
      * the constructor
      */
     final public function __construct()
     {
-        $this->formDefinition = new stdClass;
-        $this->formData = new stdClass();
-        $this->main();
+        $this->attributes = new stdClass();
+//        $this->formData = new stdClass();
+        $this->form();
     }
     /**
-     * the main function overwritten in the form definition
+     * the form function overwritten in the form definition
      */
-    public function main()
-    {
-    }
+    abstract function form();
 
     /**
-     * set all form data to its request parameters
-     * @return Form_Abstract
-     */
-    public function proceedFormRequest()
-    {
-        /**
-         * @var Helper_Request
-         */
-        $request = Registry::getInstance()->get('request');
-        foreach (get_object_vars($this->getFormDefinition()) as $name => $element) {
-            $this->formData->$name = $request->getParamByName($name);
-        }
-        return $this;
-    }
-    /**
      * the form definition
-     * @return stdClass
+     * @return array
      */
     public function getFormDefinition()
     {
-        return $this->formDefinition;
+        return $this->formElements;
     }
     /**
-     * adds an entry to the form definition
-     * @param string $name
-     * @param array $formDefinition
-     * @return Form_Abstract
+     * adds an element to this form
+     * @param Form_Element_Abstract $entry
+     * @param string|Form_Entry_Fieldset $fieldSet
+     * @return \Form_Abstract
      */
-    public function addFormDefinition($name, $formDefinition = array())
+    public function addElement(Form_Element_Abstract $element,
+                               $fieldSet = null)
     {
-        if (!is_array($formDefinition)) {
-            throw new Exception('Form definition must be an array');
+        if (!is_null($fieldSet))
+        {
+            if (array_key_exists($fieldSet, $this->formElements)) {
+                if (!($fieldSet instanceof Form_Entry_Fieldset)) {
+                    /**
+                     * @var $fieldSetEntry Form_Entry_Fieldset
+                     */
+                    $fieldSetEntry = $this->formElements[$fieldSet];
+                    $fieldSetEntry->addElement($element);
+                    $this->formElements[$fieldSet] = $fieldSetEntry;
+                } else {
+                    throw new Exception ('Cannot add an element to a fieldset '
+                        . 'that is of type Form_Entry_Fieldset');
+                }
+            } else {
+                if ($fieldSet instanceof Form_Entry_Fieldset) {
+                    $this->formElements[$fieldSet->getName()] = $fieldSet;
+                } else {
+                    $fieldSetEntry = new Form_Entry_Fieldset();
+                    $fieldSetEntry->setName($fieldSet);
+                    $fieldSetEntry->addElement($element);
+                    $this->formElements[$fieldSet] = $fieldSetEntry;
+                }
+            }
+            
+        } else {
+            $this->formElements[] = $element;
         }
-
-        if (!array_key_exists('optional', $formDefinition)
-            || !in_array($formDefinition['optional'], array(true, false))
-        ) {
-            $formDefinition['optional'] = false;
+        
+        return $this;
+    }
+    
+    public function render()
+    {
+        $form = PHP_EOL . '<form ';
+        $form .= 'action="' . $this->getAction() . '" ';
+        $form .= 'method="' . $this->getMethod() . '" ';
+        foreach (get_object_vars($this->getAttributes()) as $name => $value) {
+            $form .= $name . '="' . $value . '" ';
         }
-
-        $this->formDefinition->$name = $formDefinition;
+        $form .= '>' . PHP_EOL;
+        foreach ($this->formElements as $element) {
+            $form .= $element->render() . PHP_EOL;
+        }
+        $form .= PHP_EOL . '</form>' . PHP_EOL;
+        return nl2br($form);
+    }
+    /**
+     * get all additional attributes
+     * @return stdClass
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+    /**
+     * set all additional attributes
+     * @param stdClass $attributes
+     * @return \Form_Element_Abstract
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+    /** 
+     * @param string $name
+     * @param string $value
+     * @return \Form_Element_Abstract
+     */
+    public function addAttribute($name, $value)
+    {
+        $this->attributes->$name = $value;
         return $this;
     }
     /**
-     * checks the form
-     * @return array
+     * get an attribute by its name
+     * @param string $name
+     * @return string
      */
-    public function checkForm()
+    public function getAttribute($name)
     {
-        $error = array();
-        foreach (get_object_vars($this->getFormDefinition()) as $name => $element) {
-            if ($element['optional'] == false) {
-                if (!property_exists($this->getFormData(), $name)) {
-                    $error[$name]= ' is not set';
-                } elseif (empty($this->formData->$name)) {
-                    $error[$name] = 'is needed and can not be empty';
-                } elseif (array_key_exists('function', $element)) {
-                    if (method_exists($this, $element['function'])) {
-                        $fncName = $element['fucntion'];
-                        if ($this->$fncName() == false) {
-                            $error[$name] = ' Function' . htmlentities($element['function']) . ' not successfull.';
-                        }
-                    } else {
-                        $error[$name] = ' Function ' . htmlentities($element['function']) . ' not found in form';
-                    }
-                }
-            }
-        }
-
-        return $error;
+        return $this->attributes->$name;
     }
-    /**
-     * get the passed form data
-     * @return the $_formData
-     */
     public function getFormData()
     {
         return $this->formData;
     }
 
-    /**
-     * set the passed form data
-     * @param stdClass $_formData
-     * @return Form_Abstract
-     */
-    public function setFormData($_formData)
+    public function setFormData(stdClass $formData)
     {
-        $this->formData = $_formData;
+        $this->formData = $formData;
         return $this;
     }
-    /**
-     * add an entry to the passed form data
-     * @param string $name
-     * @param mixed $value
-     * @throws Exception
-     * @return Form_Abstract
-     */
-    public function addFormData($name, $value = null)
+
+    public function getAction()
     {
-        if (empty($name)) {
-            throw new Exception('Form element name must not be empty.');
-        }
-        $this->formData->$name = $value;
+        return $this->action;
+    }
+
+    public function setAction($action)
+    {
+        $this->action = $action;
         return $this;
+    }
+
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    public function setMethod($method)
+    {
+        $this->method = $method;
+        return $this;
+    }
+    public function check($recheck = false)
+    {
+        if (is_null($this->checkErrors) || $recheck == true) {
+            $this->checkErrors = new Form_Check_Error();
+            foreach ($this->formElements as $element) {
+               if ($element instanceof Form_Entry_Fieldset) {
+                   foreach ($element->getElements() as $entry) {
+                       $check = $entry->check();
+                       if (($check != true) == false) {
+                           $this->checkErrors->addError($entry->getName(), $check);
+
+                       }
+                   }
+               } else {
+                   $check = $element->check();
+                   if ($check != true) {
+                       $this->checkErrors->addError($element->getName(), $check);
+                   }
+               }
+            }
+        }
+        return $this->checkErrors;
     }
 }
