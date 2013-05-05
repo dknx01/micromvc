@@ -50,6 +50,7 @@ class Application
             $viewOutput = new View_Output($this->getRequest());
             $viewOutput->setViewData($controller->getViewData())
                        ->setConfig($this->config)
+                       ->setLayout()
                        ->isAjax($controller->isAjax());
             if (!empty($viewNameController)) {
                 $viewOutput->setView($viewNameController);

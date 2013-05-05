@@ -1,8 +1,15 @@
 The default index page with an dump to some database data
 <div id="container">
 <?php
+echo $this->viewData->testform;
 Helper_Debug::dump($this->viewData->testData);
 
 print_r($this->config->getParam('bar'));
+if($this->viewData->formErrors != null) {
+    echo '<hr>there were some errors<hr>';
+    foreach ($this->viewData->formErrors as $field => $msg) {
+        echo $field . ':' . $msg . '<br>';
+    }
+}
 ?>
 </div>
