@@ -7,45 +7,86 @@
 class Helper_Request
 {
     /**
-     * the basename
+     * the controller name
      * @var string
      */
-    protected $baseName = 'Index';
+    protected $controllerName = 'Index';
+    /**
+     * name of the action
+     * @var string
+     */
+    protected $action = 'index';
     /**
      * all passed params
      * @var array
      */
     protected $params = array();
     /**
+     * the query string
+     * @var string
+     */
+    private $queryString = '';
+    /**
      * the constructor
      */
     public function __construct()
     {
-        if (strpos($_SERVER['QUERY_STRING'], '/') != false) {
-            $this->baseName = substr($_SERVER['QUERY_STRING'], 0, strpos($_SERVER['QUERY_STRING'], '/'));
-        } elseif (!empty($_SERVER['QUERY_STRING'])) {
-            $this->baseName = $_SERVER['QUERY_STRING'];
+        $this->queryString = substr($_SERVER['REQUEST_URI'], 1);
+        $firstSlash = strpos($_SERVER['QUERY_STRING'], '/');
+        $secondSlash = $firstSlash == false
+                       ? false
+                       : strpos($_SERVER['QUERY_STRING'], '/', $firstSlash);
+        if ($firstSlash != false) {
+            $this->extractParams();
+            $this->controllerName = ucfirst(substr($_SERVER['QUERY_STRING'], 0, $firstSlash));
+            if ($secondSlash != false) {
+                $this->extractParams();
+                $this->action = lcfirst(
+                                    substr(
+                                            $_SERVER['QUERY_STRING'],
+                                            $firstSlash + 1, 
+                                            $secondSlash - 1
+                                        )
+                                );
+            }
+            if (empty($this->action)) {
+                $this->action = 'index';
+            }
         }
+        $this->removeQuestionmark();
         $this->getAllParams();
     }
+    private function removeQuestionmark()
+    {
+        preg_match('/\??(.*)/', $this->queryString, $matches);
+        $this->queryString = $matches[1];
+    }
+    private function extractParams()
+    {
+        $posSlash = strpos($this->queryString, '/');
+        if ($posSlash != false) {
+            $this->queryString = substr($this->queryString, $posSlash + 1);
+        }
+    }
+
     /**
      * retrive all params get by GET or POST method
      */
     protected function getAllParams()
     {
         $params = array();
-        $queryString = substr($_SERVER['QUERY_STRING'], strpos($_SERVER['QUERY_STRING'], '/') + 1);
-        $queryString = str_replace(array('?', '&'), '|', $queryString);
-        if (strpos($_SERVER['QUERY_STRING'], '/') != false) {
-            $params = explode('|', $queryString);
-        } elseif (strpos($queryString, '|') > 1) {
-            $params = explode('|', $queryString);
+        if (strpos($this->queryString, '/') != false) {
+            $params = explode('/', $this->queryString);
+        } else {
+            $params = explode('&', $this->queryString);
         }
         if (count($params) > 0) {
             foreach ($params as $param) {
-                $paramParts = explode('=', $param);
-                if (count($paramParts) > 1) {
-                    $this->params[$paramParts[0]] = $paramParts[1];
+                $split = strpos($param, '=');
+                if ($split != false) {
+                    $this->params[substr($param, 0, $split)] = substr($param, $split + 1);
+                } else {
+                    $this->params[$param] = '';
                 }
             }
         }
@@ -54,22 +95,22 @@ class Helper_Request
         }
     }
     /**
-     * the basename
+     * the controller name
      * @return string
      */
-    public function getBaseName()
+    public function getControllerName()
     {
-        return $this->baseName;
+        return $this->controllerName;
     }
 
     /**
      * set an new basename
-     * @param string $_baseName
+     * @param string $controllerName
      * @return Helper_Request
      */
-    public function setBaseName($_baseName)
+    public function setControllerName($controllerName)
     {
-        $this->baseName = $_baseName;
+        $this->controllerName = $controllerName;
         return $this;
     }
 
@@ -100,6 +141,24 @@ class Helper_Request
     public function setParam($name, $value)
     {
         $this->params[$name] = $value;
+        return $this;
+    }
+    /**
+     * the action
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+    /**
+     * set a new action name
+     * @param string $action
+     * @return \Helper_Request
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
         return $this;
     }
 }

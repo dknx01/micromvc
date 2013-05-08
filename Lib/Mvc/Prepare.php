@@ -22,6 +22,9 @@ function checkConstants()
 }
 
 checkConstants();
-require_once ROOTDIR . '/Lib/Mvc/php_error.php';
-$options = array('background_text' => 'MVC', 'application_root' => ROOTDIR);
-\php_error\reportErrors($options);
+
+if ($_SERVER['APP_ENV'] != 'online') {
+    require_once ROOTDIR . '/Lib/Mvc/php_error.php';
+    $options = array('background_text' => 'MVC', 'application_root' => ROOTDIR);
+    \php_error\reportErrors($options);
+}

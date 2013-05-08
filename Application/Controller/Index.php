@@ -9,8 +9,10 @@ class Controller_Index extends Controller_Abstract
     /**
      * the main action with the controller logic
      */
-    public function index()
+    public function indexAction()
     {
+//        Helper_Debug::dump($this->getRequest());
+//        exit;
         $testDml = new Db_TestTable();
         $this->addToView('testData',$testDml->fetchAll());
         $form = new Form_TestForm();
@@ -21,5 +23,9 @@ class Controller_Index extends Controller_Abstract
                 $this->addToView('formErrors', $form->check()->getAllErrors());
             }
         }
+    }
+    public function testAction()
+    {
+        
     }
 }
