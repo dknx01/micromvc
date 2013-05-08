@@ -124,7 +124,7 @@ Class View_Output
      */
     public function setHeader($header = null)
     {
-        $header = is_null($header) ? $this->getRequest()->getBaseName() : $header;
+        $header = is_null($header) ? $this->getRequest()->getControllerName() : $header;
         $this->header = APPDIR . 'View/' . $header . '.header.phtml';
         return $this;
     }
@@ -143,7 +143,9 @@ Class View_Output
      */
     public function setView($view = null)
     {
-        $view = is_null($view) ? $this->getRequest()->getBaseName() : $view;
+        $view = is_null($view) 
+                ? $this->getRequest()->getControllerName() . '/' . ucfirst($this->getRequest()->getAction())
+                : $view;
         $this->view = APPDIR . '/View/' . $view . '.phtml';
         return $this;
     }
@@ -162,7 +164,7 @@ Class View_Output
      */
     public function setFooter($footer = null)
     {
-        $footer = is_null($footer) ? $this->getRequest()->getBaseName() : $footer;
+        $footer = is_null($footer) ? $this->getRequest()->getControllerName() : $footer;
         $this->footer = APPDIR . '/View/' . $footer . '.footer.phtml';
         return $this;
     }
@@ -183,14 +185,6 @@ Class View_Output
     {
         $this->request = $request;
         return $this;
-    }
-    /**
-     * get the view data object
-     * @return stdClass
-     */
-    public function getViewData()
-    {
-        return $this->viewData;
     }
     /**
      * set new view data object
@@ -231,5 +225,21 @@ Class View_Output
     {
         $this->config = $config;
         return $this;
+    }
+    /**
+     * returns the value for the key of the view data or null if it's not exists.
+     * If no key is provided the whole view data stor will be returned.
+     * @param string $key
+     * @return null|mixed
+     */
+    public function getViewData($key = null)
+    {
+        if (is_null($key)) {
+            return $this->viewData;
+        } elseif (property_exists($this->viewData, $key)) {
+            return $this->viewData->$key;
+        } else {
+            return null;
+        }
     }
 }

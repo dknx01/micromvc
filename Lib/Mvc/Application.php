@@ -16,8 +16,11 @@ class Application
      * @var string
      */
     protected $controller = '';
-    
-    
+    /**
+     * name of the action method
+     * @var string 
+     */
+    protected $action = '';
     /**
      * the loaded and parsed config file
      * @var Config_Definition_Config
@@ -31,7 +34,8 @@ class Application
         $this->request = new Helper_Request();
         $config = new Config_ParseConfig();
         $this->config = $config->getConfigData();
-        $this->setController($this->getRequest()->getBaseName())
+        $this->setController($this->getRequest()->getControllerName())
+              ->setAction($this->getRequest()->getAction())
              ->prepareDatabase();
         Registry::getInstance()->set('request', $this->getRequest());
     }
@@ -45,7 +49,9 @@ class Application
             /**
              * @var Controller_Abstract
              */
-            $controller = new $controllerName;
+            $controller = new $controllerName();
+            $actionMethod = $this->getAction();
+            $controller->$actionMethod();
             $viewNameController = $controller->getViewName();
             $viewOutput = new View_Output($this->getRequest());
             $viewOutput->setViewData($controller->getViewData())
@@ -117,6 +123,24 @@ class Application
         } catch (PDOException $exc) {
             throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }
+        return $this;
+    }
+    /**
+     * 
+     * @return typethe action method name
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+    /**
+     * set the action method name
+     * @param string $action
+     * @return \Application
+     */
+    public function setAction($action)
+    {
+        $this->action = $action . 'Action';
         return $this;
     }
 }

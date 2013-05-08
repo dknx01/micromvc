@@ -42,7 +42,7 @@ abstract class Controller_Abstract
     public function run()
     {
         $this->up();
-        $this->index();
+        $this->indexAction();
     }
     /**
      * setup the current controller
@@ -54,7 +54,7 @@ abstract class Controller_Abstract
     /**
      * the main function
      */
-    abstract function index();
+    abstract function indexAction();
     /**
      * adds an entry to the view
      * @param string $name
