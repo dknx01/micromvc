@@ -1,13 +1,44 @@
 <?php
-
+/**
+ * abstract class for all html form elements
+ * @author dknx01
+ * @package Form\Element
+ */
 abstract class Form_Element_Abstract
 {
+    /**
+     * element type e.g. input, checkbox
+     * @var string
+     */
     protected $elementType = '';
+    /**
+     * value for the name attribute
+     * @var string
+     */
     protected $name = '';
+    /**
+     * value for the id attribute
+     * @var string
+     */
     protected $id = '';
+    /**
+     * value of the class attribute
+     * @var string
+     */
     protected $class = '';
+    /**
+     * list with additional attributes
+     * @var stdClass
+     */
     protected $attributes = null;
+    /**
+     * the check definition
+     * @var Form_Check_Abstract
+     */
     protected $check = null;
+    /**
+     * the constructor
+     */
     public function __construct()
     {
         $this->attributes = new stdClass();
@@ -131,7 +162,10 @@ abstract class Form_Element_Abstract
     {
         return $this->attributes->$name;
     }
-    
+    /**
+     * render all additional attributes
+     * @return string
+     */
     protected function renderAttributes()
     {
         $attributes = '';
@@ -140,16 +174,28 @@ abstract class Form_Element_Abstract
         }
         return $attributes;
     }
+    /**
+     * the check definition
+     * @return Form_Check_Abstract
+     */
     public function getCheck()
     {
         return $this->check;
     }
-
-    public function setCheck($check)
+    /**
+     * set the check definition
+     * @param Form_Check_Abstract $check
+     * @return \Form_Element_Abstract
+     */
+    public function setCheck(Form_Check_Abstract $check)
     {
         $this->check = $check;
         return $this;
     }
+    /**
+     * run the check for this element
+     * @return mixed
+     */
     public function check()
     {
         return $this->check->check();

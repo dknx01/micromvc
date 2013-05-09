@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * define an input element
+ * @author dknx01
+ * @package Form\Element
+ */
 class Form_Element_Input extends Form_Element_Abstract
 {
     /**
@@ -7,14 +11,24 @@ class Form_Element_Input extends Form_Element_Abstract
      * @var string
      */
     private $type = 'text';
+    /**
+     * the value data
+     * @var string
+     */
     private $value = '';
     /**
      * @see Form_Element_Abstract
+     * @return \Form_Element_Input
      */
     public function definition()
     {
         $this->setElementType('input');
+        return $this;
     }
+    /**
+     * @see Form_Element_Abstract
+     * @return string
+     */
     public function render()
     {
         $form = '<input ';
@@ -46,11 +60,19 @@ class Form_Element_Input extends Form_Element_Abstract
         $this->type = $type;
         return $this;
     }
+    /**
+     * the value data
+     * @return string
+     */
     public function getValue()
     {
         return $this->value;
     }
-
+    /**
+     * set the value data
+     * @param string $value
+     * @return \Form_Element_Input
+     */
     public function setValue($value)
     {
         $this->value = $value;
