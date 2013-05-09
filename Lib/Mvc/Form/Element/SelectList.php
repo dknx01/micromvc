@@ -1,15 +1,29 @@
 <?php
-
+/**
+ * define a form select list
+ * @author dknx01
+ * @package Form\Element
+ */
 class Form_Element_SelectList extends Form_Element_Abstract
 {
+    /**
+     * list with all options elements
+     * @var array
+     */
     private $options = array();
     /**
      * @see Form_Element_Abstract
+     * @return \Form_Element_SelectList
      */
     public function definition()
     {
         $this->setElementType('selectlist');
+        return $this;
     }
+    /**
+     * @see  Form_Element_Abstract
+     * @return string
+     */
     public function render()
     {
         $form = '<select ';
@@ -23,7 +37,10 @@ class Form_Element_SelectList extends Form_Element_Abstract
         $form .=  PHP_EOL . '</select>';
         return $form;
     }
-    
+    /**
+     * render all options
+     * @return string
+     */
     private function proccessOptions()
     {
         $options = '';
@@ -42,6 +59,11 @@ class Form_Element_SelectList extends Form_Element_Abstract
         }
         return $options;
     }
+    /**
+     * render one option
+     * @param array $option
+     * @return string
+     */
     private function proccessOption($option) {
         $html = '<option';
         $html .= is_null($option['name']) ? '' : ' name="' . $option['name'] . '"';
@@ -51,7 +73,14 @@ class Form_Element_SelectList extends Form_Element_Abstract
         $html .= '</option>';
         return $html . PHP_EOL;
     }
-
+    /**
+     * add one option
+     * @param mixed $value option value
+     * @param string|null $name name attribute
+     * @param string|null $group name of the group
+     * @param boolean $selected is this option selected
+     * @return \Form_Element_SelectList
+     */
     public function addOption($value, $name = null, $group = null, $selected = false)
     {
         $option = array(

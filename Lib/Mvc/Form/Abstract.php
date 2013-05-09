@@ -11,11 +11,6 @@ abstract class Form_Abstract
      * @var array
      */
     protected $formElements = array();
-//    /**
-//     * the form data get by a request
-//     * @var stdClass
-//     */
-//    protected $formData = null;
     protected $action = '';
     protected $method = 'post';
     protected $attributes = null;
