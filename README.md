@@ -36,11 +36,15 @@ BSD
 
 ToDo
 ----
-[] Documentation
+[x] Documentation
 
-[] Actions
+[x] Actions
 
 [] extend standard database function
+
+[] automatic header and doctype
+
+[] context switch
 
 
 Any sugestions or comments just let me know.
