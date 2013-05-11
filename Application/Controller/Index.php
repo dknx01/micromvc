@@ -15,10 +15,6 @@ class Controller_Index extends Controller_Abstract
         $session->hallo = 'Da sollte was stehen';
         $session2 = new Session_Session('TEST');
         $session2->hallo = 'hier ist etwas';
-        Helper_Debug::dump($session->hallo);
-        Helper_Debug::dump($session2->hallo);
-        Helper_Debug::dump($_SESSION);
-        exit;
         $testDml = new Db_TestTable();
         $this->addToView('testData',$testDml->fetchAll());
         $form = new Form_TestForm();
