@@ -16,7 +16,7 @@ class Application
 {
     /**
      * request handler
-     * @var Mvc\Helper\Request
+     * @var \Mvc\Helper\Request
      */
     protected $request = null;
     /**
@@ -31,7 +31,7 @@ class Application
     protected $action = '';
     /**
      * the loaded and parsed config file
-     * @var Mvc\Config\Definition\Config
+     * @var \Mvc\Config\Definition\Config
      */
     protected $config = null;
     /**

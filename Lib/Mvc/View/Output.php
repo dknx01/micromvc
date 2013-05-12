@@ -40,7 +40,7 @@ Class Output
     private $request = null;
     /**
      * the data passed to the view
-     * @var stdClass
+     * @var \stdClass
      */
     private $viewData = null;
     /**

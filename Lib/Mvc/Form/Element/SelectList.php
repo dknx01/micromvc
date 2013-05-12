@@ -16,7 +16,7 @@ class SelectList extends ElementAbstract
      */
     private $options = array();
     /**
-     * @see Form_Element_Abstract
+     * @see \Mvc\Form\Element\ElementAbstract
      * @return \Mvc\Form\Element\SelectList
      */
     public function definition()

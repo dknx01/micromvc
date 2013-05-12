@@ -34,7 +34,7 @@ abstract class ElementAbstract
     protected $class = '';
     /**
      * list with additional attributes
-     * @var stdClass
+     * @var \stdClass
      */
     protected $attributes = null;
     /**

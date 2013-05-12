@@ -12,7 +12,7 @@ class Session
     /**
      * creates a new session or returns an existing one
      * @param string $name
-     * @return stdClass
+     * @return \stdClass
      * @throws Exception
      */
     public function __construct($name = 'Default')

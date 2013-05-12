@@ -13,7 +13,7 @@ abstract class ControllerAbstract
 {
     /**
      * the view data
-     * @var stdClass
+     * @var \stdClass
      */
     protected $viewData = null;
     /**
