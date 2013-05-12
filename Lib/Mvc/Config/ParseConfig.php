@@ -2,9 +2,13 @@
 /**
  * the config parser
  * @author dknx01
- * @package Config
+ * @package Mvc\Config
  */
-class Config_ParseConfig
+
+namespace Mvc\Config;
+use Mvc\Config\Definition;
+
+class ParseConfig
 {
     /**
      * configuration file name
@@ -13,7 +17,7 @@ class Config_ParseConfig
     protected $name = 'Config/Application.xml';
     /**
      * the parsed configuration data
-     * @var Config_Definition_Config
+     * @var Mvc\Config\Definition
      */
     protected $configData = null;
     /**
@@ -29,7 +33,7 @@ class Config_ParseConfig
     }
     /**
      * basic checkfor the config file
-     * @return \Config_ParseConfig
+     * @return \Mvc\Config\ParseConfig
      * @throws Exception
      */
     protected function checkFile()
@@ -45,18 +49,18 @@ class Config_ParseConfig
     }
     /**
      * pares the config to our object
-     * @return \Config_ParseConfig
+     * @return \Mvc\Config\ParseConfig
      */
     protected function parse()
     {
-        $className = 'Config_Definition_Config';
+        $className = '\Mvc\Config\Definition\Config';
         $filename = APPDIR . '/' . $this->name;
         $this->configData = simplexml_load_file($filename, $className);
         return $this;
     }
     /**
      * get the parsed configuration datas
-     * @return Config_Definition_Config
+     * @return Mvc\Config\Definition\Config
      */
     public function getConfigData()
     {

@@ -2,9 +2,13 @@
 /**
  * claas to define some configuration entry and how to get a value from the configuration
  * @author dknx01
- * @package Config
+ * @package \Mvc\Config\Definition
  */
-class Config_Definition_Config extends SimpleXMLElement
+
+namespace Mvc\Config\Definition;
+use \SimpleXMLElement;
+
+class Config extends SimpleXMLElement
 {
     /**
      * check if the configuration has an database entry

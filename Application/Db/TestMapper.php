@@ -1,5 +1,8 @@
 <?php
-class Db_TestMapper extends Db_Mapper
+namespace Application\Db;
+use \Mvc\Db\Mapper as Mapper;
+
+class TestMapper extends Mapper
 {
     public function __construct()
     {

@@ -2,9 +2,16 @@
 /**
  * the table class
  * @author dknx01
- * @package Db
+ * @package Mvc\Db
  */
-class Db_Table
+
+namespace Mvc\Db;
+use \PDO as PDO;
+use \Mvc\Db\Mapper as Mapper;
+use \Mvc\Db\Model as Model;
+use \Mvc\Registry as Registry;
+
+class Table
 {
     /**
      * the pdo connection
@@ -18,12 +25,12 @@ class Db_Table
     protected $name = '';
     /**
      * the table model used for this dml class
-     * @var Db_Model
+     * @var \Mvc\Db\Model
      */
     protected $model = null;
     /**
      * the table mapper used for this dml class
-     * @var Db_Mapper
+     * @var \Mvc\Db\Mapper
      */
     protected $mapper = null;
     /**
@@ -46,11 +53,11 @@ class Db_Table
         $this->model = new $modelName;
         $this->mapper = new $mapperName;
         
-        if (!$this->model instanceof Db_Model) {
+        if (!$this->model instanceof Model) {
             throw new Exception($modelName . ' is not an instance of Db_Modell');
             exit;
         }
-        if (!$this->mapper instanceof Db_Mapper) {
+        if (!$this->mapper instanceof Mapper) {
             throw new Exception($mapperName . ' is not an instance of Db_Mapper');
             exit;
         }
@@ -66,7 +73,7 @@ class Db_Table
     /**
      * set the table name
      * @param string $name
-     * @return \Db_Table
+     * @return \Mvc\Db\Table
      */
     public function setName($name)
     {
@@ -76,7 +83,7 @@ class Db_Table
     /**
      * maps a row to a table model
      * @param array $row
-     * @return Db_Model
+     * @return \Mvc\Db\Model
      * @throws Exception
      */
     public function mapper(array $row)
@@ -95,7 +102,7 @@ class Db_Table
     /**
      * maps a table model to a table row
      * @param array $row
-     * @return Db_Model
+     * @return \Mvc\Db\Model
      * @throws Exception
      */
     public function reverseMapper($model)
@@ -117,7 +124,7 @@ class Db_Table
     /**
      * fetch all records from this table
      * @param boolean $asIterator should the result implements Db_ResultIterator
-     * @return array with Db_Model instances for each row
+     * @return array with \Mvc\Db\Model instances for each row
      * @throws Exception
      */
     public function fetchAll($asIterator = false)
@@ -136,7 +143,7 @@ class Db_Table
     
     /**
      * Inserts a database model into a table without the primary column
-     * @param Db_Model $model
+     * @param \Mvc\Db\Model $model
      * @return null|int null if nothing was insert or lastInsertId
      * @throws Exception
      */
@@ -163,7 +170,7 @@ class Db_Table
     /**
      * fetches a record from this table identified by the primary key
      * @param mixed $id
-     * @return false|Db_Model instances for a row
+     * @return false|\Mvc\Db\Model instances for a row
      * @throws Exception
      */
     public function fetchById($id = false)

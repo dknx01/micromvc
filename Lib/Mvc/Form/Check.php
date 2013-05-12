@@ -2,12 +2,16 @@
 /**
  * the default form check definition
  * @author dknx01
- * @package Form
+ * @package Mvc\Form
  */
-class Form_Check extends Form_Check_Abstract
+
+namespace Mvc\Form;
+use \Mvc\Form\Check\CheckAbstract as CheckAbstract;
+
+class Check extends CheckAbstract
 {
     /**
-     * @see Form_Check_Abstract
+     * @see \Mvc\Form\Check\CheckAbstract
      * @return boolean
      */
     public function check()

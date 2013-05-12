@@ -1,6 +1,10 @@
 <?php
+namespace Mvc\Form\Entry;
+use \Mvc\Form\Entry\EntryAbstract as EntryAbstract;
+use \Mvc\Form\Element\ElementAbstrac;
+use \stdClass;
 
-class Form_Entry_Fieldset extends Form_Entry_Abstract
+class Fieldset extends EntryAbstract
 {
     protected $elements = array();
     protected $attributes = null;
@@ -12,7 +16,7 @@ class Form_Entry_Fieldset extends Form_Entry_Abstract
         $this->attributes = new stdClass();
         $this->legendAttributes = new stdClass();
     }
-    public function addElement(Form_Element_Abstract $entry)
+    public function addElement(\Mvc\Form\Element\ElementAbstract $entry)
     {
         $this->elements[] = $entry;
         return $this;

@@ -2,9 +2,12 @@
 /**
  * the basic mapper class
  * @author dknx01
- * @package Db
+ * @package Mvc\Db
  */
-class Db_Mapper
+
+namespace Mvc\Db;
+
+class Mapper
 {
     /**
      * the model db result mapper
@@ -27,7 +30,7 @@ class Db_Mapper
     /**
      * set the primary key column
      * @param string $primary
-     * @return \Db_Mapper
+     * @return \Mvc\Db\Mapper
      */
     public function setPrimary($primary)
     {
@@ -45,7 +48,7 @@ class Db_Mapper
     /**
      * set a mapper
      * @param array $mapper
-     * @return \Db_Mapper
+     * @return \Mvc\Db\Mapper
      */
     public function setMapper(array $mapper)
     {

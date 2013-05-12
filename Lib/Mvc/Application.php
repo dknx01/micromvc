@@ -4,11 +4,19 @@
  * @author dknx01
  * @package Mvc
  */
+namespace Mvc;
+
+use \Mvc\Helper as Helper;
+use \Mvc\Config as Config;
+use \Mvc\Db as Db;
+use \Mvc\Registry as Registry;
+use \Mvc\View as View;
+
 class Application
 {
     /**
      * request handler
-     * @var Helper_Request
+     * @var Mvc\Helper\Request
      */
     protected $request = null;
     /**
@@ -23,7 +31,7 @@ class Application
     protected $action = '';
     /**
      * the loaded and parsed config file
-     * @var Config_Definition_Config
+     * @var Mvc\Config\Definition\Config
      */
     protected $config = null;
     /**
@@ -31,8 +39,8 @@ class Application
      */
     public function __construct()
     {
-        $this->request = new Helper_Request();
-        $config = new Config_ParseConfig();
+        $this->request = new Helper\Request();
+        $config = new Config\ParseConfig();
         $this->config = $config->getConfigData();
         $this->setController($this->getRequest()->getControllerName())
               ->setAction($this->getRequest()->getAction())
@@ -47,13 +55,13 @@ class Application
         try {
             $controllerName = $this->getController();
             /**
-             * @var Controller_Abstract
+             * @var \Mvc\Controller\ControllerAbstract
              */
             $controller = new $controllerName();
             $actionMethod = $this->getAction();
             $controller->$actionMethod();
             $viewNameController = $controller->getViewName();
-            $viewOutput = new View_Output($this->getRequest());
+            $viewOutput = new View\Output($this->getRequest());
             $viewOutput->setViewData($controller->getViewData())
                        ->setConfig($this->config)
                        ->setLayout()
@@ -107,7 +115,7 @@ class Application
      */
     public function setController($_controller)
     {
-        $this->controller = 'Controller_' . $_controller;
+        $this->controller = 'Application\Controller\\' . $_controller;
         return $this;
     }
     /**
@@ -118,7 +126,7 @@ class Application
     protected function prepareDatabase()
     {
         try {
-            $db = new Db_Adapter();
+            $db = new Db\Adapter();
             Registry::getInstance()->set('db', $db);
         } catch (PDOException $exc) {
             throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());

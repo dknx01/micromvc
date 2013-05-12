@@ -2,9 +2,13 @@
 /**
  * define a form select list
  * @author dknx01
- * @package Form\Element
+ * @package Mvc\Form\Element
  */
-class Form_Element_SelectList extends Form_Element_Abstract
+
+namespace Mvc\Form\Element;
+use \Mvc\Form\Element\ElementAbstract as ElementAbstract;
+
+class SelectList extends ElementAbstract
 {
     /**
      * list with all options elements
@@ -13,7 +17,7 @@ class Form_Element_SelectList extends Form_Element_Abstract
     private $options = array();
     /**
      * @see Form_Element_Abstract
-     * @return \Form_Element_SelectList
+     * @return \Mvc\Form\Element\SelectList
      */
     public function definition()
     {
@@ -21,7 +25,7 @@ class Form_Element_SelectList extends Form_Element_Abstract
         return $this;
     }
     /**
-     * @see  Form_Element_Abstract
+     * @see  \Mvc\Form\Element\ElementAbstract
      * @return string
      */
     public function render()
@@ -79,7 +83,7 @@ class Form_Element_SelectList extends Form_Element_Abstract
      * @param string|null $name name attribute
      * @param string|null $group name of the group
      * @param boolean $selected is this option selected
-     * @return \Form_Element_SelectList
+     * @return \Mvc\Form\Element\SelectList
      */
     public function addOption($value, $name = null, $group = null, $selected = false)
     {

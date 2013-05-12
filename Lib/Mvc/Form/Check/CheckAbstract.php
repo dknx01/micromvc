@@ -4,7 +4,10 @@
  * @author dknx01
  * @package Form\Check
  */
-abstract class Form_Check_Abstract
+
+namespace Mvc\Form\Check;
+
+abstract class CheckAbstract
 {
     /**
      * data from the request
@@ -31,7 +34,7 @@ abstract class Form_Check_Abstract
     /**
      * set the request data
      * @param mixed $requestData
-     * @return \Form_Check_Abstract
+     * @return \Mvc\Form\Check\CheckAbstract
      */
     public function setRequestData($requestData)
     {
@@ -41,7 +44,7 @@ abstract class Form_Check_Abstract
     /**
      * set or returns if thsi element is required an cannot be empty
      * @param boolean $required
-     * @return \Form_Check_Abstract
+     * @return \Mvc\Form\Check\CheckAbstract
      */
     public function isRequired($required = null)
     {

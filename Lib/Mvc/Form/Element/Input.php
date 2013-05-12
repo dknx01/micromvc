@@ -4,7 +4,11 @@
  * @author dknx01
  * @package Form\Element
  */
-class Form_Element_Input extends Form_Element_Abstract
+
+namespace Mvc\Form\Element;
+use \Mvc\Form\Element\ElementAbstract as ElementAbstract;
+
+class Input extends ElementAbstract
 {
     /**
      * the input type
@@ -17,8 +21,8 @@ class Form_Element_Input extends Form_Element_Abstract
      */
     private $value = '';
     /**
-     * @see Form_Element_Abstract
-     * @return \Form_Element_Input
+     * @see \Mvc\Form\Element\ElementAbstract
+     * @return \Mvc\Form\Element\Input
      */
     public function definition()
     {
@@ -53,7 +57,7 @@ class Form_Element_Input extends Form_Element_Abstract
     /**
      * set the input type
      * @param string $type
-     * @return \Form_Element_Input
+     * @return \Mvc\Form\Element\Input
      */
     public function setType($type)
     {
@@ -71,7 +75,7 @@ class Form_Element_Input extends Form_Element_Abstract
     /**
      * set the value data
      * @param string $value
-     * @return \Form_Element_Input
+     * @return \Mvc\Form\Element\Input
      */
     public function setValue($value)
     {

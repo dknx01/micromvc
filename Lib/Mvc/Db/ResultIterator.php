@@ -2,9 +2,13 @@
 /**
  * an iterator to iterate over all recived columns
  * @author dknx01
- * @package Db
+ * @package Mvc\Db
  */
-class Db_ResultIterator implements Iterator
+
+namespace Mvc\Db;
+use \Iterator;
+
+class ResultIterator implements Iterator
 {
     /**
      * the position
@@ -32,7 +36,7 @@ class Db_ResultIterator implements Iterator
     }
     /**
      * get the current row model
-     * @return Db_Model
+     * @return \Mvc\Db\Model
      */
     function current() {
         return $this->items[$this->position];

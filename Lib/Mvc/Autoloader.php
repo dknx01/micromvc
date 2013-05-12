@@ -11,7 +11,13 @@
  */
 function AppAutoloader($classname)
 {
-    $filename  = APPDIR . '/' . str_replace('_', '/', $classname);
+    if (strpos($classname, '\\')) {
+        $appdir = realpath(APPDIR . '/..');
+        $classname = ltrim($classname, '\\');
+        $filename  = $appdir . '/' . str_replace('\\', '/', $classname);
+    } else {
+        $filename  = APPDIR . '/' . str_replace('_', '/', $classname);
+    }
     if (file_exists($filename . '.php')) {
         require_once $filename . '.php';
     }
@@ -23,7 +29,12 @@ function AppAutoloader($classname)
  */
 function MvcAutoloader($classname)
 {
-    $filename  = realpath(__DIR__)  . '/' . str_replace('_', '/', $classname);
+    if (strpos($classname, '\\')) {
+        $classname = ltrim($classname, '\\');
+        $filename  = realpath(__DIR__ . '/..')  . '/' . str_replace('\\', '/', $classname);
+    } else {
+        $filename  = realpath(__DIR__)  . '/' . str_replace('_', '/', $classname);
+    }
     if (file_exists($filename . '.php')) {
         require_once $filename . '.php';
     }
@@ -34,7 +45,11 @@ function MvcAutoloader($classname)
  */
 function LibAutoloader($classname)
 {
-    $filename  = ROOTDIR  . '/Lib/Libs/' . str_replace('_', '/', $classname);
+    if (strpos($classname, '\\')) {
+        $filename  = ROOTDIR  . '/Lib/Libs/' . str_replace('\\', '/', $classname);
+    } {
+        $filename  = ROOTDIR  . '/Lib/Libs/' . str_replace('_', '/', $classname);
+    }
     if (file_exists($filename . '.php')) {
         require_once $filename . '.php';
     }

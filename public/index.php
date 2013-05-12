@@ -9,6 +9,6 @@ if(APPDIR == false || ROOTDIR == false) {
     throw new Exception ('Cannot find application directory or root directory');
     exit;
 }
-
-$application = new Application();
+use \Mvc;
+$application = new \Mvc\Application();
 $application->run();

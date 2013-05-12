@@ -2,9 +2,12 @@
 /**
  * a helper to debug a variable
  * @author dknx01
- * @package Helper
+ * @package Mvc\Helper
  */
-class Helper_Debug
+
+namespace Mvc\Helper;
+
+class Debug
 {
     /**
      * the sapi

@@ -1,31 +1,36 @@
 <?php
+namespace Application\Form;
+use \Mvc\Form\FormAbstract as Form;
+use \Mvc\Form\Element as Element;
+use \Application\Form\TestCheck as Testcheck;
+use \Mvc\Registry as Registry;
 
-class Form_TestForm extends Form_Abstract
+class TestForm extends Form
 {
     public function form()
     {
         $this->addAttribute('onchange', 'alert()');
-        $input1 = new Form_Element_Input();
+        $input1 = new Element\Input();
         $this->addElement($input1);
-        $input2 = new Form_Element_Input();
+        $input2 = new Element\Input();
         $input2->setName('name')->addAttribute('size', 50);
         $this->addElement($input2);
-        $textarea = new Form_Element_Textarea();
+        $textarea = new Element\Textarea();
         $this->addElement($textarea);
-        $selectList = new Form_Element_SelectList();
+        $selectList = new Element\SelectList();
         $selectList->addOption('Select1')
                    ->addOption('Select2');
         $selectList->addOption('SubSelect1', null, 'Gruppe1');
         $selectList->addOption('SubSelect2', null, 'Gruppe1');
         $selectList->addOption('SubSelect1', null, 'Gruppe2');
         $this->addElement($selectList);
-        $input4 = new Form_Element_Input();
-        $check = new Form_TestCheck();
+        $input4 = new Element\Input();
+        $check = new Testcheck();
         $request = Registry::getInstance()->get('request');
         $check->setRequestData($request->getParamByName('testname'));
         $input4->setName('testname')->setCheck($check);
         $this->addElement($input4, 'test1');
-        $input3 = new Form_Element_Input();
+        $input3 = new Element\Input();
         $input3->setType('submit')->setValue('WEG')->setName('weg');
         $this->addElement($input3);
     }
