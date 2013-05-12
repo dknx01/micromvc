@@ -10,6 +10,7 @@ use \stdClass;
 use \Mvc\Config\Definition\Config as ConfigDefinition;
 use \Mvc\Helper\Request as Request;
 use \Mvc\Registry as Registry;
+use \Mvc\View\DocTypes as Doctypes;
 
 Class Output
 {
@@ -54,6 +55,11 @@ Class Output
      */
     protected $config = null;
     /**
+     * the doctype of the site
+     * @var string
+     */
+    protected $doctype = \Mvc\View\DocTypes::HTML5;
+    /**
      * the constructor
      * @param \Mvc\Helper\Request $request
      */
@@ -69,7 +75,12 @@ Class Output
      * the a complete output
      */
     public function render()
-    {        
+    {
+        $doctypeFunction = method_exists('\Mvc\View\DocTypes', $this->getDoctype())
+                           ? $this->getDoctype()
+                           : Doctypes::HTML5;
+        Registry::getInstance()->set('viewDoctype', Doctypes::$doctypeFunction());
+        
         ob_start();
         include_once $this->getView();
         $viewOutput = ob_get_contents();
@@ -248,5 +259,23 @@ Class Output
         } else {
             return null;
         }
+    }
+    /**
+     * returns the doctype
+     * @return string
+     */
+    public function getDoctype()
+    {
+        return $this->doctype;
+    }
+    /**
+     * set the doctype of the site
+     * @param string $doctype
+     * @return \Mvc\View\Output
+     */
+    public function setDoctype($doctype)
+    {
+        $this->doctype = $doctype;
+        return $this;
     }
 }
