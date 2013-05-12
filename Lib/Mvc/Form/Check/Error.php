@@ -2,9 +2,12 @@
 /**
  * class for the check errors
  * @author dknx01
- * @package Form\Check
+ * @package Mvc\Form\Check
  */
-class Form_Check_Error
+
+namespace Mvc\Form\Check;
+
+class Error
 {
     /**
      * contains all errors
@@ -15,7 +18,7 @@ class Form_Check_Error
      * add a new error to the collection
      * @param string $element
      * @param string $message
-     * @return \Form_Check_Error
+     * @return \Mvc\Form\Check\Error
      */
     public function addError($element, $message)
     {

@@ -2,8 +2,12 @@
 /**
  * the registry object to store datas
  * @author dknx01
- * @package Registry
+ * @package Mvc\Registry
  */
+
+namespace Mvc;
+use \stdClass;
+
 class Registry
 {
     /**
@@ -19,7 +23,7 @@ class Registry
 
     /**
      * get the current registry or create a new one
-     * @return Registry
+     * @return \Mvc\Registry
      */
     static function getInstance()
     {
@@ -55,7 +59,7 @@ class Registry
      * set a new entry in the store
      * @param string $name
      * @param mixed $value
-     * @return Registry
+     * @return \Mvc\Registry
      */
     public function set($name, $value)
     {

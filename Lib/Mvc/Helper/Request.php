@@ -2,9 +2,11 @@
 /**
  * helper class to procces the request and get the basename for the controller and all params
  * @author dknx01
- * @package Helper
+ * @package Mvc\Helper
  */
-class Helper_Request
+namespace Mvc\Helper;
+
+class Request
 {
     /**
      * the controller name
@@ -40,7 +42,6 @@ class Helper_Request
             $this->extractParams();
             $this->controllerName = ucfirst(substr($_SERVER['QUERY_STRING'], 0, $firstSlash));
             if ($secondSlash != false) {
-                $this->extractParams();
                 $this->action = lcfirst(
                                     substr(
                                             $_SERVER['QUERY_STRING'],
@@ -48,6 +49,7 @@ class Helper_Request
                                             $secondSlash - 1
                                         )
                                 );
+                $this->extractParams();
             }
             if (empty($this->action)) {
                 $this->action = 'index';
@@ -66,6 +68,8 @@ class Helper_Request
         $posSlash = strpos($this->queryString, '/');
         if ($posSlash != false) {
             $this->queryString = substr($this->queryString, $posSlash + 1);
+        } else {
+            $this->queryString = '';
         }
     }
 
@@ -78,7 +82,9 @@ class Helper_Request
         if (strpos($this->queryString, '/') != false) {
             $params = explode('/', $this->queryString);
         } else {
-            $params = explode('&', $this->queryString);
+            if (!empty($this->queryString)) {
+                $params = explode('&', $this->queryString);
+            }
         }
         if (count($params) > 0) {
             foreach ($params as $param) {
@@ -106,7 +112,7 @@ class Helper_Request
     /**
      * set an new basename
      * @param string $controllerName
-     * @return Helper_Request
+     * @return \Mvc\Helper\Request
      */
     public function setControllerName($controllerName)
     {
@@ -136,7 +142,7 @@ class Helper_Request
      * set a new param
      * @param string $_name
      * @param mixed $value
-     * @return Helper_Request
+     * @return \Mvc\Helper\Request
      */
     public function setParam($name, $value)
     {
@@ -154,7 +160,7 @@ class Helper_Request
     /**
      * set a new action name
      * @param string $action
-     * @return \Helper_Request
+     * @return \Mvc\Helper\Request
      */
     public function setAction($action)
     {

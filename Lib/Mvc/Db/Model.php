@@ -2,8 +2,11 @@
 /**
  * the basic model class
  * @author dknx01
- * @package Db
+ * @package Mvc\Db
  */
-class Db_Model
+
+namespace Mvc\Db;
+
+class Model
 {
 }

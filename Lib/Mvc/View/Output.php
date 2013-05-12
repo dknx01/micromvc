@@ -2,9 +2,16 @@
 /**
  * procces the output passed to the browser
  * @author dknx01
- * @package View
+ * @package Mvc\View
  */
-Class View_Output
+
+namespace Mvc\View;
+use \stdClass;
+use \Mvc\Config\Definition\Config as ConfigDefinition;
+use \Mvc\Helper\Request as Request;
+use \Mvc\Registry as Registry;
+
+Class Output
 {
     /**
      * the layout file name
@@ -28,7 +35,7 @@ Class View_Output
     private $footer = null;
     /**
      * the request object
-     * @var Helper_Request
+     * @var \Mvc\Helper\Request
      */
     private $request = null;
     /**
@@ -43,14 +50,14 @@ Class View_Output
     private $ajax = false;
     /**
      * the loaded and parsed configuration
-     * @var Config_Definition_Config
+     * @var \Mvc\Config\Definition\Config
      */
     protected $config = null;
     /**
      * the constructor
-     * @param Helper_Request $request
+     * @param \Mvc\Helper\Request $request
      */
-    public function __construct(Helper_Request $request)
+    public function __construct(Request $request)
     {
         $this->viewData = new stdClass();
         $this->setRequest($request);
@@ -101,7 +108,7 @@ Class View_Output
     /**
      * set a new layout
      * @param string $layout
-     * @return \View_Render
+     * @return \Mvc\View\Output
      */
     public function setLayout($layout = null)
     {
@@ -120,7 +127,7 @@ Class View_Output
     /**
      * set a new header
      * @param string $header
-     * @return \View_Render
+     * @return \Mvc\View\Output
      */
     public function setHeader($header = null)
     {
@@ -139,7 +146,7 @@ Class View_Output
     /**
      * set a new view
      * @param string $view
-     * @return \View_Render
+     * @return \Mvc\View\Output
      */
     public function setView($view = null)
     {
@@ -160,7 +167,7 @@ Class View_Output
     /**
      * set a new footer
      * @param string $footer
-     * @return \View_Render
+     * @return \Mvc\View\Output
      */
     public function setFooter($footer = null)
     {
@@ -170,7 +177,7 @@ Class View_Output
     }
     /**
      * get the request object
-     * @return Helper_Request
+     * @return \Mvc\Helper\Request
      */
     public function getRequest()
     {
@@ -178,10 +185,10 @@ Class View_Output
     }
     /**
      * set a new request object
-     * @param Helper_Request $request
-     * @return \View_Render
+     * @param \Mvc\Helper\Request $request
+     * @return \Mvc\View\Output
      */
-    public function setRequest(Helper_Request $request)
+    public function setRequest(Request $request)
     {
         $this->request = $request;
         return $this;
@@ -189,7 +196,7 @@ Class View_Output
     /**
      * set new view data object
      * @param stdClass $viewData
-     * @return \View_Render
+     * @return \Mvc\View\Output
      */
     public function setViewData(stdClass $viewData)
     {
@@ -210,7 +217,7 @@ Class View_Output
     }
     /**
      *  get the configuration object
-     * @return Config_Definition_Config
+     * @return \Mvc\Config\Definition\Config
      */
     public function getConfig()
     {
@@ -218,10 +225,10 @@ Class View_Output
     }
     /**
      * set the configuration object
-     * @param Config_Definition_Config $config
-     * @return \View_Output
+     * @param \Mvc\Config\Definition\Config $config
+     * @return \Mvc\View\Output
      */
-    public function setConfig(Config_Definition_Config $config)
+    public function setConfig(ConfigDefinition $config)
     {
         $this->config = $config;
         return $this;

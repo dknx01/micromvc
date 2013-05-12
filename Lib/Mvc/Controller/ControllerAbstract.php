@@ -2,9 +2,14 @@
 /**
  * the abstract controller class
  * @author dknx01
- * @package Controller
+ * @package Mvc\Controller
  */
-abstract class Controller_Abstract
+
+namespace Mvc\Controller;
+use \Mvc\Registry as Registry;
+use \stdClass;
+
+abstract class ControllerAbstract
 {
     /**
      * the view data
@@ -13,7 +18,7 @@ abstract class Controller_Abstract
     protected $viewData = null;
     /**
      * the request object
-     * @var Helper_Request
+     * @var \Mvc\Helper\Request
      */
     protected $request = null;
     /**
@@ -59,7 +64,7 @@ abstract class Controller_Abstract
      * adds an entry to the view
      * @param string $name
      * @param mixed $value
-     * @return Controller_Abstract
+     * @return \Mvc\Controller\ControllerAbstract
      */
     public function addToView($name, $value)
     {
@@ -68,7 +73,7 @@ abstract class Controller_Abstract
     }
     /**
      * get the request helper object
-     * @return Helper_Request
+     * @return \Mvc\Helper\Request
      */
     public function getRequest()
     {
@@ -85,7 +90,7 @@ abstract class Controller_Abstract
     /**
      * set if this is an ajax view request
      * @param boolean $_isAjax
-     * @return Controller_Abstract
+     * @return \Mvc\Controller\ControllerAbstract
      */
     public function setIsAjax($_isAjax)
     {
@@ -103,7 +108,7 @@ abstract class Controller_Abstract
     /**
      * set the controllers view name
      * @param string $_viewName
-     * @return Controller_Abstract
+     * @return \Mvc\Controller\ControllerAbstract
      */
     public function setViewName($_viewName)
     {

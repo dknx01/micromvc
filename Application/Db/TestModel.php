@@ -1,6 +1,8 @@
 <?php
+namespace Application\Db;
+use \Mvc\Db\Model as Model;
 
-class Db_TestModel extends Db_Model
+class TestModel extends Model
 {
     protected $id;
     protected $testName;

@@ -2,9 +2,15 @@
 /**
  * class to set a form definition and checks it
  * @author dknx01
- * @package Form
+ * @package Mvc\Form
  */
-abstract class Form_Abstract
+namespace Mvc\Form;
+use \stdClass;
+use \Mvc\Form\Element\ElementAbstract as ElementAbstract;
+use \Mvc\Form\Entry\Fieldset as Fieldset;
+use \Mvc\Form\Check\Error as CheckError;
+
+abstract class FormAbstract
 {
     /**
      * the form elements
@@ -21,7 +27,6 @@ abstract class Form_Abstract
     final public function __construct()
     {
         $this->attributes = new stdClass();
-//        $this->formData = new stdClass();
         $this->form();
     }
     /**
@@ -39,17 +44,17 @@ abstract class Form_Abstract
     }
     /**
      * adds an element to this form
-     * @param Form_Element_Abstract $entry
-     * @param string|Form_Entry_Fieldset $fieldSet
-     * @return \Form_Abstract
+     * @param \Mvc\Form\ElementAbstract $entry
+     * @param string|\Mvc\Form\Entry\Fieldset $fieldSet
+     * @return \Mvc\Form\FormAbstract
      */
-    public function addElement(Form_Element_Abstract $element,
+    public function addElement(ElementAbstract $element,
                                $fieldSet = null)
     {
         if (!is_null($fieldSet))
         {
             if (array_key_exists($fieldSet, $this->formElements)) {
-                if (!($fieldSet instanceof Form_Entry_Fieldset)) {
+                if (!($fieldSet instanceof Entry\Fieldset)) {
                     /**
                      * @var $fieldSetEntry Form_Entry_Fieldset
                      */
@@ -61,10 +66,10 @@ abstract class Form_Abstract
                         . 'that is of type Form_Entry_Fieldset');
                 }
             } else {
-                if ($fieldSet instanceof Form_Entry_Fieldset) {
+                if ($fieldSet instanceof Entry\Fieldset) {
                     $this->formElements[$fieldSet->getName()] = $fieldSet;
                 } else {
-                    $fieldSetEntry = new Form_Entry_Fieldset();
+                    $fieldSetEntry = new Fieldset();
                     $fieldSetEntry->setName($fieldSet);
                     $fieldSetEntry->addElement($element);
                     $this->formElements[$fieldSet] = $fieldSetEntry;
@@ -104,7 +109,7 @@ abstract class Form_Abstract
     /**
      * set all additional attributes
      * @param stdClass $attributes
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\FormAbstract
      */
     public function setAttributes($attributes)
     {
@@ -114,7 +119,7 @@ abstract class Form_Abstract
     /** 
      * @param string $name
      * @param string $value
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\FormAbstract
      */
     public function addAttribute($name, $value)
     {
@@ -165,9 +170,9 @@ abstract class Form_Abstract
     public function check($recheck = false)
     {
         if (is_null($this->checkErrors) || $recheck == true) {
-            $this->checkErrors = new Form_Check_Error();
+            $this->checkErrors = new CheckError();
             foreach ($this->formElements as $element) {
-               if ($element instanceof Form_Entry_Fieldset) {
+               if ($element instanceof Fieldset) {
                    foreach ($element->getElements() as $entry) {
                        $check = $entry->check();
                        if (($check != true) == false) {

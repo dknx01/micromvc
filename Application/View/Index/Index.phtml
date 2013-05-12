@@ -2,7 +2,7 @@ The default index page with an dump to some database data
 <div id="container">
 <?php
 echo $this->viewData->testform;
-Helper_Debug::dump($this->viewData->testData);
+\Mvc\Helper\Debug::dump($this->viewData->testData);
 
 print_r($this->config->getParam('bar'));
 if($this->getViewData('formErrors') != null) {
@@ -11,6 +11,6 @@ if($this->getViewData('formErrors') != null) {
         echo $field . ':' . $msg . '<br>';
     }
 }
-Helper_Debug::dump($this->getRequest());
+\Mvc\Helper\Debug::dump($this->getRequest());
 ?>
 </div>

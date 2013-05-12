@@ -2,9 +2,15 @@
 /**
  * abstract class for all html form elements
  * @author dknx01
- * @package Form\Element
+ * @package \Mvc\Form\Element
  */
-abstract class Form_Element_Abstract
+
+namespace Mvc\Form\Element;
+use \Mvc\Form\Check as CheckClass;
+use \Mvc\Form\Check\CheckAbstract as CheckAbstract;
+use \stdClass;
+
+abstract class ElementAbstract
 {
     /**
      * element type e.g. input, checkbox
@@ -33,7 +39,7 @@ abstract class Form_Element_Abstract
     protected $attributes = null;
     /**
      * the check definition
-     * @var Form_Check_Abstract
+     * @var \Mvc\Form\Check\Abstract
      */
     protected $check = null;
     /**
@@ -42,7 +48,7 @@ abstract class Form_Element_Abstract
     public function __construct()
     {
         $this->attributes = new stdClass();
-        $this->check = new Form_Check();
+        $this->check = new CheckClass();
         $this->definition();
     }
     /**
@@ -64,7 +70,7 @@ abstract class Form_Element_Abstract
     /**
      * set the type of the form element
      * @param string $elementType
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\Element\Abstract
      */
     public function setElementType($elementType)
     {
@@ -82,7 +88,7 @@ abstract class Form_Element_Abstract
     /**
      * sett the name attribute
      * @param string $name
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\Element\Abstract
      */
     public function setName($name)
     {
@@ -100,7 +106,7 @@ abstract class Form_Element_Abstract
     /**
      * set the id attribute
      * @param string $id
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\Element\Abstract
      */
     public function setId($id)
     {
@@ -118,7 +124,7 @@ abstract class Form_Element_Abstract
     /**
      * get the class attribute
      * @param string $class
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\Element\Abstract
      */
     public function setClass($class)
     {
@@ -136,7 +142,7 @@ abstract class Form_Element_Abstract
     /**
      * set all additional attributes
      * @param stdClass $attributes
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\Element\Abstract
      */
     public function setAttributes($attributes)
     {
@@ -146,7 +152,7 @@ abstract class Form_Element_Abstract
     /** 
      * @param string $name
      * @param string $value
-     * @return \Form_Element_Abstract
+     * @return \Mvc\Form\Element\Abstract
      */
     public function addAttribute($name, $value)
     {
@@ -184,10 +190,10 @@ abstract class Form_Element_Abstract
     }
     /**
      * set the check definition
-     * @param Form_Check_Abstract $check
-     * @return \Form_Element_Abstract
+     * @param \Mvc\Form\Check\Abstract $check
+     * @return \Mvc\Form\Element\Abstract
      */
-    public function setCheck(Form_Check_Abstract $check)
+    public function setCheck(CheckAbstract $check)
     {
         $this->check = $check;
         return $this;

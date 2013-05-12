@@ -1,6 +1,8 @@
 <?php
+namespace Application\Form;
+use Mvc\Form\Check\CheckAbstract as CheckAbstract;
 
-class Form_TestCheck extends Form_Check_Abstract
+class TestCheck extends CheckAbstract
 {
     public function check()
     {

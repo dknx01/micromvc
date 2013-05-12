@@ -2,9 +2,13 @@
 /**
  * the adapter for our database connection
  * @author dknx01
- * @package Db
+ * @package Mvc\Db
  */
-class Db_Adapter extends PDO
+
+namespace Mvc\Db;
+use \PDO as PDO;
+use \Mvc\Config as Config;
+class Adapter extends PDO
 {
     /**
      * the generated dsn
@@ -51,9 +55,9 @@ class Db_Adapter extends PDO
      */
     protected function init()
     {
-        $configParser = new Config_ParseConfig();
+        $configParser = new Config\ParseConfig();
         /**
-         * @var Config_Definition_Config
+         * @var \Mvc\Config\Definition\Config
          */
         $config = $configParser->getConfigData();
 

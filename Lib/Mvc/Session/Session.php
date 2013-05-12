@@ -2,9 +2,12 @@
 /**
  * class for session data hanndling
  * @author dknx01
- * @package Session
+ * @package Mvc\Session
  */
-class Session_Session
+namespace Mvc\Session;
+use \stdClass;
+
+class Session
 {
     /**
      * creates a new session or returns an existing one
