@@ -24,11 +24,13 @@ All other folders must be readable for the web server user.
 Usage
 -----
 Your controllers are inside Application/Controllers folder.
-Your views insideApplictin/View.
-The view uses the same name like the controller.
+Your views inside Application/View/CONTROLLERNAME/.
+The view uses the same name like the action in the controller.
 Your database models, mappers and table classes should be under Application/Db.
-The configuration file is under Applicatin/Config.
+The configuration file is under Application/Config.
+If you use a bootstrapping file it must be under Application/Config/Bootstrap.php and will be included in the startUp-Process.
 If you use 3rd party apps, put it under Lib/Libs.
+Further information visit https://github.com/dknx01/micromvc/wiki/Usage
 
 License
 -------
@@ -42,7 +44,7 @@ ToDo
 
 [] extend standard database function
 
-[] automatic header and doctype
+[X] automatic doctype
 
 [] context switch
 
