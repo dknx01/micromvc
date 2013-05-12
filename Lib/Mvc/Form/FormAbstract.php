@@ -17,9 +17,25 @@ abstract class FormAbstract
      * @var array
      */
     protected $formElements = array();
+    /**
+     * the form action value
+     * @var string
+     */
     protected $action = '';
+    /**
+     * the form method value
+     * @var string
+     */
     protected $method = 'post';
+    /**
+     * the forms additional attributes
+     * @var \stdClass
+     */
     protected $attributes = null;
+    /**
+     * the check error instance
+     * @var \Mvc\Form\Check\Error
+     */
     protected $checkErrors = null;
     /**
      * the constructor
@@ -82,7 +98,10 @@ abstract class FormAbstract
         
         return $this;
     }
-    
+    /**
+     * renders the form
+     * @return string
+     */
     public function render()
     {
         $form = PHP_EOL . '<form ';
@@ -100,7 +119,7 @@ abstract class FormAbstract
     }
     /**
      * get all additional attributes
-     * @return stdClass
+     * @return \stdClass
      */
     public function getAttributes()
     {
@@ -108,7 +127,7 @@ abstract class FormAbstract
     }
     /**
      * set all additional attributes
-     * @param stdClass $attributes
+     * @param \stdClass $attributes
      * @return \Mvc\Form\FormAbstract
      */
     public function setAttributes($attributes)
@@ -117,6 +136,7 @@ abstract class FormAbstract
         return $this;
     }
     /** 
+     * adds an additional attribute
      * @param string $name
      * @param string $value
      * @return \Mvc\Form\FormAbstract
@@ -135,38 +155,47 @@ abstract class FormAbstract
     {
         return $this->attributes->$name;
     }
-    public function getFormData()
-    {
-        return $this->formData;
-    }
-
-    public function setFormData(stdClass $formData)
-    {
-        $this->formData = $formData;
-        return $this;
-    }
-
+    /**
+     * returns the forms action value
+     * @return string
+     */
     public function getAction()
     {
         return $this->action;
     }
-
+    /**
+     * set the forms action value
+     * @param string $action
+     * @return \Mvc\Form\FormAbstract
+     */
     public function setAction($action)
     {
         $this->action = $action;
         return $this;
     }
-
+    /**
+     * returns the form method value
+     * @return string (get|post)
+     */
     public function getMethod()
     {
         return $this->method;
     }
-
+    /**
+     * set the forms method value
+     * @param string $method (get|post)
+     * @return \Mvc\Form\FormAbstract
+     */
     public function setMethod($method)
     {
         $this->method = $method;
         return $this;
     }
+    /**
+     * checks the form
+     * @param boolean $recheck
+     * @return \Mvc\Form\Check\Error
+     */
     public function check($recheck = false)
     {
         if (is_null($this->checkErrors) || $recheck == true) {

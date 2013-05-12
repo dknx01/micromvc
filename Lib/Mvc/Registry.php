@@ -12,12 +12,12 @@ class Registry
 {
     /**
      * our store
-     * @var stdClass
+     * @var \stdClass
      */
     protected $store = null;
     /**
      * the current instance
-     * @var Registry|null
+     * @var \Mvc\Registry|null
      */
     static private $_instance = null;
 

@@ -6,7 +6,7 @@
  */
 
 namespace Mvc\Config;
-use Mvc\Config\Definition;
+use \Mvc\Config\Definition;
 
 class ParseConfig
 {
@@ -17,7 +17,7 @@ class ParseConfig
     protected $name = 'Config/Application.xml';
     /**
      * the parsed configuration data
-     * @var Mvc\Config\Definition
+     * @var \Mvc\Config\Definition
      */
     protected $configData = null;
     /**
@@ -60,7 +60,7 @@ class ParseConfig
     }
     /**
      * get the parsed configuration datas
-     * @return Mvc\Config\Definition\Config
+     * @return \Mvc\Config\Definition\Config
      */
     public function getConfigData()
     {

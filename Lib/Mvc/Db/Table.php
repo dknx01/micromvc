@@ -15,7 +15,7 @@ class Table
 {
     /**
      * the pdo connection
-     * @var PDO
+     * @var \PDO
      */
     protected $connection = null;
     /**
