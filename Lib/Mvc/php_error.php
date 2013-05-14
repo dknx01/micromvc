@@ -2396,7 +2396,9 @@
 
                     // load the session, if it's there
 
-                    if ( isset($_COOKIE[session_name()]) && session_id() !== '' ) {
+                    if ( isset($_COOKIE[session_name()]) 
+                         && session_id() !== '' 
+                         && session_status() == PHP_SESSION_NONE) {
                         session_start();
                     }
 
@@ -3821,7 +3823,7 @@
                         background: #261313;
                     }
                     .select-highlight.is-native {
-                        background: #222;
+                        bacprint_r(get_defined_vars());kground: #222;
                     }
                     .highlight {
                         background: #391414;
