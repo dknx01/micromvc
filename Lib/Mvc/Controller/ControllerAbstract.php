@@ -32,6 +32,11 @@ abstract class ControllerAbstract
      */
     protected $isAjax = false;
     /**
+     * the layout name
+     * @var string|null
+     */
+    protected $layout = null;
+    /**
      * the constructor
      */
     public function __construct()
@@ -55,7 +60,6 @@ abstract class ControllerAbstract
     public function up()
     {
     }
-
     /**
      * the main function
      */
@@ -123,4 +127,24 @@ abstract class ControllerAbstract
     {
         return $this->viewData;
     }
+    /**
+     * the layout name
+     * @return string|null
+     */
+    public function getLayout()
+    {
+        return $this->layout;
+    }
+    /**
+     * set a new layout name
+     * @param string $layout
+     * @return \Mvc\Controller\ControllerAbstract
+     */
+    public function setLayout($layout)
+    {
+        $this->layout = empty($layout) ? null : $layout;
+        return $this;
+    }
+
+
 }
