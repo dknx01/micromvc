@@ -1,8 +1,11 @@
 <?php
 /**
  * claas to define some configuration entry and how to get a value from the configuration
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package \Mvc\Config\Definition
+ * @author dknx01
  */
 
 namespace Mvc\Config\Definition;
@@ -12,6 +15,7 @@ class Config extends SimpleXMLElement
 {
     /**
      * check if the configuration has an database entry
+     * 
      * @return boolean
      */
     public function hasDatabase()
@@ -20,6 +24,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * the database host name
+     * 
      * @return string
      */
     public function getDatabaseHost()
@@ -28,6 +33,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * the database user
+     * 
      * @return string
      */
     public function getDatabaseUser()
@@ -36,6 +42,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * the database password
+     * 
      * @return string
      */
     public function getDatabasePassword()
@@ -44,6 +51,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * the database name
+     * 
      * @return string
      */
     public function getDatabaseName()
@@ -52,6 +60,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * should this connection be used (active)
+     * 
      * @return boolean
      */
     public function getDatabaseStatus()
@@ -64,6 +73,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * get all database params
+     * 
      * @return array
      */
     public function getDatabaseParams()
@@ -72,6 +82,7 @@ class Config extends SimpleXMLElement
     }
     /**
      * get the type of the database
+     * 
      * @return string
      */
     public function getDatabaseType()
@@ -84,6 +95,7 @@ class Config extends SimpleXMLElement
     
     /**
      * get the path for a sqlite database
+     * 
      * @return string
      */
     public function getDatabasePath()
@@ -92,7 +104,9 @@ class Config extends SimpleXMLElement
     }
     /**
      * get the value of a parameter
+     * 
      * @param string $name
+     * 
      * @return mixed the value
      */
     public function getParam($name)
@@ -107,7 +121,9 @@ class Config extends SimpleXMLElement
     }
     /**
      * check if a node has children and parse them
+     * 
      * @param SimpleXMLElement $node
+     * 
      * @return array|string
      */
     protected function checkChildren($node)

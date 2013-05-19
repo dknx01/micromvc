@@ -1,8 +1,11 @@
 <?php
 /**
  * class for the check errors
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form\Check
+ * @author dknx01
  */
 
 namespace Mvc\Form\Check;
@@ -16,8 +19,10 @@ class Error
     protected $errors = array();
     /**
      * add a new error to the collection
-     * @param string $element
-     * @param string $message
+     * 
+     * @param string $element name of the form element
+     * @param string $message error message
+     * 
      * @return \Mvc\Form\Check\Error
      */
     public function addError($element, $message)
@@ -27,7 +32,9 @@ class Error
     }
     /**
      * returns the error message for an element
-     * @param string $element
+     * 
+     * @param string $element name of the element
+     * 
      * @return type
      */
     public function getError($element)
@@ -36,6 +43,7 @@ class Error
     }
     /**
      * returns all errors
+     * 
      * @return array
      */
     public function getAllErrors()
@@ -44,6 +52,7 @@ class Error
     }
     /**
      * the numbers of errors in this collection
+     * 
      * @return int
      */
     public function errorNumbers()

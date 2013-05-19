@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * some typically html doctypes
+ * 
+ * PHP version >=5.3
+ * 
+ * @package Mvc\View
+ * @author dknx01
+ */
 namespace Mvc\View;
 
 class DocTypes
@@ -30,6 +37,7 @@ class DocTypes
     const XHTML11 = 'xhtml11';
     /**
      * doctype definition for HTML 4.01 Transitional
+     * 
      * @return string
      */
     static function html401Transitional()
@@ -38,6 +46,7 @@ class DocTypes
     }
     /**
      * doctype definition for HTML 4.01 Strict
+     * 
      * @return string
      */
     static function html401Strict()
@@ -46,6 +55,7 @@ class DocTypes
     }
     /**
      * doctype definition for HTML 5
+     * 
      * @return string
      */
     static function html5()
@@ -54,6 +64,7 @@ class DocTypes
     }
     /**
      * doctype definition for XHTML 1.0 Transitional
+     * 
      * @return string
      */
     static function xhtml10Transitional()
@@ -62,6 +73,7 @@ class DocTypes
     }
     /**
      * doctype definition for XHTML 1.0 Strict
+     * 
      * @return string
      */
     static function xhtml10Strict()
@@ -70,6 +82,7 @@ class DocTypes
     }
     /**
      * doctype definition for XHTML 1.1
+     * 
      * @return string
      */
     static function xhtml11()

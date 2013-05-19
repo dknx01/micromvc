@@ -1,8 +1,11 @@
 <?php
 /**
  * class for session data hanndling
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Session
+ * @author dknx01
  */
 namespace Mvc\Session;
 use \stdClass;
@@ -11,14 +14,16 @@ class Session
 {
     /**
      * creates a new session or returns an existing one
-     * @param string $name
+     * 
+     * @param string $name the session namespace
+     * 
      * @return \stdClass
      * @throws Exception
      */
     public function __construct($name = 'Default')
     {
         if (empty($name)) {
-            throw new Exception ('Session needs a name');
+            throw new Exception('Session needs a name');
         }   
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();

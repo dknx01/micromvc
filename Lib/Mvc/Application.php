@@ -1,8 +1,13 @@
 <?php
 /**
  * the main class for all the mvc application
- * @author dknx01
+ * 
+ * PHP version >= 5.3
+ * 
  * @package Mvc
+ * @author  dknx01
+ * @license https://github.com/dknx01/micromvc/blob/master/license.txt BSD License
+ *
  */
 namespace Mvc;
 
@@ -13,6 +18,9 @@ use \Mvc\Registry as Registry;
 use \Mvc\View as View;
 use \Exception;
 
+/**
+ * the application class to run it all
+ */
 class Application
 {
     /**
@@ -51,6 +59,9 @@ class Application
     }
     /**
      * run the application
+     * 
+     * @return void
+     * @throws \Exception
      */
     public function run()
     {
@@ -65,26 +76,26 @@ class Application
             $this->proccessOutput($controller);
             $this->shutDown();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage() . PHP_EOL 
-                    . $e->getTraceAsString() . PHP_EOL);
+            throw new Exception($e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
         }
 
     }
     /**
      * return the request object
-     * @return Helper_Request
+     * 
+     * @return \Mvc\Helper\Request
      */
     public function getRequest()
     {
         return $this->request;
     }
-
     /**
      * set the request objec
-     * @param Helper_Request $_request
-     * @return Application
+     * 
+     * @param \Mvc\Helper\Request $request
+     * @return \Mvc\Application
      */
-    public function setRequest($_request)
+    public function setRequest(\Mvc\Helper\Request $request)
     {
         $this->request = $_request;
         return $this;
@@ -92,6 +103,7 @@ class Application
 
     /**
      * return the current controller name
+     * 
      * @return string
      */
     public function getController()
@@ -102,8 +114,9 @@ class Application
     /**
      * set the controller name
      * @param string $_controller
-     * @return Application
+     * @return \Mvc\Application
      */
+    /**
     public function setController($_controller)
     {
         $this->controller = 'Application\Controller\\' . $_controller;
@@ -111,8 +124,9 @@ class Application
     }
     /**
      * prepare the database connection and store them in the registry
-     * @return \Application
-     * @throws Exception
+     * 
+     * @return \Mvc\Application
+     * @throws \Exception
      */
     protected function prepareDatabase()
     {
@@ -125,6 +139,7 @@ class Application
         return $this;
     }
     /**
+     * the current action
      * 
      * @return typethe action method name
      */
@@ -134,8 +149,9 @@ class Application
     }
     /**
      * set the action method name
+     * 
      * @param string $action
-     * @return \Application
+     * @return \Mvc\Application
      */
     public function setAction($action)
     {
@@ -144,6 +160,7 @@ class Application
     }
     /**
      * proccess and render the output
+     * 
      * @param \Mvc\Controller\ControllerAbstract $controller
      */
     protected function proccessOutput(\Mvc\Controller\ControllerAbstract $controller)
@@ -165,10 +182,12 @@ class Application
     {
         if (!is_null(Registry::getInstance()->get('db'))) {
                 Registry::getInstance()->set('db', null);
-            }
+        }
     }
     /**
      * additional work before the rendering
+     * 
+     * @throws \Exception
      */
     protected function startUp()
     {
@@ -182,8 +201,8 @@ class Application
         $config = new Config\ParseConfig();
         $this->config = $config->getConfigData();
         $this->setController($this->getRequest()->getControllerName())
-              ->setAction($this->getRequest()->getAction())
-             ->prepareDatabase();
+            ->setAction($this->getRequest()->getAction())
+            ->prepareDatabase();
         Registry::getInstance()->set('request', $this->getRequest());
     }
 }

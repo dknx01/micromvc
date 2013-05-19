@@ -1,8 +1,11 @@
 <?php
 /**
  * the basic model class
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Db
+ * @author dknx01
  */
 
 namespace Mvc\Db;

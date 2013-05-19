@@ -1,8 +1,11 @@
 <?php
 /**
  * the basic mapper class
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Db
+ * @author dknx01
  */
 
 namespace Mvc\Db;
@@ -29,7 +32,9 @@ class Mapper
     }
     /**
      * set the primary key column
+     * 
      * @param string $primary
+     * 
      * @return \Mvc\Db\Mapper
      */
     public function setPrimary($primary)
@@ -39,6 +44,7 @@ class Mapper
     }
     /**
      * get the mapper
+     * 
      * @return array
      */
     public function getMapper()
@@ -47,7 +53,9 @@ class Mapper
     }
     /**
      * set a mapper
+     * 
      * @param array $mapper
+     * 
      * @return \Mvc\Db\Mapper
      */
     public function setMapper(array $mapper)

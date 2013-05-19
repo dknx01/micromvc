@@ -1,8 +1,11 @@
 <?php
 /**
  * define a html textarea element
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form\Element
+ * @author dknx01
  */
 
 namespace Mvc\Form\Element;
@@ -33,7 +36,9 @@ class Textarea extends ElementAbstract
         $this->setElementType('textarea');
     }
     /**
+     * 
      * @see \Mvc\Form\Element\Abstract
+     * 
      * @return string
      */
     public function render()
@@ -52,6 +57,7 @@ class Textarea extends ElementAbstract
     }
     /**
      * returns the value
+     * 
      * @return string
      */
     public function getValue()
@@ -60,7 +66,9 @@ class Textarea extends ElementAbstract
     }
     /**
      * set the value data
-     * @param string $value
+     * 
+     * @param string $value value data
+     * 
      * @return \Mvc\Form\Element\Textarea
      */
     public function setValue($value)
@@ -70,6 +78,7 @@ class Textarea extends ElementAbstract
     }
     /**
      * returns the width
+     * 
      * @return int
      */
     public function getCols()
@@ -78,7 +87,9 @@ class Textarea extends ElementAbstract
     }
     /**
      * set the width
-     * @param int $cols
+     * 
+     * @param int $cols number of columns
+     * 
      * @return \Mvc\Form\Element\Textarea
      */
     public function setCols($cols)
@@ -88,6 +99,7 @@ class Textarea extends ElementAbstract
     }
     /**
      * return the height
+     * 
      * @return int
      */
     public function getRows()
@@ -96,7 +108,9 @@ class Textarea extends ElementAbstract
     }
     /**
      * set the height
-     * @param int $rows
+     * 
+     * @param int $rows number of rows
+     * 
      * @return \Mvc\Form\Element\Textarea
      */
     public function setRows($rows)

@@ -1,8 +1,11 @@
 <?php
 /**
  * the config parser
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Config
+ * @author dknx01
  */
 
 namespace Mvc\Config;
@@ -22,6 +25,7 @@ class ParseConfig
     protected $configData = null;
     /**
      * the constructor with an optional configuration file
+     * 
      * @param string $configFile
      */
     public function __construct($configFile = null)
@@ -33,13 +37,13 @@ class ParseConfig
     }
     /**
      * basic checkfor the config file
+     * 
      * @return \Mvc\Config\ParseConfig
      * @throws Exception
      */
     protected function checkFile()
     {
-        if (!file_exists(APPDIR . '/' . $this->name))
-        {
+        if (!file_exists(APPDIR . '/' . $this->name)) {
             throw new Exception('Config file not found: ' . $this->name);
         }
         if (substr($this->name, -4) != '.xml') {
@@ -49,6 +53,7 @@ class ParseConfig
     }
     /**
      * pares the config to our object
+     * 
      * @return \Mvc\Config\ParseConfig
      */
     protected function parse()
@@ -60,6 +65,7 @@ class ParseConfig
     }
     /**
      * get the parsed configuration datas
+     * 
      * @return \Mvc\Config\Definition\Config
      */
     public function getConfigData()

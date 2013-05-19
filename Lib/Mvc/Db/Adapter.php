@@ -1,13 +1,17 @@
 <?php
 /**
  * the adapter for our database connection
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Db
+ * @author dknx01
  */
 
 namespace Mvc\Db;
 use \PDO as PDO;
 use \Mvc\Config as Config;
+
 class Adapter extends PDO
 {
     /**

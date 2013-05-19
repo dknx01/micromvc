@@ -1,8 +1,11 @@
 <?php
 /**
  * define an input element
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Form\Element
+ * @author dknx01
  */
 
 namespace Mvc\Form\Element;
@@ -21,7 +24,9 @@ class Input extends ElementAbstract
      */
     private $value = '';
     /**
+     * 
      * @see \Mvc\Form\Element\ElementAbstract
+     * 
      * @return \Mvc\Form\Element\Input
      */
     public function definition()
@@ -30,7 +35,9 @@ class Input extends ElementAbstract
         return $this;
     }
     /**
+     * 
      * @see \Mvc\Form\Element\ElementAbstract
+     * 
      * @return string
      */
     public function render()
@@ -48,6 +55,7 @@ class Input extends ElementAbstract
 
     /**
      * get the input type
+     * 
      * @return string
      */
     public function getType()
@@ -56,7 +64,9 @@ class Input extends ElementAbstract
     }
     /**
      * set the input type
-     * @param string $type
+     * 
+     * @param string $type vtype value
+     * 
      * @return \Mvc\Form\Element\Input
      */
     public function setType($type)
@@ -66,6 +76,7 @@ class Input extends ElementAbstract
     }
     /**
      * the value data
+     * 
      * @return string
      */
     public function getValue()
@@ -74,7 +85,9 @@ class Input extends ElementAbstract
     }
     /**
      * set the value data
-     * @param string $value
+     * 
+     * @param string $value value data
+     * 
      * @return \Mvc\Form\Element\Input
      */
     public function setValue($value)

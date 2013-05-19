@@ -1,8 +1,11 @@
 <?php
 /**
  * class for handle html form fieldsets. A collection of entries.
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form
+ * @author dknx01
  */
 
 namespace Mvc\Form\Entry;
@@ -47,7 +50,9 @@ class Fieldset extends EntryAbstract
     }
     /**
      * adds a new form Element to this fieldset
-     * @param \Mvc\Form\Element\ElementAbstract $entry
+     * 
+     * @param \Mvc\Form\Element\ElementAbstract $entry the entry
+     * 
      * @return \Mvc\Form\Entry\Fieldset
      */
     public function addElement(\Mvc\Form\Element\ElementAbstract $entry)
@@ -57,6 +62,7 @@ class Fieldset extends EntryAbstract
     }
     /**
      * @see \Mvc\Form\EntryAbstract
+     * 
      * @return string
      */
     public function render()
@@ -85,6 +91,7 @@ class Fieldset extends EntryAbstract
     }
     /**
      * the legend text
+     * 
      * @return string
      */
     public function getLegend()
@@ -93,7 +100,9 @@ class Fieldset extends EntryAbstract
     }
     /**
      * set the legend text
-     * @param string $legend
+     * 
+     * @param string $legend legend text
+     * 
      * @return \Mvc\Form\Entry\Fieldset
      */
     public function setLegend($legend)
@@ -103,6 +112,7 @@ class Fieldset extends EntryAbstract
     }
     /**
      * the fieldset name
+     * 
      * @return string
      */
     public function getName()
@@ -111,7 +121,9 @@ class Fieldset extends EntryAbstract
     }
     /**
      * set the fieldset name
-     * @param string $name
+     * 
+     * @param string $name name value
+     * 
      * @return \Mvc\Form\Entry\Fieldset
      */
     public function setName($name)
@@ -121,8 +133,10 @@ class Fieldset extends EntryAbstract
     }
     /**
      * adds a new attribute to the legend tag
-     * @param string $name
-     * @param string $value
+     * 
+     * @param string $name attribute name
+     * @param string $value attribute value
+     * 
      * @return \Mvc\Form\Entry\Fieldset
      */
     public function addLegendAttribute($name, $value)
@@ -132,8 +146,10 @@ class Fieldset extends EntryAbstract
     }
     /**
      * adds a new attribute to the fieldset tag
-     * @param string $name
-     * @param string $value
+     * 
+     * @param string $name attribute name
+     * @param string $value attribute value
+     * 
      * @return \Mvc\Form\Entry\Fieldset
      */
     public function addAttribute($name, $value)
@@ -143,6 +159,7 @@ class Fieldset extends EntryAbstract
     }
     /**
      * returns all elements of this fieldset
+     * 
      * @return array
      */
     public function getElements()

@@ -1,8 +1,11 @@
 <?php
 /**
  * the default form check definition
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form
+ * @author dknx01
  */
 
 namespace Mvc\Form;
@@ -12,6 +15,7 @@ class Check extends CheckAbstract
 {
     /**
      * @see \Mvc\Form\Check\CheckAbstract
+     * 
      * @return boolean
      */
     public function check()

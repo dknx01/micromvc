@@ -1,8 +1,11 @@
 <?php
 /**
  * abstract class for all html form elements
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package \Mvc\Form\Element
+ * @author dknx01
  */
 
 namespace Mvc\Form\Element;
@@ -61,6 +64,7 @@ abstract class ElementAbstract
     abstract function render();
     /**
      * get the type of the form element
+     * 
      * @return string
      */
     public function getElementType()
@@ -69,7 +73,9 @@ abstract class ElementAbstract
     }
     /**
      * set the type of the form element
-     * @param string $elementType
+     * 
+     * @param string $elementType the element type e.g. input
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function setElementType($elementType)
@@ -79,6 +85,7 @@ abstract class ElementAbstract
     }
     /**
      * get the name attribute
+     * 
      * @return string
      */
     public function getName()
@@ -87,7 +94,9 @@ abstract class ElementAbstract
     }
     /**
      * sett the name attribute
-     * @param string $name
+     * 
+     * @param string $name name value
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function setName($name)
@@ -97,6 +106,7 @@ abstract class ElementAbstract
     }
     /**
      * get the id attribute
+     * 
      * @return string
      */
     public function getId()
@@ -105,7 +115,9 @@ abstract class ElementAbstract
     }
     /**
      * set the id attribute
-     * @param string $id
+     * 
+     * @param string $id id value
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function setId($id)
@@ -115,6 +127,7 @@ abstract class ElementAbstract
     }
     /**
      * get the class attribute
+     * 
      * @return string
      */
     public function getClass()
@@ -123,7 +136,9 @@ abstract class ElementAbstract
     }
     /**
      * get the class attribute
-     * @param string $class
+     * 
+     * @param string $class class value
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function setClass($class)
@@ -133,6 +148,7 @@ abstract class ElementAbstract
     }
     /**
      * get all additional attributes
+     * 
      * @return stdClass
      */
     public function getAttributes()
@@ -141,7 +157,9 @@ abstract class ElementAbstract
     }
     /**
      * set all additional attributes
-     * @param stdClass $attributes
+     * 
+     * @param stdClass $attributes additional attributes
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function setAttributes($attributes)
@@ -150,8 +168,11 @@ abstract class ElementAbstract
         return $this;
     }
     /** 
-     * @param string $name
-     * @param string $value
+     * adds an additional attribute
+     * 
+     * @param string $name attribute name
+     * @param string $value attribute value
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function addAttribute($name, $value)
@@ -161,7 +182,9 @@ abstract class ElementAbstract
     }
     /**
      * get an attribute by its name
-     * @param string $name
+     * 
+     * @param string $name attribute name
+     * 
      * @return string
      */
     public function getAttribute($name)
@@ -170,6 +193,7 @@ abstract class ElementAbstract
     }
     /**
      * render all additional attributes
+     * 
      * @return string
      */
     protected function renderAttributes()
@@ -182,6 +206,7 @@ abstract class ElementAbstract
     }
     /**
      * the check definition
+     * 
      * @return Form_Check_Abstract
      */
     public function getCheck()
@@ -190,7 +215,9 @@ abstract class ElementAbstract
     }
     /**
      * set the check definition
-     * @param \Mvc\Form\Check\Abstract $check
+     * 
+     * @param \Mvc\Form\Check\Abstract $check check definition class
+     * 
      * @return \Mvc\Form\Element\Abstract
      */
     public function setCheck(CheckAbstract $check)
@@ -200,6 +227,7 @@ abstract class ElementAbstract
     }
     /**
      * run the check for this element
+     * 
      * @return mixed
      */
     public function check()

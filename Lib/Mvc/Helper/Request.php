@@ -1,8 +1,11 @@
 <?php
 /**
  * helper class to procces the request and get the basename for the controller and all params
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Helper
+ * @author dknx01
  */
 namespace Mvc\Helper;
 
@@ -92,6 +95,7 @@ class Request
     }
     /**
      * splits the param string in key and value part
+     * 
      * @param string $param
      * @param string $delimiter default '='
      */
@@ -110,6 +114,9 @@ class Request
             $this->params[$key] = $value;
         }
     }
+    /**
+     * write the original request URI in the property queryString
+     */
     private function originRequestUri()
     {
         $this->queryString = $_SERVER['REQUEST_URI'];
@@ -117,6 +124,7 @@ class Request
 
     /**
      * the controller name
+     * 
      * @return string
      */
     public function getControllerName()
@@ -126,7 +134,9 @@ class Request
 
     /**
      * set an new basename
+     * 
      * @param string $controllerName
+     * 
      * @return \Mvc\Helper\Request
      */
     public function setControllerName($controllerName)
@@ -137,6 +147,7 @@ class Request
 
     /**
      * all passed params
+     * 
      * @return array
      */
     public function getParams()
@@ -146,7 +157,9 @@ class Request
 
     /**
      * get a param by its name
+     * 
      * @param string $_params
+     * 
      * @return string | null
      */
     public function getParamByName($name)
@@ -155,8 +168,10 @@ class Request
     }
     /**
      * set a new param
+     * 
      * @param string $_name
      * @param mixed $value
+     * 
      * @return \Mvc\Helper\Request
      */
     public function setParam($name, $value)
@@ -166,6 +181,7 @@ class Request
     }
     /**
      * the action
+     * 
      * @return string
      */
     public function getAction()
@@ -174,7 +190,9 @@ class Request
     }
     /**
      * set a new action name
+     * 
      * @param string $action
+     * 
      * @return \Mvc\Helper\Request
      */
     public function setAction($action)

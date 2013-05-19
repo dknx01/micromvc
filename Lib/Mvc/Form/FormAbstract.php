@@ -1,9 +1,13 @@
 <?php
 /**
  * class to set a form definition and checks it
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form
+ * @author dknx01
  */
+
 namespace Mvc\Form;
 use \stdClass;
 use \Mvc\Form\Element\ElementAbstract as ElementAbstract;
@@ -52,6 +56,7 @@ abstract class FormAbstract
 
     /**
      * the form definition
+     * 
      * @return array
      */
     public function getFormDefinition()
@@ -60,15 +65,15 @@ abstract class FormAbstract
     }
     /**
      * adds an element to this form
-     * @param \Mvc\Form\ElementAbstract $entry
-     * @param string|\Mvc\Form\Entry\Fieldset $fieldSet
+     * 
+     * @param \Mvc\Form\ElementAbstract $entry the element
+     * @param string|\Mvc\Form\Entry\Fieldset $fieldSet the fieldset
+     * 
      * @return \Mvc\Form\FormAbstract
      */
-    public function addElement(ElementAbstract $element,
-                               $fieldSet = null)
+    public function addElement(ElementAbstract $element, $fieldSet = null)
     {
-        if (!is_null($fieldSet))
-        {
+        if (!is_null($fieldSet)) {
             if (array_key_exists($fieldSet, $this->formElements)) {
                 if (!($fieldSet instanceof Entry\Fieldset)) {
                     /**
@@ -78,7 +83,7 @@ abstract class FormAbstract
                     $fieldSetEntry->addElement($element);
                     $this->formElements[$fieldSet] = $fieldSetEntry;
                 } else {
-                    throw new Exception ('Cannot add an element to a fieldset '
+                    throw new Exception('Cannot add an element to a fieldset '
                         . 'that is of type Form_Entry_Fieldset');
                 }
             } else {
@@ -91,7 +96,6 @@ abstract class FormAbstract
                     $this->formElements[$fieldSet] = $fieldSetEntry;
                 }
             }
-            
         } else {
             $this->formElements[] = $element;
         }
@@ -100,6 +104,7 @@ abstract class FormAbstract
     }
     /**
      * renders the form
+     * 
      * @return string
      */
     public function render()
@@ -119,6 +124,7 @@ abstract class FormAbstract
     }
     /**
      * get all additional attributes
+     * 
      * @return \stdClass
      */
     public function getAttributes()
@@ -127,7 +133,9 @@ abstract class FormAbstract
     }
     /**
      * set all additional attributes
+     * 
      * @param \stdClass $attributes
+     * 
      * @return \Mvc\Form\FormAbstract
      */
     public function setAttributes($attributes)
@@ -137,8 +145,10 @@ abstract class FormAbstract
     }
     /** 
      * adds an additional attribute
-     * @param string $name
-     * @param string $value
+     * 
+     * @param string $name attribute name
+     * @param string $value attribute value
+     * 
      * @return \Mvc\Form\FormAbstract
      */
     public function addAttribute($name, $value)
@@ -148,7 +158,9 @@ abstract class FormAbstract
     }
     /**
      * get an attribute by its name
-     * @param string $name
+     * 
+     * @param string $name attribute name
+     * 
      * @return string
      */
     public function getAttribute($name)
@@ -157,6 +169,7 @@ abstract class FormAbstract
     }
     /**
      * returns the forms action value
+     * 
      * @return string
      */
     public function getAction()
@@ -165,7 +178,9 @@ abstract class FormAbstract
     }
     /**
      * set the forms action value
-     * @param string $action
+     * 
+     * @param string $action action value
+     * 
      * @return \Mvc\Form\FormAbstract
      */
     public function setAction($action)
@@ -175,6 +190,7 @@ abstract class FormAbstract
     }
     /**
      * returns the form method value
+     * 
      * @return string (get|post)
      */
     public function getMethod()
@@ -183,7 +199,9 @@ abstract class FormAbstract
     }
     /**
      * set the forms method value
+     * 
      * @param string $method (get|post)
+     * 
      * @return \Mvc\Form\FormAbstract
      */
     public function setMethod($method)
@@ -193,7 +211,9 @@ abstract class FormAbstract
     }
     /**
      * checks the form
-     * @param boolean $recheck
+     * 
+     * @param boolean $recheck recheck the form
+     * 
      * @return \Mvc\Form\Check\Error
      */
     public function check($recheck = false)
@@ -201,20 +221,19 @@ abstract class FormAbstract
         if (is_null($this->checkErrors) || $recheck == true) {
             $this->checkErrors = new CheckError();
             foreach ($this->formElements as $element) {
-               if ($element instanceof Fieldset) {
-                   foreach ($element->getElements() as $entry) {
-                       $check = $entry->check();
-                       if (($check != true) == false) {
-                           $this->checkErrors->addError($entry->getName(), $check);
-
-                       }
-                   }
-               } else {
-                   $check = $element->check();
-                   if ($check != true) {
-                       $this->checkErrors->addError($element->getName(), $check);
-                   }
-               }
+                if ($element instanceof Fieldset) {
+                    foreach ($element->getElements() as $entry) {
+                        $check = $entry->check();
+                        if (($check != true) == false) {
+                            $this->checkErrors->addError($entry->getName(), $check);
+                        }
+                    }
+                } else {
+                    $check = $element->check();
+                    if ($check != true) {
+                        $this->checkErrors->addError($element->getName(), $check);
+                    }
+                }
             }
         }
         return $this->checkErrors;

@@ -1,8 +1,11 @@
 <?php
 /**
  * the abstract controller class
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Controller
+ * @author dknx01
  */
 
 namespace Mvc\Controller;
@@ -66,8 +69,10 @@ abstract class ControllerAbstract
     abstract function indexAction();
     /**
      * adds an entry to the view
+     * 
      * @param string $name
      * @param mixed $value
+     * 
      * @return \Mvc\Controller\ControllerAbstract
      */
     public function addToView($name, $value)
@@ -77,6 +82,7 @@ abstract class ControllerAbstract
     }
     /**
      * get the request helper object
+     * 
      * @return \Mvc\Helper\Request
      */
     public function getRequest()
@@ -85,6 +91,7 @@ abstract class ControllerAbstract
     }
     /**
      * check if this is an ajax view request
+     * 
      * @return boolean
      */
     public function isAjax()
@@ -93,7 +100,9 @@ abstract class ControllerAbstract
     }
     /**
      * set if this is an ajax view request
+     * 
      * @param boolean $_isAjax
+     * 
      * @return \Mvc\Controller\ControllerAbstract
      */
     public function setIsAjax($_isAjax)
@@ -103,6 +112,7 @@ abstract class ControllerAbstract
     }
     /**
      * get the view name for the controller
+     * 
      * @return string
      */
     public function getViewName()
@@ -111,7 +121,9 @@ abstract class ControllerAbstract
     }
     /**
      * set the controllers view name
+     * 
      * @param string $_viewName
+     * 
      * @return \Mvc\Controller\ControllerAbstract
      */
     public function setViewName($_viewName)
@@ -121,6 +133,7 @@ abstract class ControllerAbstract
     }
     /**
      * get all data used in the view
+     * 
      * @return stdClass
      */
     public function getViewData()
@@ -129,6 +142,7 @@ abstract class ControllerAbstract
     }
     /**
      * the layout name
+     * 
      * @return string|null
      */
     public function getLayout()
@@ -137,7 +151,9 @@ abstract class ControllerAbstract
     }
     /**
      * set a new layout name
+     * 
      * @param string $layout
+     * 
      * @return \Mvc\Controller\ControllerAbstract
      */
     public function setLayout($layout)
@@ -145,6 +161,4 @@ abstract class ControllerAbstract
         $this->layout = empty($layout) ? null : $layout;
         return $this;
     }
-
-
 }

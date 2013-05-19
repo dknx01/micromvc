@@ -1,8 +1,11 @@
 <?php
 /**
  * class for one Entry in a form entry list
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form
+ * @author dknx01
  */
 namespace Mvc\Form\Entry;
 use \Mvc\Form\Entry\EntryAbstract as EntryAbstract;
@@ -23,8 +26,9 @@ class Entry extends EntryAbstract
     protected $check = null;
     /**
      * the constructor
+     * 
      * @param \Mvc\Form\Element\ElementAbstract $element
-     * @param \Mvc\Form\Check $check
+     * @param \Mvc\Form\Check $check check class
      */
     public function __construct(ElementAbstract $element, CheckClass $check)
     {
@@ -32,7 +36,9 @@ class Entry extends EntryAbstract
         $this->check = $check;
     }
     /**
+     * 
      * @see \Mvc\Form\Entry\EntryAbstract
+     * 
      * @return string
      */
     public function render()
@@ -40,7 +46,7 @@ class Entry extends EntryAbstract
         $entry = '';
         if ($this->element instanceof ElementAbstract 
             && method_exists($this->element, 'render')
-        ){
+        ) {
             $entry .= $entry->render() . PHP_EOL;
         }
         return $entry;

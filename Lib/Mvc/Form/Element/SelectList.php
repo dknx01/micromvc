@@ -1,8 +1,11 @@
 <?php
 /**
  * define a form select list
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Form\Element
+ * @author dknx01
  */
 
 namespace Mvc\Form\Element;
@@ -16,7 +19,9 @@ class SelectList extends ElementAbstract
      */
     private $options = array();
     /**
+     * 
      * @see \Mvc\Form\Element\ElementAbstract
+     * 
      * @return \Mvc\Form\Element\SelectList
      */
     public function definition()
@@ -25,7 +30,9 @@ class SelectList extends ElementAbstract
         return $this;
     }
     /**
+     * 
      * @see  \Mvc\Form\Element\ElementAbstract
+     * 
      * @return string
      */
     public function render()
@@ -43,6 +50,7 @@ class SelectList extends ElementAbstract
     }
     /**
      * render all options
+     * 
      * @return string
      */
     private function proccessOptions()
@@ -51,7 +59,7 @@ class SelectList extends ElementAbstract
         foreach ($this->options as $group => $entry) {
             if ($entry['group'] == false) {
                 $options .= $this->proccessOption($entry['options']);
-            } elseif($entry['group'] == true) {
+            } elseif ($entry['group'] == true) {
                 $options .= '<optgroup ';
                 $options .= 'label="' . $group . '"';
                 $options .= '>' . PHP_EOL;
@@ -65,7 +73,9 @@ class SelectList extends ElementAbstract
     }
     /**
      * render one option
-     * @param array $option
+     * 
+     * @param array $option the options
+     * 
      * @return string
      */
     private function proccessOption($option) {
@@ -79,10 +89,12 @@ class SelectList extends ElementAbstract
     }
     /**
      * add one option
+     * 
      * @param mixed $value option value
      * @param string|null $name name attribute
      * @param string|null $group name of the group
      * @param boolean $selected is this option selected
+     * 
      * @return \Mvc\Form\Element\SelectList
      */
     public function addOption($value, $name = null, $group = null, $selected = false)
@@ -99,12 +111,12 @@ class SelectList extends ElementAbstract
                     );
             $this->options[] = $entry;
         } else {
-             if (array_key_exists($group, $this->options)) {
-                 $this->options[$group]['options'][] = $option;
-             } else {
+            if (array_key_exists($group, $this->options)) {
+                $this->options[$group]['options'][] = $option;
+            } else {
                 $this->options[$group]['group'] = true;
                 $this->options[$group]['options'][] = $option;
-             }
+            }
         }
         return $this;
     }

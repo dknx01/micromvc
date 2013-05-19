@@ -1,8 +1,11 @@
 <?php
 /**
  * the table class
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Db
+ * @author dknx01
  */
 
 namespace Mvc\Db;
@@ -38,6 +41,7 @@ class Table
     protected $mapper = null;
     /**
      * the constructor
+     * 
      * @throws \Exception
      */
     public function __construct()
@@ -67,6 +71,7 @@ class Table
     }
     /**
      * get the table name
+     * 
      * @return string
      */
     public function getName()
@@ -75,7 +80,9 @@ class Table
     }
     /**
      * set the table name
-     * @param string $name
+     * 
+     * @param string $name the table name
+     * 
      * @return \Mvc\Db\Table
      */
     public function setName($name)
@@ -85,8 +92,11 @@ class Table
     }
     /**
      * maps a row to a table model
-     * @param array $row
+     * 
+     * @param array $row an array with all rows
+     * 
      * @return \Mvc\Db\Model
+     * 
      * @throws \Exception
      */
     public function mapper(array $row)
@@ -104,18 +114,20 @@ class Table
     }
     /**
      * maps a table model to a table row
-     * @param array $row
-     * @return \Mvc\Db\Model
+     * 
+     * @param \Mvc\Db\Model $model the model
+     * 
+     * @return array $row
+     * 
      * @throws \Exception
      */
     public function reverseMapper($model)
     {
         if (count($this->mapper->getMapper()) == 0) {
             throw new \Exception('Cannot use mapper because it\'s not declared');
-        } elseif(!$model instanceof Db_Model) {
+        } elseif (!$model instanceof Model) {
             throw new \Exception('Model does not base on Db_Model');
-        }
-        else {
+        } else {
             $row = array();
             foreach (array_flip($this->mapper->getMapper()) as $property => $column) {
                 $getter = 'get' . ucfirst($property);
@@ -126,8 +138,11 @@ class Table
     }
     /**
      * fetch all records from this table
+     * 
      * @param boolean $asIterator should the result implements \Mvc\Db\ResultIterartor
+     * 
      * @return array with \Mvc\Db\Model instances for each row
+     * 
      * @throws \Exception
      */
     public function fetchAll($asIterator = true)
@@ -146,8 +161,11 @@ class Table
     
     /**
      * Inserts a database model into a table without the primary column
-     * @param \Mvc\Db\Model $model
+     * 
+     * @param \Mvc\Db\Model $model the model
+     * 
      * @return null|int null if nothing was insert or lastInsertId
+     * 
      * @throws \Exception
      */
     public function insert($model)
@@ -172,8 +190,11 @@ class Table
     
     /**
      * fetches a record from this table identified by the primary key
-     * @param mixed $id
+     * 
+     * @param mixed $id the primary key column
+     * 
      * @return false|\Mvc\Db\Model instances for a row
+     * 
      * @throws \Exception
      */
     public function fetchById($id = false)

@@ -1,8 +1,11 @@
 <?php
 /**
  * a helper to debug a variable
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Mvc\Helper
+ * @author dknx01
  */
 
 namespace Mvc\Helper;
@@ -49,6 +52,7 @@ class Debug
      * @param  mixed  $var   The variable to dump.
      * @param  string $label OPTIONAL Label to prepend to output.
      * @param  bool   $echo  OPTIONAL Echo output if true.
+     * 
      * @return string
      */
     public static function dump($var, $label=null, $echo=true)
@@ -68,7 +72,7 @@ class Debug
                     . PHP_EOL . $output
                     . PHP_EOL;
         } else {
-            if(!extension_loaded('xdebug')) {
+            if (!extension_loaded('xdebug')) {
                 $output = htmlspecialchars($output, ENT_QUOTES);
             }
 

@@ -1,8 +1,11 @@
 <?php
 /**
  * class to set a form check
- * @author dknx01
+ * 
+ * PHP version >=5.3
+ * 
  * @package Form\Check
+ * @author dknx01
  */
 
 namespace Mvc\Form\Check;
@@ -25,6 +28,7 @@ abstract class CheckAbstract
     abstract function check();
     /**
      * the request data
+     * 
      * @return string
      */
     public function getRequestData()
@@ -33,7 +37,9 @@ abstract class CheckAbstract
     }
     /**
      * set the request data
-     * @param mixed $requestData
+     * 
+     * @param mixed $requestData the data from the request
+     * 
      * @return \Mvc\Form\Check\CheckAbstract
      */
     public function setRequestData($requestData)
@@ -43,7 +49,9 @@ abstract class CheckAbstract
     }
     /**
      * set or returns if thsi element is required an cannot be empty
-     * @param boolean $required
+     * 
+     * @param boolean $required require flag
+     * 
      * @return \Mvc\Form\Check\CheckAbstract
      */
     public function isRequired($required = null)
@@ -56,13 +64,14 @@ abstract class CheckAbstract
         }
     }
     /**
-     * checks if this element is required an not empty 
+     * checks if this element is required an not empty
+     * 
      * @return boolean
      */
     public function checkRequired()
     {
         $data = $this->getRequestData();
-        if ($this->isRequired() == true && !empty($data)){
+        if ($this->isRequired() == true && !empty($data)) {
             return true;
         }
         if ($this->isRequired() == false) {
