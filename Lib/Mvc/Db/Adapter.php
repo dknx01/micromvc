@@ -31,13 +31,20 @@ class Adapter extends PDO
      */
     protected $params = array();
     /**
+     * is the adapter active
+     * @var boolean
+     */
+    protected $active = false;
+    /**
      * the constructor
      */
     public function __construct()
     {
         $this->init();
-        parent::__construct($this->dsn, $this->user, $this->password);
-        $this->proccedParams();
+        if ($this->active == true) {
+            parent::__construct($this->dsn, $this->user, $this->password);
+            $this->proccedParams();
+        }
     }
     /**
      * procces all parameters
@@ -60,8 +67,8 @@ class Adapter extends PDO
          * @var \Mvc\Config\Definition\Config
          */
         $config = $configParser->getConfigData();
-
-        if ($config->getDatabaseStatus() == true) {
+        $this->active = $config->getDatabaseStatus();
+        if ($this->active == true) {
             $this->params = $config->getDatabaseParams();
             if ($config->getDatabaseType() == 'sqlite') {
                 $this->dsn = 'sqlite:' . $config->getDatabasePath();

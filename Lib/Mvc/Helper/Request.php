@@ -9,6 +9,11 @@ namespace Mvc\Helper;
 class Request
 {
     /**
+     * the value separator
+     * @var string
+     */
+    const SEPARATOR = '/';
+    /**
      * the controller name
      * @var string
      */
@@ -33,73 +38,83 @@ class Request
      */
     public function __construct()
     {
-        $this->queryString = substr($_SERVER['REQUEST_URI'], 1);
-        $firstSlash = strpos($_SERVER['QUERY_STRING'], '/');
-        $secondSlash = $firstSlash == false
-                       ? false
-                       : strpos($_SERVER['QUERY_STRING'], '/', $firstSlash);
-        if ($firstSlash != false) {
-            $this->extractParams();
-            $this->controllerName = ucfirst(substr($_SERVER['QUERY_STRING'], 0, $firstSlash));
-            if ($secondSlash != false) {
-                $this->action = lcfirst(
-                                    substr(
-                                            $_SERVER['QUERY_STRING'],
-                                            $firstSlash + 1, 
-                                            $secondSlash - 1
-                                        )
-                                );
-                $this->extractParams();
-            }
-            if (empty($this->action)) {
-                $this->action = 'index';
-            }
-        }
-        $this->removeQuestionmark();
-        $this->getAllParams();
-    }
-    private function removeQuestionmark()
-    {
-        preg_match('/\??(.*)/', $this->queryString, $matches);
-        $this->queryString = $matches[1];
-    }
-    private function extractParams()
-    {
-        $posSlash = strpos($this->queryString, '/');
-        if ($posSlash != false) {
-            $this->queryString = substr($this->queryString, $posSlash + 1);
+        $this->queryString = '';
+        if ($_SERVER['REQUEST_URI'] == '/') {
+            $this->querystring = '';
         } else {
-            $this->queryString = '';
+            $this->queryString = trim(substr($_SERVER['REQUEST_URI'], 1));
         }
-    }
-
-    /**
-     * retrive all params get by GET or POST method
-     */
-    protected function getAllParams()
-    {
-        $params = array();
-        if (strpos($this->queryString, '/') != false) {
-            $params = explode('/', $this->queryString);
-        } else {
-            if (!empty($this->queryString)) {
-                $params = explode('&', $this->queryString);
-            }
-        }
-        if (count($params) > 0) {
-            foreach ($params as $param) {
-                $split = strpos($param, '=');
-                if ($split != false) {
-                    $this->params[substr($param, 0, $split)] = substr($param, $split + 1);
+        if (strlen($this->queryString) > 0) {
+            $controllerEnd = strpos($this->queryString, self::SEPARATOR);
+            if ($controllerEnd != false) {
+                $this->controllerName = substr($this->queryString, 0, $controllerEnd);
+                $this->queryString = substr($this->queryString, $controllerEnd + 1);
+                $actionEnd = strpos($this->queryString, self::SEPARATOR);
+                if ($actionEnd != false) {
+                    $this->action = substr($this->queryString, 0, $actionEnd);
+                    $this->queryString = substr($this->queryString, $actionEnd + 1);
+                    $this->getAllParams();
                 } else {
-                    $this->params[$param] = '';
+                    $this->action = $this->queryString;
+                    $this->originRequestUri();
+                    $this->getPostParamas();
+                }
+                
+            } else {
+                if (substr($this->queryString, 0, 1) == '?') {
+                    $this->getAllParams();
+                } else {
+                    $this->controllerName = $this->queryString;
+                    $this->originRequestUri();
+                    $this->getPostParamas();
                 }
             }
         }
+    }
+    /**
+     * retrive all params get by GET or POST method
+     */
+    private function getAllParams()
+    {
+        $this->queryString = ltrim($this->queryString, '?');
+        if (!empty($this->queryString)) {
+            if (strpos($this->queryString, '/') != false) {
+                $params = explode('/', $this->queryString);
+            } else {
+                $params = explode('&', $this->queryString);
+            }         
+            foreach ($params as $param) {
+                $this->splitParam($param);
+            }
+            $this->originRequestUri();
+        }
+        $this->getPostParamas();
+    }
+    /**
+     * splits the param string in key and value part
+     * @param string $param
+     * @param string $delimiter default '='
+     */
+    private function splitParam($param, $delimiter = '=')
+    {
+        $parts = explode($delimiter, $param);
+        $this->params[$parts[0]] = $parts[1];
+    }
+
+    /**
+     * proccess all post params
+     */
+    private function getPostParamas()
+    {
         foreach ($_POST as $key => $value) {
             $this->params[$key] = $value;
         }
     }
+    private function originRequestUri()
+    {
+        $this->queryString = $_SERVER['REQUEST_URI'];
+    }
+
     /**
      * the controller name
      * @return string

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <database type="mysql">
-        <active>true</active>
+        <active>false</active>
         <host>localhost</host>
         <user>test</user>
         <password>test123</password>
