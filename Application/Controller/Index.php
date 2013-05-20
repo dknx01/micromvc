@@ -35,6 +35,6 @@ class Index extends \Mvc\Controller\ControllerAbstract
     }
     public function testAction()
     {
-        
+
     }
 }
