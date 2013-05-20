@@ -118,7 +118,6 @@ class Application
      * @param string $_controller
      * @return \Mvc\Application
      */
-    /**
     public function setController($_controller)
     {
         $this->controller = 'Application\Controller\\' . $_controller;

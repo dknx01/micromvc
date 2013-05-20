@@ -1,9 +1,9 @@
 <?php
 /**
  * helper class to procces the request and get the basename for the controller and all params
- * 
+ *
  * PHP version >=5.3
- * 
+ *
  * @package Mvc\Helper
  * @author  dknx01 <e.witthauer@gmail.com>
  */
@@ -62,7 +62,7 @@ class Request
                     $this->originRequestUri();
                     $this->getPostParamas();
                 }
-                
+
             } else {
                 if (substr($this->queryString, 0, 1) == '?') {
                     $this->getAllParams();
@@ -85,7 +85,7 @@ class Request
                 $params = explode('/', $this->queryString);
             } else {
                 $params = explode('&', $this->queryString);
-            }         
+            }
             foreach ($params as $param) {
                 $this->splitParam($param);
             }
@@ -95,14 +95,14 @@ class Request
     }
     /**
      * splits the param string in key and value part
-     * 
+     *
      * @param string $param
      * @param string $delimiter default '='
      */
     private function splitParam($param, $delimiter = '=')
     {
         $parts = explode($delimiter, $param);
-        $this->params[$parts[0]] = $parts[1];
+        $this->params[$parts[0]] = htmlentities($parts[1]);
     }
 
     /**
@@ -111,7 +111,7 @@ class Request
     private function getPostParamas()
     {
         foreach ($_POST as $key => $value) {
-            $this->params[$key] = $value;
+            $this->params[$key] = htmlentities($value);
         }
     }
     /**
@@ -124,7 +124,7 @@ class Request
 
     /**
      * the controller name
-     * 
+     *
      * @return string
      */
     public function getControllerName()
@@ -134,9 +134,9 @@ class Request
 
     /**
      * set an new basename
-     * 
+     *
      * @param string $controllerName
-     * 
+     *
      * @return \Mvc\Helper\Request
      */
     public function setControllerName($controllerName)
@@ -147,7 +147,7 @@ class Request
 
     /**
      * all passed params
-     * 
+     *
      * @return array
      */
     public function getParams()
@@ -157,9 +157,9 @@ class Request
 
     /**
      * get a param by its name
-     * 
+     *
      * @param string $_params
-     * 
+     *
      * @return string | null
      */
     public function getParamByName($name)
@@ -168,10 +168,10 @@ class Request
     }
     /**
      * set a new param
-     * 
+     *
      * @param string $_name
      * @param mixed $value
-     * 
+     *
      * @return \Mvc\Helper\Request
      */
     public function setParam($name, $value)
@@ -181,7 +181,7 @@ class Request
     }
     /**
      * the action
-     * 
+     *
      * @return string
      */
     public function getAction()
@@ -190,9 +190,9 @@ class Request
     }
     /**
      * set a new action name
-     * 
+     *
      * @param string $action
-     * 
+     *
      * @return \Mvc\Helper\Request
      */
     public function setAction($action)

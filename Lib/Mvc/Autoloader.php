@@ -14,7 +14,7 @@ function AppAutoloader($classname)
     if (strpos($classname, '\\')) {
         $appdir = realpath(APPDIR . '/..');
         $classname = ltrim($classname, '\\');
-        $filename  = $appdir . '/' . str_replace('\\', '/', $classname);
+        $filename = $appdir . '/' . str_replace(array('\\', '_'), '/', $classname);
     } else {
         $filename  = APPDIR . '/' . str_replace('_', '/', $classname);
     }
@@ -31,7 +31,7 @@ function MvcAutoloader($classname)
 {
     if (strpos($classname, '\\')) {
         $classname = ltrim($classname, '\\');
-        $filename  = realpath(__DIR__ . '/..')  . '/' . str_replace('\\', '/', $classname);
+        $filename = realpath(__DIR__ . '/..') . '/' . str_replace(array('\\', '_'), '/', $classname);
     } else {
         $filename  = realpath(__DIR__)  . '/' . str_replace('_', '/', $classname);
     }
@@ -46,7 +46,7 @@ function MvcAutoloader($classname)
 function LibAutoloader($classname)
 {
     if (strpos($classname, '\\')) {
-        $filename  = ROOTDIR  . '/Lib/Libs/' . str_replace('\\', '/', $classname);
+        $filename = ROOTDIR . '/Lib/Libs/' . str_replace(array('\\', '_'), '/', $classname);
     } {
         $filename  = ROOTDIR  . '/Lib/Libs/' . str_replace('_', '/', $classname);
     }

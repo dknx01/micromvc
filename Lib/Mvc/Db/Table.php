@@ -1,9 +1,9 @@
 <?php
 /**
  * the table class
- * 
+ *
  * PHP version >=5.3
- * 
+ *
  * @package Mvc\Db
  * @author  dknx01 <e.witthauer@gmail.com>
  */
@@ -24,6 +24,7 @@ class Table
      * @var \PDO
      */
     protected $connection = null;
+
     /**
      * table name
      * @var string
@@ -41,7 +42,7 @@ class Table
     protected $mapper = null;
     /**
      * the constructor
-     * 
+     *
      * @throws \Exception
      */
     public function __construct()
@@ -59,7 +60,7 @@ class Table
         }
         $this->model = new $modelName;
         $this->mapper = new $mapperName;
-        
+
         if (!$this->model instanceof Model) {
             throw new \Exception($modelName . ' is not an instance of Db_Modell');
             exit;
@@ -71,7 +72,7 @@ class Table
     }
     /**
      * get the table name
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -80,9 +81,9 @@ class Table
     }
     /**
      * set the table name
-     * 
+     *
      * @param string $name the table name
-     * 
+     *
      * @return \Mvc\Db\Table
      */
     public function setName($name)
@@ -90,13 +91,41 @@ class Table
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * the connection
+     *
+     * @return \PDO
+     */
+    public function getConnection() {
+        return $this->connection;
+    }
+
+    /**
+     * the model
+     *
+     * @return \Mvc\Db\Model
+     */
+    public function getModel() {
+        return $this->model;
+    }
+
+    /**
+     * the mapper
+     *
+     * @return \Mvc\Db\Mapper
+     */
+    public function getMapper() {
+        return $this->mapper;
+    }
+
     /**
      * maps a row to a table model
-     * 
+     *
      * @param array $row an array with all rows
-     * 
+     *
      * @return \Mvc\Db\Model
-     * 
+     *
      * @throws \Exception
      */
     public function mapper(array $row)
@@ -114,11 +143,11 @@ class Table
     }
     /**
      * maps a table model to a table row
-     * 
+     *
      * @param \Mvc\Db\Model $model the model
-     * 
+     *
      * @return array $row
-     * 
+     *
      * @throws \Exception
      */
     public function reverseMapper($model)
@@ -138,11 +167,11 @@ class Table
     }
     /**
      * fetch all records from this table
-     * 
+     *
      * @param boolean $asIterator should the result implements \Mvc\Db\ResultIterartor
-     * 
+     *
      * @return array with \Mvc\Db\Model instances for each row
-     * 
+     *
      * @throws \Exception
      */
     public function fetchAll($asIterator = true)
@@ -158,14 +187,14 @@ class Table
         }
         return $asIterator == true ? new ResultIterator($result) : $result;
     }
-    
+
     /**
      * Inserts a database model into a table without the primary column
-     * 
+     *
      * @param \Mvc\Db\Model $model the model
-     * 
+     *
      * @return null|int null if nothing was insert or lastInsertId
-     * 
+     *
      * @throws \Exception
      */
     public function insert($model)
@@ -187,14 +216,14 @@ class Table
         }
         return $insertId;
     }
-    
+
     /**
      * fetches a record from this table identified by the primary key
-     * 
+     *
      * @param mixed $id the primary key column
-     * 
+     *
      * @return false|\Mvc\Db\Model instances for a row
-     * 
+     *
      * @throws \Exception
      */
     public function fetchById($id = false)
