@@ -3,8 +3,8 @@
     <database type="mysql">
         <active>true</active>
         <host>localhost</host>
-        <user>root</user>
-        <password></password>
+        <user>test</user>
+        <password>test123</password>
         <name>test</name>
         <params>
             <charset>UTF-8</charset>
