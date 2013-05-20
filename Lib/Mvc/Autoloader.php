@@ -1,7 +1,7 @@
 <?php
 /**
  * all needed autoloader
- * @author dknx01
+ * @author  dknx01 <e.witthauer@gmail.com>
  * @package Autoloader
  */
 

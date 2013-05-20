@@ -1,11 +1,13 @@
 <?php
 /**
  * the main class for all the mvc application
- * 
+ *
  * PHP version >= 5.3
- * 
+ *
+ *
+ *
  * @package Mvc
- * @author  dknx01
+ * @author  dknx01 <e.witthauer@gmail.com>
  * @license https://github.com/dknx01/micromvc/blob/master/license.txt BSD License
  *
  */
@@ -35,7 +37,7 @@ class Application
     protected $controller = '';
     /**
      * name of the action method
-     * @var string 
+     * @var string
      */
     protected $action = '';
     /**
@@ -59,7 +61,7 @@ class Application
     }
     /**
      * run the application
-     * 
+     *
      * @return void
      * @throws \Exception
      */
@@ -82,7 +84,7 @@ class Application
     }
     /**
      * return the request object
-     * 
+     *
      * @return \Mvc\Helper\Request
      */
     public function getRequest()
@@ -91,7 +93,7 @@ class Application
     }
     /**
      * set the request objec
-     * 
+     *
      * @param \Mvc\Helper\Request $request
      * @return \Mvc\Application
      */
@@ -103,7 +105,7 @@ class Application
 
     /**
      * return the current controller name
-     * 
+     *
      * @return string
      */
     public function getController()
@@ -124,7 +126,7 @@ class Application
     }
     /**
      * prepare the database connection and store them in the registry
-     * 
+     *
      * @return \Mvc\Application
      * @throws \Exception
      */
@@ -140,7 +142,7 @@ class Application
     }
     /**
      * the current action
-     * 
+     *
      * @return typethe action method name
      */
     public function getAction()
@@ -149,7 +151,7 @@ class Application
     }
     /**
      * set the action method name
-     * 
+     *
      * @param string $action
      * @return \Mvc\Application
      */
@@ -160,7 +162,7 @@ class Application
     }
     /**
      * proccess and render the output
-     * 
+     *
      * @param \Mvc\Controller\ControllerAbstract $controller
      */
     protected function proccessOutput(\Mvc\Controller\ControllerAbstract $controller)
@@ -186,7 +188,7 @@ class Application
     }
     /**
      * additional work before the rendering
-     * 
+     *
      * @throws \Exception
      */
     protected function startUp()

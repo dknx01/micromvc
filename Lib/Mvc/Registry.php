@@ -1,7 +1,7 @@
 <?php
 /**
  * the registry object to store datas
- * @author dknx01
+ * @author  dknx01 <e.witthauer@gmail.com>
  * @package Mvc\Registry
  */
 

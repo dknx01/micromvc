@@ -1,7 +1,7 @@
 <?php
 /**
  * some prepare work for the mvc application
- * @author dknx01
+ * @author  dknx01 <e.witthauer@gmail.com>
  * @package Prepare
  */
 

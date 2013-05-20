@@ -5,7 +5,7 @@
  * PHP version >=5.3
  * 
  * @package Mvc\Form\Element
- * @author dknx01
+ * @author  dknx01 <e.witthauer@gmail.com>
  */
 
 namespace Mvc\Form\Element;

@@ -6,7 +6,7 @@
  * 
  * 
  * @package Mvc\Db
- * @author dknx01
+ * @author  dknx01 <e.witthauer@gmail.com>
  */
 
 namespace Mvc\Db;
