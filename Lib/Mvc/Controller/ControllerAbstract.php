@@ -40,6 +40,11 @@ abstract class ControllerAbstract
      */
     protected $layout = null;
     /**
+     * the service locator
+     * @var \Mvc\Di\ServiceLocator
+     */
+    protected $serviceLocator = null;
+    /**
      * the constructor
      */
     public function __construct()
@@ -160,5 +165,21 @@ abstract class ControllerAbstract
     {
         $this->layout = empty($layout) ? null : $layout;
         return $this;
+    }
+    /**
+     * get or set a new service locator
+     * 
+     * @param \Mvc\Di\ServiceLocator $serviceLocator the new service locator
+     * 
+     * @return \Mvc\Di\ServiceLocatorct
+     */
+    public function serviceLocator(\Mvc\Di\ServiceLocator $serviceLocator = null)
+    {
+        if (!is_null($serviceLocator)) {
+            $this->serviceLocator = $serviceLocator;
+        } elseif (is_null($this->serviceLocator)) {
+            $this->serviceLocator = System::getInstance()->serviceLocator();
+        }
+        return $this->serviceLocator;
     }
 }

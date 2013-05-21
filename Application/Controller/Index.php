@@ -21,7 +21,7 @@ class Index extends \Mvc\Controller\ControllerAbstract
         $session->hallo = 'Da sollte was stehen';
         $session2 = new Session('TEST');
         $session2->hallo = 'hier ist etwas';
-        $testDml = new TestTable();
+        $testDml = new TestTable($this->serviceLocator());
         $this->addToView('testData',$testDml->fetchAll());
         $form = new TestForm();
 //        \Mvc\Helper\Debug::dump($form);

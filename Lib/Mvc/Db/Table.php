@@ -45,9 +45,9 @@ class Table
      *
      * @throws \Exception
      */
-    public function __construct()
+    public function __construct(\Mvc\Di\ServiceLocator $sl)
     {
-        $this->connection = System::getInstance()->database();
+        $this->connection = $sl->get('db');
         $modelName = str_replace('Table', 'Model', get_class($this));
         $mapperName = str_replace('Table', 'Mapper', get_class($this));
         if (!class_exists($modelName)) {

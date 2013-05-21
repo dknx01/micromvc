@@ -133,6 +133,7 @@ class Application
         try {
             $db = new Db\Adapter();
             System::getInstance()->database($db);
+            System::getInstance()->serviceLocator()->set('db', $db);
         } catch (PDOException $exc) {
             throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }

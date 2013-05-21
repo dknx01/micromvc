@@ -46,6 +46,8 @@ class System
         $this->store->viewFooter = '';
         $this->store->viewDoctype = '';
         $this->store->request = null;
+        $this->store->database = null;
+        $this->store->serviceLocator = null;
     }
 
     /**
@@ -158,5 +160,21 @@ class System
             $this->store->database = $data;
         }
         return $this->store->database;
+    }
+    /**
+     * get or set a service locator
+     * 
+     * @param \Mvc\Di\ServiceLocator $locator a new service locator
+     * 
+     * @return \Mvc\Di\ServiceLocator
+     */
+    public function serviceLocator(\Mvc\Di\ServiceLocator $locator = null)
+    {
+        if (!is_null($locator)) {
+            $this->store->serviceLocator = $locator;
+        } elseif (is_null($this->store->serviceLocator)) {
+            $this->store->serviceLocator = new \Mvc\Di\ServiceLocator();
+        }
+        return $this->store->serviceLocator;
     }
 }
