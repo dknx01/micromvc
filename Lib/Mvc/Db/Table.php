@@ -13,7 +13,7 @@ use \PDO as PDO;
 use \Mvc\Db\Mapper as Mapper;
 use \Mvc\Db\Model as Model;
 use \Mvc\Db\ResultIterator as ResultIterator;
-use \Mvc\Registry as Registry;
+use \Mvc\System as System;
 use \PDOException;
 use \Exception;
 
@@ -47,7 +47,7 @@ class Table
      */
     public function __construct()
     {
-        $this->connection = Registry::getInstance()->get('db');
+        $this->connection = System::getInstance()->database();
         $modelName = str_replace('Table', 'Model', get_class($this));
         $mapperName = str_replace('Table', 'Mapper', get_class($this));
         if (!class_exists($modelName)) {

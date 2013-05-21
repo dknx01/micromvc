@@ -3,7 +3,7 @@ namespace Application\Form;
 use \Mvc\Form\FormAbstract as Form;
 use \Mvc\Form\Element as Element;
 use \Application\Form\TestCheck as Testcheck;
-use \Mvc\Registry as Registry;
+use \Mvc\System as System;
 
 class TestForm extends Form
 {
@@ -26,7 +26,7 @@ class TestForm extends Form
         $this->addElement($selectList);
         $input4 = new Element\Input();
         $check = new Testcheck();
-        $request = Registry::getInstance()->get('request');
+        $request = System::getInstance()->getRequest();
         $check->setRequestData($request->getParamByName('testname'));
         $input4->setName('testname')->setCheck($check);
         $this->addElement($input4, 'test1');

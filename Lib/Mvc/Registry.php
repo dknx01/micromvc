@@ -22,7 +22,7 @@ class Registry
      * the current instance
      * @var \Mvc\Registry|null
      */
-    static private $_instance = null;
+    static private $instance = null;
 
     /**
      * get the current registry or create a new one
@@ -30,10 +30,10 @@ class Registry
      */
     static function getInstance()
     {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new self();
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
         }
-        return self::$_instance;
+        return self::$instance;
     }
     /**
      * the constructor

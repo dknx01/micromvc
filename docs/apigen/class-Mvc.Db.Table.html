@@ -7,7 +7,7 @@
 	<title>Class Mvc\Db\Table | Micro Mvc System</title>
 
 	<script type="text/javascript" src="resources/combined.js?394153670"></script>
-	<script type="text/javascript" src="elementlist.js?2521238790"></script>
+	<script type="text/javascript" src="elementlist.js?1355336508"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -62,6 +62,9 @@
 				<li><a href="class-Mvc.Db.Adapter.html">Adapter</a></li>
 				<li><a href="class-Mvc.Db.Mapper.html">Mapper</a></li>
 				<li><a href="class-Mvc.Db.Model.html">Model</a></li>
+				<li><a href="class-Mvc.Db.Query.html">Query</a></li>
+				<li><a href="class-Mvc.Db.Query_QueryAbstract.html">Query_QueryAbstract</a></li>
+				<li><a href="class-Mvc.Db.Query_Select.html">Query_Select</a></li>
 				<li><a href="class-Mvc.Db.ResultIterator.html">ResultIterator</a></li>
 				<li class="active"><a href="class-Mvc.Db.Table.html">Table</a></li>
 			</ul>
@@ -127,7 +130,7 @@
 		<b>Namespace:</b> <a href="namespace-Mvc.html">Mvc</a>\<a href="namespace-Mvc.Db.html">Db</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Mvc.Db.Table.html#20-219" title="Go to source code">Db/Table.php</a><br />
+		<b>Located at</b> <a href="source-class-Mvc.Db.Table.html#20-248" title="Go to source code">Db/Table.php</a><br />
 	</div>
 
 
@@ -145,7 +148,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#42-71" title="Go to source code">__construct</a>( )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#43-72" title="Go to source code">__construct</a>( )</code>
 
 		<div class="description short">
 			
@@ -182,7 +185,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#72-80" title="Go to source code">getName</a>( )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#73-81" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			
@@ -219,7 +222,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setName">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#81-92" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#82-93" title="Go to source code">setName</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -250,6 +253,117 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="getConnection" id="_getConnection">
+
+		<td class="attributes"><code>
+			 public 
+			PDO
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getConnection">#</a>
+		<code><a href="source-class-Mvc.Db.Table.html#95-102" title="Go to source code">getConnection</a>( )</code>
+
+		<div class="description short">
+			
+<p>the connection</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the connection</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>PDO</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getModel" id="_getModel">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Mvc.Db.Model.html">Mvc\Db\Model</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getModel">#</a>
+		<code><a href="source-class-Mvc.Db.Table.html#104-111" title="Go to source code">getModel</a>( )</code>
+
+		<div class="description short">
+			
+<p>the model</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the model</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Mvc.Db.Model.html">Mvc\Db\Model</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMapper" id="_getMapper">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Mvc.Db.Mapper.html">Mvc\Db\Mapper</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMapper">#</a>
+		<code><a href="source-class-Mvc.Db.Table.html#113-120" title="Go to source code">getMapper</a>( )</code>
+
+		<div class="description short">
+			
+<p>the mapper</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>the mapper</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Mvc.Db.Mapper.html">Mvc\Db\Mapper</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="mapper" id="_mapper">
 
 		<td class="attributes"><code>
@@ -261,7 +375,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_mapper">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#93-114" title="Go to source code">mapper</a>( <span>array <var>$row</var></span> )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#122-143" title="Go to source code">mapper</a>( <span>array <var>$row</var></span> )</code>
 
 		<div class="description short">
 			
@@ -307,7 +421,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_reverseMapper">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#115-138" title="Go to source code">reverseMapper</a>( <span><code><a href="class-Mvc.Db.Model.html">Mvc\Db\Model</a></code> <var>$model</var></span> )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#144-167" title="Go to source code">reverseMapper</a>( <span><code><a href="class-Mvc.Db.Model.html">Mvc\Db\Model</a></code> <var>$model</var></span> )</code>
 
 		<div class="description short">
 			
@@ -353,7 +467,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetchAll">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#139-160" title="Go to source code">fetchAll</a>( <span>boolean <var>$asIterator</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#168-189" title="Go to source code">fetchAll</a>( <span>boolean <var>$asIterator</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			
@@ -399,7 +513,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_insert">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#162-189" title="Go to source code">insert</a>( <span><code><a href="class-Mvc.Db.Model.html">Mvc\Db\Model</a></code> <var>$model</var></span> )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#191-218" title="Go to source code">insert</a>( <span><code><a href="class-Mvc.Db.Model.html">Mvc\Db\Model</a></code> <var>$model</var></span> )</code>
 
 		<div class="description short">
 			
@@ -445,7 +559,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetchById">#</a>
-		<code><a href="source-class-Mvc.Db.Table.html#191-218" title="Go to source code">fetchById</a>( <span>mixed <var>$id</var> = <span class="php-keyword1">false</span></span> )</code>
+		<code><a href="source-class-Mvc.Db.Table.html#220-247" title="Go to source code">fetchById</a>( <span>mixed <var>$id</var> = <span class="php-keyword1">false</span></span> )</code>
 
 		<div class="description short">
 			
@@ -529,7 +643,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Mvc.Db.Table.html#27-31" title="Go to source code"><var>$name</var></a>
+				<a href="source-class-Mvc.Db.Table.html#28-32" title="Go to source code"><var>$name</var></a>
 		</td>
 		<td class="value"><code><span class="php-quote">''</span></code></td>
 		<td class="description"><div>
@@ -556,7 +670,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Mvc.Db.Table.html#32-36" title="Go to source code"><var>$model</var></a>
+				<a href="source-class-Mvc.Db.Table.html#33-37" title="Go to source code"><var>$model</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">null</span></code></td>
 		<td class="description"><div>
@@ -583,7 +697,7 @@
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-Mvc.Db.Table.html#37-41" title="Go to source code"><var>$mapper</var></a>
+				<a href="source-class-Mvc.Db.Table.html#38-42" title="Go to source code"><var>$mapper</var></a>
 		</td>
 		<td class="value"><code><span class="php-keyword1">null</span></code></td>
 		<td class="description"><div>

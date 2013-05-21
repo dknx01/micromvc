@@ -9,44 +9,154 @@
  */
 
 namespace Mvc;
+use \stdClass;
 
 class System
 {
-
+    /**
+     * our store
+     * @var \stdClass
+     */
+    protected $store = null;
     /**
      * the instances of called objects
      * @var array
      */
-    static private $instances = array();
+    static private $instance = null;
 
     /**
-     * call an instance of an objec
-     *
-     * @param string $name object name
-     *
-     * @return mixed
+     * get the current registry or create a new one
+     * @return \Mvc\System
      */
-    static public function getInstance($name)
+    static function getInstance()
     {
-        $key = \str_replace(array(' ', '\\'), '', $name);
-        if (!array_key_exists($key, self::$instances)) {
-            if (\class_exists($name)) {
-                self::$instances[$key] = new $name();
-            }
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
         }
-        return self::$instances[$key];
+        return self::$instance;
+    }
+    /**
+     * the constructor
+     */
+    public function __construct()
+    {
+        $this->store = new stdClass();
+        $this->store->viewHeader = '';
+        $this->store->viewContent = '';
+        $this->store->viewFooter = '';
+        $this->store->viewDoctype = '';
+        $this->store->request = null;
     }
 
     /**
-     * call an instance of an object.
-     * Alisa for getInstance()
-     *
-     * @param string $name object name
-     *
-     * @return mixed
+     * gets a value from our store
+     * @param string $name
+     * @throws Exception
+     * @return null|mixed
      */
-    static public function get($name)
+    public function get($name)
     {
-        return self::getInstance($name);
+        if (property_exists($this->store, $name)) {
+            return $this->store->$name;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * set a new entry in the store
+     * @param string $name
+     * @param mixed $value
+     * @return \Mvc\System
+     */
+    public function set($name, $value)
+    {
+        if (property_exists($this, $name)) {
+           error_log( 'Entry ' .  $name . ' will be overwritten');
+        }
+        $this->store->$name = $value;
+        return $this;
+    }
+    /**
+     * set or get the view header data
+     * 
+     * @param string $data the view data or null
+     * 
+     * @return string
+     */
+    public function viewHeader($data = null)
+    {
+        if (!is_null($data)) {
+            $this->store->viewHeader = $data;
+        }
+        return $this->store->viewHeader;
+    }
+    /**
+     * set or get the view footer data
+     * 
+     * @param string $data the view data or null
+     * 
+     * @return string
+     */
+    public function viewFooter($data = null)
+    {
+        if (!is_null($data)) {
+            $this->store->viewFooter = $data;
+        }
+        return $this->store->viewFooter;
+    }
+    /**
+     * set or get the view content data
+     * 
+     * @param string $data the view data or null
+     * 
+     * @return string
+     */
+    public function viewContent($data = null)
+    {
+        if (!is_null($data)) {
+            $this->store->viewContent = $data;
+        }
+        return $this->store->viewContent;
+    }
+    /**
+     * set or get the view doctype data
+     * 
+     * @param string $data the view data or null
+     * 
+     * @return string
+     */
+    public function viewDoctype($data = null)
+    {
+        if (!is_null($data)) {
+            $this->store->viewDoctype = $data;
+        }
+        return $this->store->viewDoctype;
+    }
+    /**
+     * get the request object
+     * 
+     * @return \Mvc\Helper\Request
+     */
+    public function getRequest()
+    {
+        if (is_null($this->store->request)) {
+            $this->store->request = new \Mvc\Helper\Request();
+        }
+        return $this->store->request;
+    }
+    /**
+     * get or set the database adapter
+     * 
+     * @param \Mvc\Db\Adapter $data a new database connection or null
+     * 
+     * @return \Mvc\Db\Adapter
+     */
+    public function database($data = null)
+    {
+        if (!is_null($data)) {
+            $this->store->database = $data;
+        }
+        return $this->store->database;
     }
 }

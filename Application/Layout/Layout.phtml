@@ -1,5 +1,5 @@
 <?php
-echo \Mvc\Registry::getInstance()->get('viewDoctype');
+echo \Mvc\System::getInstance()->viewDoctype();
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -8,8 +8,8 @@ echo \Mvc\Registry::getInstance()->get('viewDoctype');
 
 <!-- CSS Files -->
 <?php
-    if (!is_null(\Mvc\Registry::getInstance()->get('viewHeader'))) {
-        echo \Mvc\Registry::getInstance()->get('viewHeader') . PHP_EOL;
+    if (!is_null(\Mvc\System::getInstance()->viewHeader())) {
+        echo \Mvc\System::getInstance()->viewHeader() . PHP_EOL;
     }
 ?>
 </head>
@@ -17,11 +17,11 @@ echo \Mvc\Registry::getInstance()->get('viewDoctype');
     <div id="navi">
     </div>
 <?php
-echo \Mvc\Registry::getInstance()->get('viewContent');
+echo \Mvc\System::getInstance()->viewContent();
 ?>
 <?php
-if (!is_null(\Mvc\Registry::getInstance()->get('viewFooter'))) {
-    echo \Mvc\Registry::getInstance()->get('viewFooter') . PHP_EOL;
+if (!is_null(\Mvc\System::getInstance()->viewFooter())) {
+    echo \Mvc\System::getInstance()->viewFooter() . PHP_EOL;
 }
 ?>
 </body>

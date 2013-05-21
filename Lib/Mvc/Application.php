@@ -13,11 +13,10 @@
  */
 namespace Mvc;
 
-use \Mvc\Helper as Helper;
 use \Mvc\Config as Config;
 use \Mvc\Db as Db;
-use \Mvc\Registry as Registry;
 use \Mvc\View as View;
+use \Mvc\System as System;
 use \Exception;
 
 /**
@@ -55,7 +54,7 @@ class Application
      */
     public function __construct()
     {
-        $this->request = new Helper\Request();
+        $this->request = System::getInstance()->getRequest();
         $this->viewOutput = new View\Output($this->getRequest());
         $this->startUp();
     }
@@ -133,7 +132,7 @@ class Application
     {
         try {
             $db = new Db\Adapter();
-            Registry::getInstance()->set('db', $db);
+            System::getInstance()->database($db);
         } catch (PDOException $exc) {
             throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
         }
@@ -181,8 +180,8 @@ class Application
      */
     protected function shutDown()
     {
-        if (!is_null(Registry::getInstance()->get('db'))) {
-                Registry::getInstance()->set('db', null);
+        if (!is_null(System::getInstance()->database())) {
+            System::getInstance()->set('database', null);
         }
     }
     /**
@@ -204,6 +203,5 @@ class Application
         $this->setController($this->getRequest()->getControllerName())
             ->setAction($this->getRequest()->getAction())
             ->prepareDatabase();
-        Registry::getInstance()->set('request', $this->getRequest());
     }
 }

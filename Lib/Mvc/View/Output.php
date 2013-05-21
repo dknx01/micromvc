@@ -12,7 +12,7 @@ namespace Mvc\View;
 use \stdClass;
 use \Mvc\Config\Definition\Config as ConfigDefinition;
 use \Mvc\Helper\Request as Request;
-use \Mvc\Registry as Registry;
+use \Mvc\System as System;
 use \Mvc\View\DocTypes as Doctypes;
 
 Class Output
@@ -83,27 +83,27 @@ Class Output
         $doctypeFunction = method_exists('\Mvc\View\DocTypes', $this->getDoctype())
                            ? $this->getDoctype()
                            : Doctypes::HTML5;
-        Registry::getInstance()->set('viewDoctype', Doctypes::$doctypeFunction());
+        System::getInstance()->viewDoctype(Doctypes::$doctypeFunction());
 
         ob_start();
         include_once $this->getView();
         $viewOutput = ob_get_contents();
         ob_end_clean();
-        Registry::getInstance()->set('viewContent', $viewOutput);
+        System::getInstance()->viewContent($viewOutput);
 
         if (file_exists($this->getHeader())) {
             ob_start();
             include_once $this->getHeader();
             $viewOutputHeader = ob_get_contents();
             ob_end_clean();
-            Registry::getInstance()->set('viewHeader', $viewOutputHeader);
+            System::getInstance()->viewHeader($viewOutputHeader);
         }
         if (file_exists($this->getFooter())) {
             ob_start();
             include_once $this->getFooter();
             $viewOutputFooter = ob_get_contents();
             ob_end_clean();
-            Registry::getInstance()->set('viewFooter', $viewOutputFooter);
+            System::getInstance()->viewFooter($viewOutputFooter);
         }
         if ($this->isAjax() == false) {
             include_once $this->getLayout();

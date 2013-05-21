@@ -9,7 +9,7 @@
  */
 
 namespace Mvc\Controller;
-use \Mvc\Registry as Registry;
+use \Mvc\System as System;
 use \stdClass;
 
 abstract class ControllerAbstract
@@ -45,7 +45,7 @@ abstract class ControllerAbstract
     public function __construct()
     {
         $this->viewData = new stdClass();
-        $this->request = Registry::getInstance()->get('request');
+        $this->request = System::getInstance()->getRequest();
         $this->run();
     }
 
