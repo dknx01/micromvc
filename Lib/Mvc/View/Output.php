@@ -1,9 +1,9 @@
 <?php
 /**
  * procces the output passed to the browser
- * 
+ *
  * PHP version >=5.3
- * 
+ *
  * @package Mvc\View
  * @author  dknx01 <e.witthauer@gmail.com>
  */
@@ -64,7 +64,7 @@ Class Output
     protected $doctype = \Mvc\View\DocTypes::HTML5;
     /**
      * the constructor
-     * 
+     *
      * @param \Mvc\Helper\Request $request
      */
     public function __construct(Request $request)
@@ -84,13 +84,13 @@ Class Output
                            ? $this->getDoctype()
                            : Doctypes::HTML5;
         Registry::getInstance()->set('viewDoctype', Doctypes::$doctypeFunction());
-        
+
         ob_start();
         include_once $this->getView();
         $viewOutput = ob_get_contents();
         ob_end_clean();
         Registry::getInstance()->set('viewContent', $viewOutput);
-        
+
         if (file_exists($this->getHeader())) {
             ob_start();
             include_once $this->getHeader();
@@ -101,20 +101,20 @@ Class Output
         if (file_exists($this->getFooter())) {
             ob_start();
             include_once $this->getFooter();
-            $viewOutputHeader = ob_get_contents();
+            $viewOutputFooter = ob_get_contents();
             ob_end_clean();
-            Registry::getInstance()->set('viewHeader', $viewOutputHeader);
+            Registry::getInstance()->set('viewFooter', $viewOutputFooter);
         }
         if ($this->isAjax() == false) {
             include_once $this->getLayout();
         } else {
             include_once APPDIR . '/Layout/Ajax.phtml';
-            
+
         }
     }
     /**
      *  get the current layout
-     * 
+     *
      * @return string
      */
     public function getLayout()
@@ -123,7 +123,7 @@ Class Output
     }
     /**
      * set a new layout
-     * 
+     *
      * @param string $layout
      * @return \Mvc\View\Output
      */
@@ -135,7 +135,7 @@ Class Output
     }
     /**
      * get the current header
-     * 
+     *
      * @return string
      */
     public function getHeader()
@@ -144,7 +144,7 @@ Class Output
     }
     /**
      * set a new header
-     * 
+     *
      * @param string $header
      * @return \Mvc\View\Output
      */
@@ -156,7 +156,7 @@ Class Output
     }
     /**
      * get the current view
-     * 
+     *
      * @return string
      */
     public function getView()
@@ -165,13 +165,13 @@ Class Output
     }
     /**
      * set a new view
-     * 
+     *
      * @param string $view
      * @return \Mvc\View\Output
      */
     public function setView($view = null)
     {
-        $view = is_null($view) 
+        $view = is_null($view)
                 ? $this->getRequest()->getControllerName() . '/' . ucfirst($this->getRequest()->getAction())
                 : $view;
         $this->view = APPDIR . '/View/' . $view . '.phtml';
@@ -179,7 +179,7 @@ Class Output
     }
     /**
      * get the current footer
-     * 
+     *
      * @return string
      */
     public function getFooter()
@@ -188,7 +188,7 @@ Class Output
     }
     /**
      * set a new footer
-     * 
+     *
      * @param string $footer
      * @return \Mvc\View\Output
      */
@@ -200,7 +200,7 @@ Class Output
     }
     /**
      * get the request object
-     * 
+     *
      * @return \Mvc\Helper\Request
      */
     public function getRequest()
@@ -209,7 +209,7 @@ Class Output
     }
     /**
      * set a new request object
-     * 
+     *
      * @param \Mvc\Helper\Request $request
      * @return \Mvc\View\Output
      */
@@ -220,7 +220,7 @@ Class Output
     }
     /**
      * set new view data object
-     * 
+     *
      * @param stdClass $viewData
      * @return \Mvc\View\Output
      */
@@ -231,7 +231,7 @@ Class Output
     }
     /**
      * get or set if it is an ajax view
-     * 
+     *
      * @param boolean|null $ajax
      * @return boolean
      */
@@ -244,7 +244,7 @@ Class Output
     }
     /**
      *  get the configuration object
-     * 
+     *
      * @return \Mvc\Config\Definition\Config
      */
     public function getConfig()
@@ -253,7 +253,7 @@ Class Output
     }
     /**
      * set the configuration object
-     * 
+     *
      * @param \Mvc\Config\Definition\Config $config
      * @return \Mvc\View\Output
      */
@@ -265,7 +265,7 @@ Class Output
     /**
      * returns the value for the key of the view data or null if it's not exists.
      * If no key is provided the whole view data stor will be returned.
-     * 
+     *
      * @param string $key
      * @return null|mixed
      */
@@ -281,7 +281,7 @@ Class Output
     }
     /**
      * returns the doctype
-     * 
+     *
      * @return string
      */
     public function getDoctype()
@@ -290,7 +290,7 @@ Class Output
     }
     /**
      * set the doctype of the site
-     * 
+     *
      * @param string $doctype
      * @return \Mvc\View\Output
      */

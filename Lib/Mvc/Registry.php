@@ -1,6 +1,9 @@
 <?php
 /**
  * the registry object to store datas
+ *
+ * PHP version >= 5.3
+ *
  * @author  dknx01 <e.witthauer@gmail.com>
  * @package Mvc\Registry
  */

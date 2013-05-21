@@ -200,4 +200,17 @@ class Request
         $this->action = $action;
         return $this;
     }
+
+    /**
+     * return the value of a parameter
+     *
+     * @param string $name parameter name
+     *
+     * @return string
+     */
+    public function getParam($name)
+    {
+        return $this->getParamByName($name);
+    }
+
 }

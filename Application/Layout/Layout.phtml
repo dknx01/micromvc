@@ -19,5 +19,10 @@ echo \Mvc\Registry::getInstance()->get('viewDoctype');
 <?php
 echo \Mvc\Registry::getInstance()->get('viewContent');
 ?>
+<?php
+if (!is_null(\Mvc\Registry::getInstance()->get('viewFooter'))) {
+    echo \Mvc\Registry::getInstance()->get('viewFooter') . PHP_EOL;
+}
+?>
 </body>
 </html>

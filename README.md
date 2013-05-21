@@ -42,12 +42,13 @@ ToDo
 
 [x] Actions
 
-[] extend standard database function
+[X] extend standard database function
 
 [X] automatic doctype
 
 [] context switch
 
+[] Dependency injection container
 
 Any sugestions or comments just let me know.
 
