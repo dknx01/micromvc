@@ -24,7 +24,6 @@ class Index extends \Mvc\Controller\ControllerAbstract
         $testDml = new TestTable($this->serviceLocator());
         $this->addToView('testData',$testDml->fetchAll());
         $form = new TestForm();
-//        \Mvc\Helper\Debug::dump($form);
         $this->addToView('testform', $form->render());
         if ($this->getRequest()->getParamByName('weg')) {
             if ($form->check()->errorNumbers() > 0) {
