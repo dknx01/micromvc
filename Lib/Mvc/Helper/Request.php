@@ -51,7 +51,12 @@ class Request
             $controllerEnd = strpos($this->queryString, self::SEPARATOR);
             if ($controllerEnd != false) {
                 $this->controllerName = substr($this->queryString, 0, $controllerEnd);
-                $this->queryString = substr($this->queryString, $controllerEnd + 1);
+                $query = substr($this->queryString, $controllerEnd + 1);
+                if ($query != false) {
+                    $this->queryString = $query;
+                } else {
+                    $this->queryString = '';
+                }
                 $actionEnd = strpos($this->queryString, self::SEPARATOR);
                 if ($actionEnd != false) {
                     $this->action = substr($this->queryString, 0, $actionEnd);

@@ -40,4 +40,13 @@ interface ServiceLocatorInterface
      * removes all registered services from the locator
      */
     public function clear();
+    /**
+     * returns all registered services
+     */
+    public function index();
+    /**
+     * checks if a service is registered
+     * @param string $name service name
+     */
+    public function serviceExists($name);
 }

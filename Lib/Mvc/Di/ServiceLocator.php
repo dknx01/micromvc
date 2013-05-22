@@ -85,4 +85,24 @@ class ServiceLocator implements ServiceLocatorInterface
         $this->services = array();
         return $this;
     }
+    /**
+     * returns all registerd services
+     * 
+     * @return array
+     */
+    public function index()
+    {
+        return array_keys($this->services);
+    }
+    /**
+     * checks if a service exists
+     * 
+     * @param string $name service name
+     * 
+     * @return boolean
+     */
+    public function serviceExists($name)
+    {
+        return array_key_exists($name, $this->services);
+    }
 }
