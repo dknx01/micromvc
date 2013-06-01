@@ -174,6 +174,20 @@ class Application
         if (!empty($viewNameController)) {
             $this->viewOutput->setView($viewNameController);
         }
+        if (\Mvc\System::getInstance()->get('isCli') == true) {
+            $viewName = substr($this->viewOutput->getView(),0 , -5) . 'cli.phtml';
+            $viewHeader = substr($this->viewOutput->getHeader(),0 , -5) . 'cli.phtml';
+            $viewFooter = substr($this->viewOutput->getFooter(),0 , -5) . 'cli.phtml';
+            if (file_exists($viewName)) {
+                $this->viewOutput->setView($viewName);
+            }
+            if (file_exists($viewHeader)) {
+                $this->viewOutput->setHeader($viewHeader);
+            }
+            if (file_exists($viewFooter)) {
+                $this->viewOutput->setFooter($viewFooter);
+            }
+        }
         $this->viewOutput->render();
     }
     /**

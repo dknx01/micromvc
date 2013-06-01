@@ -105,7 +105,11 @@ Class Output
             ob_end_clean();
             System::getInstance()->viewFooter($viewOutputFooter);
         }
-        if ($this->isAjax() == false) {
+        if (\Mvc\System::getInstance()->get('isCli') == true
+            && file_exists(APPDIR . '/Layout/Cli.phtml')
+        ) {
+            include_once APPDIR . '/Layout/Cli.phtml';
+        } elseif ($this->isAjax() == false) {
             include_once $this->getLayout();
         } else {
             include_once APPDIR . '/Layout/Ajax.phtml';
@@ -150,8 +154,10 @@ Class Output
      */
     public function setHeader($header = null)
     {
-        $header = is_null($header) ? $this->getRequest()->getControllerName() : $header;
-        $this->header = APPDIR . 'View/' . $header . '.header.phtml';
+        $header = is_null($header)
+                  ? $this->getRequest()->getControllerName() . '/' . ucfirst($this->getRequest()->getAction())
+                  : $header;
+        $this->header = APPDIR . '/View/' . $header . '.header.phtml';
         return $this;
     }
     /**
@@ -194,7 +200,9 @@ Class Output
      */
     public function setFooter($footer = null)
     {
-        $footer = is_null($footer) ? $this->getRequest()->getControllerName() : $footer;
+        $footer = is_null($footer) 
+                  ? $this->getRequest()->getControllerName() . '/' . ucfirst($this->getRequest()->getAction())
+                  : $footer;
         $this->footer = APPDIR . '/View/' . $footer . '.footer.phtml';
         return $this;
     }

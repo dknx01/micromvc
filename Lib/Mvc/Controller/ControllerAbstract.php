@@ -60,7 +60,6 @@ abstract class ControllerAbstract
     public function run()
     {
         $this->up();
-        $this->indexAction();
     }
     /**
      * setup the current controller

@@ -143,7 +143,11 @@ class System
     public function getRequest()
     {
         if (is_null($this->store->request)) {
-            $this->store->request = new \Mvc\Helper\Request();
+            if (PHP_SAPI == 'cli') {
+                $this->store->request = new \Mvc\Cli\CliRequest($this->store->cliArgs);
+            } else {
+                $this->store->request = new \Mvc\Helper\Request();
+            }
         }
         return $this->store->request;
     }

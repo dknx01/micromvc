@@ -35,7 +35,7 @@ class Request
      * the query string
      * @var string
      */
-    private $queryString = '';
+    protected $queryString = '';
     /**
      * the constructor
      */
@@ -65,7 +65,7 @@ class Request
                 } else {
                     $this->action = $this->queryString;
                     $this->originRequestUri();
-                    $this->getPostParamas();
+                    $this->getPostParams();
                 }
 
             } else {
@@ -74,15 +74,17 @@ class Request
                 } else {
                     $this->controllerName = $this->queryString;
                     $this->originRequestUri();
-                    $this->getPostParamas();
+                    $this->getPostParams();
                 }
             }
         }
     }
     /**
      * retrive all params get by GET or POST method
+     * 
+     * @param boolean $withPost should POST parameters also be checked
      */
-    private function getAllParams()
+    protected function getAllParams($withPost = true, $originRequest = true)
     {
         $this->queryString = ltrim($this->queryString, '?');
         if (!empty($this->queryString)) {
@@ -94,9 +96,13 @@ class Request
             foreach ($params as $param) {
                 $this->splitParam($param);
             }
-            $this->originRequestUri();
+            if ($originRequest == true) {
+                $this->originRequestUri();
+            }
         }
-        $this->getPostParamas();
+        if ($withPost == true) {
+            $this->getPostParams();
+        }
     }
     /**
      * splits the param string in key and value part
@@ -107,13 +113,17 @@ class Request
     private function splitParam($param, $delimiter = '=')
     {
         $parts = explode($delimiter, $param);
-        $this->params[$parts[0]] = htmlentities($parts[1]);
+        if (count($parts) == 1) {
+            $this->params[$parts[0]] = '';
+        } else {
+            $this->params[$parts[0]] = htmlentities($parts[1]);
+        }
     }
 
     /**
      * proccess all post params
      */
-    private function getPostParamas()
+    private function getPostParams()
     {
         foreach ($_POST as $key => $value) {
             $this->params[$key] = htmlentities($value);

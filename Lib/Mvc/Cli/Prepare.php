@@ -20,10 +20,11 @@ function checkConstants()
         exit;
     }
 }
-
 checkConstants();
-if (PHP_SAPI != 'cli' && $_SERVER['APP_ENV'] != 'online') {
-    require_once ROOTDIR . '/Lib/Mvc/php_error.php';
-    $options = array('background_text' => 'MVC', 'application_root' => ROOTDIR);
-    \php_error\reportErrors($options);
-}
+
+$short = 'c::a::q::';
+$long = array('controller::', 'action::', 'query::');
+$cliArguments = getopt($short, $long);
+require_once ROOTDIR .  '/Lib/Mvc/System.php';
+\Mvc\System::getInstance()->set('cliArgs', $cliArguments);
+\Mvc\System::getInstance()->set('isCli', true);
