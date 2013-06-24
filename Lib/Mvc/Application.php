@@ -98,7 +98,7 @@ class Application
      */
     public function setRequest(\Mvc\Helper\Request $request)
     {
-        $this->request = $_request;
+        $this->request = $request;
         return $this;
     }
 
@@ -142,7 +142,7 @@ class Application
     /**
      * the current action
      *
-     * @return typethe action method name
+     * @return string the action method name
      */
     public function getAction()
     {
@@ -188,7 +188,7 @@ class Application
                 $this->viewOutput->setFooter($viewFooter);
             }
         }
-        $this->viewOutput->render();
+        $this->viewOutput->renderComplete();
     }
     /**
      * the shutdown function for everything at the end

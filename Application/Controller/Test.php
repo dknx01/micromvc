@@ -15,7 +15,8 @@ class Test extends \Mvc\Controller\ControllerAbstract
      */
     public function indexAction()
     {
-        \Mvc\Helper\Debug::dump($this->getRequest());exit;
+        $this->addToView('foo', 'bar');
+        
     }
     public function testAction()
     {

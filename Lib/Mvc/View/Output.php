@@ -76,9 +76,9 @@ Class Output
              ->setFooter();
     }
     /**
-     * the a complete output
+     * the complete output
      */
-    public function render()
+    public function renderComplete()
     {
         $doctypeFunction = method_exists('\Mvc\View\DocTypes', $this->getDoctype())
                            ? $this->getDoctype()
@@ -306,5 +306,18 @@ Class Output
     {
         $this->doctype = $doctype;
         return $this;
+    }
+
+    /**
+     * @param $path string the script path started from APPDIR
+     */
+    public function render($path)
+    {
+        $return = '';
+        ob_start();
+        include_once APPDIR . '/' . $path;
+        $return = ob_get_contents();
+        ob_end_clean();
+        echo $return;
     }
 }
