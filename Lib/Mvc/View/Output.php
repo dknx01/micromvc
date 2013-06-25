@@ -288,6 +288,19 @@ Class Output
         }
     }
     /**
+     * adds an entry to the view data object
+     *
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return \Mvc\Controller\ControllerAbstract
+     */
+    public function addToViewData($name, $value)
+    {
+        $this->viewData->$name = $value;
+        return $this;
+    }
+    /**
      * returns the doctype
      *
      * @return string
@@ -309,6 +322,8 @@ Class Output
     }
 
     /**
+     * renders a view scripts
+     *
      * @param $path string the script path started from APPDIR
      */
     public function render($path)
