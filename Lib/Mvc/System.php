@@ -53,7 +53,6 @@ class System
     /**
      * gets a value from our store
      * @param string $name
-     * @throws Exception
      * @return null|mixed
      */
     public function get($name)
@@ -154,9 +153,9 @@ class System
     /**
      * get or set the database adapter
      * 
-     * @param \Mvc\Db\Adapter $data a new database connection or null
+     * @param \Mvc\Db\Adapter|\Mvc\Db\MongoDb\Adapter $data a new database connection or null
      * 
-     * @return \Mvc\Db\Adapter
+     * @return \Mvc\Db\Adapter|\Mvc\Db\MongoDb\Adapter
      */
     public function database($data = null)
     {
@@ -180,5 +179,21 @@ class System
             $this->store->serviceLocator = new \Mvc\Di\ServiceLocator();
         }
         return $this->store->serviceLocator;
+    }
+    /**
+     * get or set a config object
+     * @param Config\Definition\Config $config
+     *
+     * @return Config\Definition\Config
+     */
+    public function configuration(\Mvc\Config\Definition\Config $config = null)
+    {
+        if (!is_null($config)) {
+            $this->store->configuration = $config;
+        } elseif (is_null($this->store->configuration)) {
+            $config = new \Mvc\Config\ParseConfig();
+            $this->store->configuration = $config->getConfigData();
+        }
+        return $this->store->configuration;
     }
 }

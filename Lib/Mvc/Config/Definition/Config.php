@@ -71,6 +71,16 @@ class Config extends SimpleXMLElement
             return false;
         }
     }
+
+    /**
+     * the database port
+     *
+     * @return string
+     */
+    public function getDatabasePort()
+    {
+        return (string)$this->database->port;
+    }
     /**
      * get all database params
      *

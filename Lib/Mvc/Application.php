@@ -130,12 +130,18 @@ class Application
      */
     protected function prepareDatabase()
     {
-        try {
-            $db = new Db\Adapter();
-            System::getInstance()->database($db);
-            System::getInstance()->serviceLocator()->set('db', $db);
-        } catch (PDOException $exc) {
-            throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
+        if ($this->config->getDatabaseStatus() == true) {
+                try {
+                    if (strtolower($this->config->getDatabaseType()) == 'mongodb') {
+                        $db = new Db\MongoDb\Adapter();
+                    } else {
+                        $db = new Db\Adapter();
+                    }
+                    System::getInstance()->database($db);
+                    System::getInstance()->serviceLocator()->set('db', $db);
+                } catch (PDOException $exc) {
+                    throw new Exception($exc->getMessage() . PHP_EOL . $exc->getTraceAsString());
+                }
         }
         return $this;
     }
@@ -215,6 +221,7 @@ class Application
         }
         $config = new Config\ParseConfig();
         $this->config = $config->getConfigData();
+        System::getInstance()->configuration($this->config);
         $this->setController($this->getRequest()->getControllerName())
             ->setAction($this->getRequest()->getAction())
             ->prepareDatabase();
