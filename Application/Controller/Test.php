@@ -6,6 +6,7 @@
  */
 namespace Application\Controller;
 use \Mvc\Controller\ControllerAbstract;
+use Mvc\System;
 
 
 class Test extends \Mvc\Controller\ControllerAbstract
@@ -46,8 +47,23 @@ class Test extends \Mvc\Controller\ControllerAbstract
         $db = \Mvc\System::getInstance()->database();
         $cursor = $db->selectCollection('test', 'cartoons')->find();
         foreach ($cursor as $document) {
+
             \Mvc\Helper\Debug::dump($document);
+            $model = new \Mvc\Db\MongoDb\Model();
+            echo '<hr>';
             //echo $document["title"] . "\n";
         }
+    }
+
+    public function insertAction()
+    {
+        $model = new \Application\Db\Mongo\TestModel();
+        $model->setIid(9999)->addNonMapped('foo', 123);
+        \Mvc\Helper\Debug::dump($model);
+        $collection = new \Application\Db\Mongo\TestCollection(System::getInstance()->serviceLocator());
+        \Mvc\Helper\Debug::dump($collection);
+        echo '<hr>';
+        \Mvc\Helper\Debug::dump($collection->reverseMapper($model));
+        \Mvc\Helper\Debug::dump($collection->insert($model));
     }
 }
