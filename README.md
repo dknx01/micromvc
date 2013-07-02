@@ -9,9 +9,8 @@ System requirements
 -------------------
 + Apache 2
 + PHP >=5.3
-+ Some database (optional): MySQL or SQLite or other with PDO
-
-Installation
++ Some database (optional): MySQL or SQLite or other with PDO or a MongoDb
+Installation
 --------------
 Via git:
 ```git clone https://github.com/dknx01/micromvc.git```
