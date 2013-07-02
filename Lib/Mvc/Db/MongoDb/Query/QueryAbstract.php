@@ -7,19 +7,30 @@
 
 namespace Mvc\Db\MongoDb\Query;
 
+use MongoCollection;
 
-class QueryAbstract
+class QueryAbstract extends MongoCollection
 {
     protected $database = 'test';
     protected $collection = 'test';
+    /**
+     * @var \MongoCollection
+     */
+    protected $selectedCollection = null;
     /**
      * @var \Mvc\Db\MongoDb\Adapter
      */
     protected $connection = null;
 
-    public function __construct(\Mvc\Di\ServiceLocator $sl)
+
+    public function __construct(\Mvc\Di\ServiceLocator $sl, $collection = null)
     {
-        $this->connection = $sl->get('db');
+        $this->connection = $sl->get('MongoDbAdapter');
+        $this->setDatabase($this->getConnection()->getDbname());
+        $this->db = $sl->get('db');
+        if (!is_null($collection)) {
+            parent::__construct($this->db, $collection);
+        }
     }
 
 
@@ -32,7 +43,7 @@ class QueryAbstract
     public function setCollection($collection)
     {
         $this->collection = $collection;
-
+        $this->setSelectedCollection($this->getConnection()->selectCollection($this->getDatabase(), $collection));
         return $this;
     }
 
@@ -82,4 +93,22 @@ class QueryAbstract
         return $this->database;
     }
 
+    /**
+     * @param \MongoCollection $selectedCollection
+     *
+     * @return \Mvc\Db\MongoDb\Query\QueryAbstract
+     */
+    public function setSelectedCollection(\MongoCollection $selectedCollection)
+    {
+        $this->selectedCollection = $selectedCollection;
+        return $this;
+    }
+
+    /**
+     * @return \MongoCollection
+     */
+    public function getSelectedCollection()
+    {
+        return $this->selectedCollection;
+    }
 }

@@ -133,7 +133,9 @@ class Application
         if ($this->config->getDatabaseStatus() == true) {
                 try {
                     if (strtolower($this->config->getDatabaseType()) == 'mongodb') {
-                        $db = new Db\MongoDb\Adapter();
+                        $dba = new Db\MongoDb\Adapter();
+                        System::getInstance()->serviceLocator()->set('MongoDbAdapter', $dba);
+                        $db = $dba->dB();
                     } else {
                         $db = new Db\Adapter();
                     }
